@@ -16,6 +16,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			postRegister: (info) => {
+				console.log(info)
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+				method: 'POST',
+				headers: myHeaders,
+				body: JSON.stringify(info),
+				redirect: 'follow'
+				};
+
+				fetch(process.env.BACKEND_URL + "/api/user/register", requestOptions)
+				.then(response => response.json())
+				.then(result => console.log(result))
+				.catch(error => console.log('error', error));
+			},
+
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
