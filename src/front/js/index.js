@@ -1,8 +1,8 @@
 //import react into the bundle
 import React from "react";
 import ReactDOM from "react-dom";
-## agregue esto ##
-## adf 
+// agregue esto //
+// adf 
 //include your index.scss file into the bundle
 import "../styles/index.css";
 
