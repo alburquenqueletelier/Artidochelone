@@ -6,101 +6,121 @@ import "../../styles/main.css";
 
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
 
-	return (
-		<div className="glass2 justify-content-center flex-column text-center mt-5">
-			{/* <div className="slides flex-row p-2 fs-1">Hello Rigo!!
-			</div> */}
-
-
-
-			<div className="d-flex justify-content-around">
-				<div id="carouselExampleDark" className="carousel carousel-dark slide" data-bs-ride="carousel">
-					<div className="carousel-indicators">
-						<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-						<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-						<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-					</div>
-					<div className="carousel-inner">
-						<div className="carousel-item active" data-bs-interval="10000">
-							<img src="http://placeimg.com/640/480/nature" className="d-block h-100 w-100" alt="..." />
-							<div className="carousel-caption d-none d-md-block">
-								<h5>First slide label</h5>
-								<p>Some representative placeholder content for the first slide.</p>
-							</div>
-						</div>
-						<div className="carousel-item" data-bs-interval="2000">
-							<img src="http://placeimg.com/640/480/tech" className="d-block h-100 w-100" alt="..." />
-							<div className="carousel-caption d-none d-md-block">
-								<h5>Second slide label</h5>
-								<p>Some representative placeholder content for the second slide.</p>
-							</div>
-						</div>
-						<div className="carousel-item">
-							<img src="http://placeimg.com/400/400/people" className="d-block w-100" alt="..." />
-							<div className="carousel-caption d-none d-md-block">
-								<h5>Third slide label</h5>
-								<p>Some representative placeholder content for the third slide.</p>
-							</div>
-						</div>
-					</div>
-					<button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-						<span className="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span className="visually-hidden">Previous</span>
-					</button>
-					<button className="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-						<span className="carousel-control-next-icon" aria-hidden="true"></span>
-						<span className="visually-hidden">Next</span>
-					</button>
-				</div>
-
-
-
-				{/* <div id="carouselExampleDark" className="carousel carousel-dark slide" data-bs-ride="carousel">
-				<div className="carousel-indicators">
-					<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-					<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-					<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-				</div>
-				<div className="carousel-inner">
-					<div className="carousel-item active" data-bs-interval="10000">
-						<img src="http://placeimg.com/400/400/nature" className="d-block w-100" alt="..." />
-						<div className="carousel-caption d-none d-md-block">
-							<h5>First slide label</h5>
-							<p>Some representative placeholder content for the first slide.</p>
-						</div>
-					</div>
-					<div className="carousel-item" data-bs-interval="2000">
-						<img src="http://placeimg.com/400/400/people" className="d-block w-100" alt="..." />
-						<div className="carousel-caption d-none d-md-block">
-							<h5>Second slide label</h5>
-							<p>Some representative placeholder content for the second slide.</p>
-						</div>
-					</div>
-					<div className="carousel-item">
-						<img src="http://placeimg.com/400/400/nature" className="d-block w-100" alt="..." />
-						<div className="carousel-caption d-none d-md-block">
-							<h5>Third slide label</h5>
-							<p>Some representative placeholder content for the third slide.</p>
-						</div>
-					</div>
-				</div>
-				<button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-					<span className="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span className="visually-hidden">Previous</span>
-				</button>
-				<button className="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-					<span className="carousel-control-next-icon" aria-hidden="true"></span>
-					<span className="visually-hidden">Next</span>
-				</button>
-			</div> */}
-			</div>
-
-
-			{/* <div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
-			</div> */}
-		</div>
-	);
+  return (
+    <div className="container-fluid text-center mt-5 glass2">
+		{/* Carousel con 2 imagenes por slides. Debe ser generado con los top 10 proyectos */}
+      <div
+        id="carouselExampleIndicators"
+        className="carousel carousel-dark slide p-5"
+        data-bs-ride="true"
+      >
+        <div className="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            className="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <div className="row justify-content-center">
+              <div className="col-auto">
+                <img
+                  src="https://dummyimage.com/400x300/000/fff"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div className="col-auto">
+                <img
+                  src="https://dummyimage.com/400x300/000/fff"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+            </div>
+          </div>
+          <div className="carousel-item">
+            <div className="row justify-content-center">
+              <div className="col-auto">
+                <img
+                  src="https://dummyimage.com/400x300/000/fff"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div className="col-auto">
+                <img
+                  src="https://dummyimage.com/400x300/000/fff"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+            </div>
+          </div>
+          <div className="carousel-item">
+            <div className="row justify-content-center">
+              <div className="col-auto">
+                <img
+                  src="https://dummyimage.com/400x300/000/fff"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div className="col-auto">
+                <img
+                  src="https://dummyimage.com/400x300/000/fff"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+		{/* Descripción de la pagina */}
+		<p className="m-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eleifend interdum sapien vitae malesuada. Integer sed leo sed est fringilla convallis. Pellentesque malesuada ut nulla ut feugiat. Praesent egestas erat vel lacus mattis, vel facilisis erat iaculis. Duis eleifend volutpat dapibus. Proin porta mauris non accumsan imperdiet. Vestibulum porttitor purus eget tortor bibendum, vitae fermentum odio aliquam. Proin rhoncus ut orci vel molestie. Suspendisse in urna eleifend, lobortis felis sed, pharetra dui. Nullam gravida dapibus justo, ac eleifend elit tristique et. Suspendisse molestie lectus eget placerat convallis. Vivamus venenatis, erat nec rutrum pulvinar, ex risus vehicula nunc, viverra interdum eros tellus et metus. Maecenas in mi dui. Donec efficitur diam quis felis congue, sit amet scelerisque ex vestibulum.</p>
+    </div>
+  );
 };
