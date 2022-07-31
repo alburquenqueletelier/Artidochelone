@@ -104,7 +104,7 @@ export const Register = () => {
       <div className="row m-5">
         <div className="input-group mb-3">
           <input
-            type="text"
+            type="password"
             className="form-control"
             placeholder="Password"
             aria-label="Sizing example input"
@@ -116,7 +116,7 @@ export const Register = () => {
       <div className="row m-5">
         <div className="input-group mb-3">
           <input
-            type="text"
+            type="password"
             className="form-control"
             placeholder="Repeat Password"
             aria-label="Sizing example input"
