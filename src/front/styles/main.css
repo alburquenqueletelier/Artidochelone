@@ -1,5 +1,29 @@
-.navbar-brand{
+body {
+    background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
+    background-size: cover;
+   /* background-image: url(../../front/img/fondo.jpg); */
+    /* background: (https://i.pinimg.com/564x/e4/8a/bf/e48abfb1c643cbe45a129abc821585f9.jpg); https://cdn.dribbble.com/users/1516344/screenshots/6625506/18_liquidbackgrounds_3_1600x1200_1_4x.jpg?compress=1&resize=768x576&vertical=top*/
+    background-color: rgba(195, 0, 255, 0.452);
+  }
+/*general styles*/
+.glass1{
+    background-color: rgba(0, 0, 0, 0.637)!important;
+    border-bottom: rgb(65, 63, 63) solid 1px;
+    box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
+}
+
+/*navbar*/
+  .navbar-brand{
     letter-spacing: 7px;
     text-decoration: none;
-    
+    color: pink!important;
 }
+.navbar{
+    background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
+    background-size: cover;
+
+}
+.nav-link:hover, .btn:hover{
+    box-shadow: 0 0px 15px 0 rgba(224, 219, 219, 0.295);
+}
+/*section 1*/
