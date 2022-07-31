@@ -5,19 +5,13 @@ body {
     background-color: rgba(195, 0, 255, 0.452);
   }
 /*general styles*/
-.glassnav{
-    background-color: rgba(17, 16, 16, 0.637)!important;
-    border-bottom: rgb(65, 63, 63) solid 1px;
-    box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
-}
 .glass2 {
   background: rgba(206, 195, 195, 0.322);
-  height: 80vh;
-  width: 100%;
+
   border: 1px solid rgba(124, 156, 156, 0.651);
   backdrop-filter: blur(10px);
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.295);
-  display: flex;
+
 }
 .glass3 {
   background: rgba(206, 195, 195, 0.541);
@@ -29,11 +23,10 @@ body {
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.295);
   display: flex;
 }
-
-.footer{
-  background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
-  background-size: cover;
-  backdrop-filter: blur(20px);
+.glassnav{
+  background-color: rgba(17, 16, 16, 0.637)!important;
+  border-bottom: rgb(65, 63, 63) solid 1px;
+  box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
 }
 /*navbar*/
   .navbar-brand{
@@ -49,6 +42,8 @@ body {
 .nav-link:hover, .btn:hover{
     box-shadow: 0 0px 15px 0 rgba(224, 219, 219, 0.829);
 }
+/* footer */
+
 /*section 1*/
 /* img{
   width: 10em;
