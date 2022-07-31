@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
+import "../../styles/main.css";
+
+
+
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="container-fluid text-center mt-5">
+    <div className="container-fluid text-center mt-5 glass2">
 		{/* Carousel con 2 imagenes por slides. Debe ser generado con los top 10 proyectos */}
       <div
         id="carouselExampleIndicators"
