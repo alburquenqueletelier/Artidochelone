@@ -54,7 +54,9 @@ def login():
             return jsonify({
                 "message": "wrong user or password"
             })
-    return("miau")
+    return jsonify({
+        "message": "miau"
+    })
 
 
 @api.route('/register', methods=['POST', 'GET'])

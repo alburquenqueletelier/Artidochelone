@@ -15,7 +15,7 @@ export const Navbar = () => {
         <div className="container-fluid glassnav p-4 ">
 
 
-          <a className="navbar-brand fs-4 text-secondary" href="/">ARTEDOCHELONE</a>
+          <a className="navbar-brand fs-4 text-secondary" href="/">ARTIDOCHELONE</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><HiMenuAlt4 /></span>
           </button>
