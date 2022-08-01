@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsSearch, BsHeart, BsChatLeftDots } from "react-icons/bs";
 import { HiMenuAlt4 } from "react-icons/hi";
-import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+
+import { Postmodal } from "./postModal";
 
 import "../../styles/main.css"
 
@@ -16,8 +17,8 @@ export const Navbar = () => {
 
 
           <a className="navbar-brand fs-4 text-secondary" href="/">ARTEDOCHELONE</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"><HiMenuAlt4 /></span>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"><HiMenuAlt4 /></span>
           </button>
 
 
@@ -27,7 +28,8 @@ export const Navbar = () => {
                 <a className="nav-link active " aria-current="page" href="#"><BsChatLeftDots /></a> {/*onclick agregar clase =  active*/}
               </li>
               <li className="nav-item mx-3 ">
-                <a className="nav-link " href="#"><MdOutlineAddPhotoAlternate /></a>
+                  <Postmodal>
+                  </Postmodal>
               </li>
 
               <li className="nav-item mx-3">
