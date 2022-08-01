@@ -2,6 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       message: null,
+      login: null,
+      user: null,
       demo: [
         {
           title: "FIRST",
@@ -34,6 +36,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => console.log(result))
           .catch((error) => console.log("error !!!", data, error));
+      },
+      
+      demoLogin:() => {
+        const {login, user} = getStore();
+        if (!login){
+          setStore({login: true})
+          setStore({user: "baal"})
+        } else {
+          setStore({login: false})
+          setStore({user: null})
+        }
       },
 
       // Use getActions to call a function within a fuction
