@@ -3,8 +3,6 @@ import { Context } from "../store/appContext";
 import "../../styles/main.css";
 
 
-
-
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
@@ -120,7 +118,7 @@ export const Home = () => {
         </button>
       </div>
 		{/* Descripción de la pagina */}
-		<p className="m-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eleifend interdum sapien vitae malesuada. Integer sed leo sed est fringilla convallis. Pellentesque malesuada ut nulla ut feugiat. Praesent egestas erat vel lacus mattis, vel facilisis erat iaculis. Duis eleifend volutpat dapibus. Proin porta mauris non accumsan imperdiet. Vestibulum porttitor purus eget tortor bibendum, vitae fermentum odio aliquam. Proin rhoncus ut orci vel molestie. Suspendisse in urna eleifend, lobortis felis sed, pharetra dui. Nullam gravida dapibus justo, ac eleifend elit tristique et. Suspendisse molestie lectus eget placerat convallis. Vivamus venenatis, erat nec rutrum pulvinar, ex risus vehicula nunc, viverra interdum eros tellus et metus. Maecenas in mi dui. Donec efficitur diam quis felis congue, sit amet scelerisque ex vestibulum.</p>
+		<p className="m-5sh">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eleifend interdum sapien vitae malesuada. Integer sed leo sed est fringilla convallis. Pellentesque malesuada ut nulla ut feugiat. Praesent egestas erat vel lacus mattis, vel facilisis erat iaculis. Duis eleifend volutpat dapibus. Proin porta mauris non accumsan imperdiet. Vestibulum porttitor purus eget tortor bibendum, vitae fermentum odio aliquam. Proin rhoncus ut orci vel molestie. Suspendisse in urna eleifend, lobortis felis sed, pharetra dui. Nullam gravida dapibus justo, ac eleifend elit tristique et. Suspendisse molestie lectus eget placerat convallis. Vivamus venenatis, erat nec rutrum pulvinar, ex risus vehicula nunc, viverra interdum eros tellus et metus. Maecenas in mi dui. Donec efficitur diam quis felis congue, sit amet scelerisque ex vestibulum.</p>
     </div>
   );
 };
