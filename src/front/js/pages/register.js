@@ -13,19 +13,19 @@ export const Register = () => {
   const [password, setPassword] = useState("");
   const [info, setInfo] = useState();
   const handleSubmit = () => {
-    setInfo(data), actions.postRegister(info);
+    setInfo(data), actions.postRegister(data);
   };
   // const userRegister = () => {
   //    actions.postRegister(info)
   // };
   let data = {
-    name: name,
-    lastname: lastname,
-    username: username,
-    dateofbirth: dateofbirth,
-    email: email,
-    phonenumber: phonenumber,
-    password: password,
+    name:name,
+    lastname:lastname,
+    username:username,
+    dateofbirth:dateofbirth,
+    email:email,
+    phonenumber:phonenumber,
+    password:password,
   };
   return (
     <div className="container">
