@@ -62,21 +62,24 @@ def login():
 @api.route('/register', methods=['POST', 'GET'])
 def register():
     decoded_object = json.loads(request.data)
-    check_user = User.query.filter_by(email=decoded_object["email"]).all()
-    if not check_user: 
-        new_user = User()
-        new_user.name = decoded_object["name"]
-        new_user.last_name = decoded_object["last_name"]
-        new_user.username = decoded_object["username"]
-        new_user.email = decoded_object["email"]
-        new_user.phone_number = decoded_object["phone_number"]
-        new_user.date_of_birth = decoded_object["date_of_birth"]
-        new_user.password = decoded_object["password"]
-        db.session.add(new_user)
-        db.session.commit()
+    check_email = User.query.filter_by(email=decoded_object["email"]).all()
+    if check_email:
         return jsonify({
-            "message": "New user created :D"
-        })
-    return jsonify({
         "message": "Email already in use"
+    }) 
+    check_username = User.query.filter_by(username=decoded_object["username"]).all()
+    if check_username:
+        return jsonify({
+        "message": "Username already in use"
+    })
+    new_user = User()
+    new_user.name = decoded_object["name"]
+    new_user.lastName = decoded_object["last_name"]
+    new_user.username = decoded_object["username"]
+    new_user.email = decoded_object["email"]
+    new_user.password = decoded_object["password"]
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify({
+        "message": "New user created :D"
     })
