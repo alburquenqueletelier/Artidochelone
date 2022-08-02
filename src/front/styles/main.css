@@ -1,6 +1,6 @@
 body {
-    /* background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp); */
-    background: url(https://media.istockphoto.com/photos/modern-abstract-wavy-background-picture-id1356565277?b=1&k=20&m=1356565277&s=170667a&w=0&h=gi9zLi3GT8_5xMp86vjFx0LPYDfoDeP5MEfARVj4JFk=);
+    background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
+    /* background: url(https://media.istockphoto.com/photos/modern-abstract-wavy-background-picture-id1356565277?b=1&k=20&m=1356565277&s=170667a&w=0&h=gi9zLi3GT8_5xMp86vjFx0LPYDfoDeP5MEfARVj4JFk=); */
     background-size: cover;
     background-color: rgba(195, 0, 255, 0.452);
   }
@@ -26,7 +26,7 @@ body {
 .glassnav{
   background-color: rgba(17, 16, 16, 0.637)!important;
   border-bottom: rgb(65, 63, 63) solid 1px;
-  box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.35);
 }
 /*navbar*/
   .navbar-brand{
@@ -34,10 +34,13 @@ body {
     text-decoration: none;
     color: pink!important;
 }
+.nav-item{
+  color: rgb(169, 170, 168)!important;
+  font-size: large;
+}
 .navbar{
     background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
     background-size: cover;
-
 }
 .nav-link:hover, .btn:hover{
     box-shadow: 0 0px 15px 0 rgba(224, 219, 219, 0.829);
@@ -50,3 +53,8 @@ body {
   height: 10em;
   background-color: rgb(143, 165, 165);
 } */
+
+.btn{
+  color: rgb(199, 199, 199)!important;
+  font-size: large;
+}

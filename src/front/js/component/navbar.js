@@ -1,7 +1,6 @@
 import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import { BsSearch, BsHeart, BsChatLeftDots } from "react-icons/bs";
-import { HiMenuAlt4 } from "react-icons/hi";
 import { Context } from "../store/appContext";
 import { Postmodal } from "./postModal";
 
@@ -18,9 +17,9 @@ export const Navbar = () => {
         <div className="container-fluid glassnav p-4 ">
 
 
-          <a className="navbar-brand fs-4 text-secondary" href="/">ARTEDOCHELONE</a>
+          <a className="navbar-brand fw-normal fs-4 text-secondary" href="/">ARTIDOCHELONE</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"><HiMenuAlt4 /></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
 
@@ -29,7 +28,7 @@ export const Navbar = () => {
               {!!store.login && 
               <div className="d-flex">
                 <li className="nav-item mx-3">
-                  <a className="nav-link active " aria-current="page" href="#"><BsChatLeftDots /></a> {/*onclick agregar clase =  active*/}
+                  <a className="nav-link  " aria-current="page" href="#"><BsChatLeftDots /></a> {/*onclick agregar clase =  active*/}
                 </li>
                 <li className="nav-item mx-3 ">
                     <Postmodal>
@@ -42,7 +41,7 @@ export const Navbar = () => {
               }
               <li className="nav-item mx-3">
                 <form className="d-flex m-auto p-0" role="search">
-                  <button className="btn  " type="submit"><BsSearch /></button> {/*añadir tooltips a los iconos al clickearlo se abre el input click input .visible sino .invisible*/}
+                  <button className="btn  " type="submit"><BsSearch className="text-light"/></button> {/*añadir tooltips a los iconos al clickearlo se abre el input click input .visible sino .invisible*/}
                   <input className="form-control me-2 invisible" type="search" placeholder="Search" aria-label="Search" />
                 </form>
               </li>
@@ -59,10 +58,10 @@ export const Navbar = () => {
                       estado de la variable login a true para visaulizar como se ve la pagina
                       desde un usuario indentificado
                   */}
-                  <button className="btn" onClick={()=>actions.demoLogin()}>
+                  <button className="btn " onClick={()=>actions.demoLogin()}>
                     <li className="nav-item mx-3">Login</li>
                   </button>
-                  <Link to="/register" className="nav-item btn mx-3">Register</Link>
+                  <Link to="/register" className="nav-item btn mx-3 ">Register</Link>
                   </ul>
               }
               <ul className="dropdown-menu dropdown-menu-end">
