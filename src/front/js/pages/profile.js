@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
-import { LoremIpsum } from "react-lorem-ipsum";
+import "../../styles/main.css";
 
-export const Features = () => {
+export const Profile = () => {
   const { store, actions } = useContext(Context);
 
   return (

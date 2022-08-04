@@ -17,18 +17,34 @@ export const Navbar = () => {
         <div className="container-fluid glassnav p-4 ">
 
 
+<<<<<<< Updated upstream
           <a className="navbar-brand fw-normal fs-4 text-secondary" href="/">ARTIDOCHELONE</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
+=======
+          <Link className="navbar-brand fs-4 text-secondary" 
+                href="/">
+                  ARTIDOCHELONE
+          </Link>
+          <button class="navbar-toggler" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#navbarSupportedContent" 
+                  aria-controls="navbarSupportedContent" 
+                  aria-expanded="false" 
+                  aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><HiMenuAlt4 /></span>
+>>>>>>> Stashed changes
           </button>
 
 
           <div className="collapse navbar-collapse  " id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
+<<<<<<< Updated upstream
               {!!store.login && 
               <div className="d-flex">
                 <li className="nav-item mx-3">
-                  <a className="nav-link  " aria-current="page" href="#"><BsChatLeftDots /></a> {/*onclick agregar clase =  active*/}
+                  <a className="nav-link btn " aria-current="page" href="#"><BsChatLeftDots /></a> {/*onclick agregar clase =  active*/}
                 </li>
                 <li className="nav-item mx-3 ">
                     <Postmodal>
@@ -39,6 +55,19 @@ export const Navbar = () => {
                 </li>
               </div>
               }
+=======
+              <li className="nav-item mx-3">
+                <Link className="nav-link active " aria-current="page" href="#" ><BsChatLeftDots /></Link> {/*onclick agregar clase =  active*/}
+              </li>
+              <li className="nav-item mx-3 ">
+                <Link className="nav-link " href="#"><MdOutlineAddPhotoAlternate /></Link>
+              </li>
+
+              <li className="nav-item mx-3">
+                <Link className="nav-link "><BsHeart className="icons"/></Link>
+              </li>
+
+>>>>>>> Stashed changes
               <li className="nav-item mx-3">
                 <form className="d-flex m-auto p-0" role="search">
                   <button className="btn  " type="submit"><BsSearch className="text-light"/></button> {/*añadir tooltips a los iconos al clickearlo se abre el input click input .visible sino .invisible*/}
@@ -48,9 +77,14 @@ export const Navbar = () => {
             </ul>
 
             <div className="nav-item dropdown ">
+<<<<<<< Updated upstream
               {!!store.login ?
-                <Link to="/perfil" className="nav-link dropdown-toggle text-secondary" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Perfil              
+                <Link to="/perfil" className="nav-link dropdown-toggle text-secondary rounded-circle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img
+                        src="https://dummyimage.com/50x50/000/fff"
+                        className="p-0 rounded-circle"
+                        alt="..."
+                      />           
                 </Link>
                 : <ul className="navbar-nav mx-auto">
                   {/* con modal para login y dar opción para derivar a registrarse 
@@ -62,10 +96,15 @@ export const Navbar = () => {
                     <li className="nav-item mx-3">Login</li>
                   </button>
                   <Link to="/register" className="nav-item btn mx-3 ">Register</Link>
+                 {/* <button
+                //  onClick={()=> setModal(true)}
+                 >
+
+                 </button> */}
                   </ul>
               }
               <ul className="dropdown-menu dropdown-menu-end">
-                <li><a className="dropdown-item" href="#">Mi perfil</a></li>
+                <li><Link className="dropdown-item" to="/profile">Mi perfil</Link></li>
                 <li><a className="dropdown-item" href="#">Seguidos </a></li>
                 <li><a className="dropdown-item" href="#">Guardados</a></li>
                 <li><a className="dropdown-item" href="#">Mensajes</a></li>
@@ -75,9 +114,21 @@ export const Navbar = () => {
                 <button className="btn" onClick={()=>actions.demoLogin()}>
                   <li className="dropdown-item">Log Out</li>
                 </button>
+=======
+              <Link className="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Perfil              
+              </Link>
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li><Link className="dropdown-item" href="#">Mi perfil</Link></li>
+                <li><Link className="dropdown-item" href="#">Seguidos </Link></li>
+                <li><Link className="dropdown-item" href="#">Guardados</Link></li>
+                <li><Link className="dropdown-item" href="#">Mensajes</Link></li>
+
+                <li><hr className="dropdown-divider" /></li>
+                <li><Link className="dropdown-item" href="#">Log Out</Link></li>
+>>>>>>> Stashed changes
               </ul>
             </div>
-
 
           </div>
         </div>

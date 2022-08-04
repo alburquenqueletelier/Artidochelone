@@ -4,12 +4,15 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { About } from "./pages/about";
-import { Features } from "./pages/features";
+// import { Features } from "./pages/features";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Register } from "./pages/register";
+import { Profile } from "./pages/profile";
+
+
 
 //create your first component
 const Layout = () => {
@@ -22,11 +25,13 @@ const Layout = () => {
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Navbar />
+
           <Routes>
             <Route element={<Register />} path="/register" />
             <Route element={<About />} path="/about" />
-            <Route element={<Features />} path="/features" />
+            {/* <Route element={<Features />} path="/features" /> */}
             <Route element={<Home />} path="/" />
+            <Route element={<Profile />} path="/profile "/>
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />

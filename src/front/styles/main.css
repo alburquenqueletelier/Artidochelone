@@ -1,49 +1,65 @@
 body {
-    background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
-    /* background: url(https://media.istockphoto.com/photos/modern-abstract-wavy-background-picture-id1356565277?b=1&k=20&m=1356565277&s=170667a&w=0&h=gi9zLi3GT8_5xMp86vjFx0LPYDfoDeP5MEfARVj4JFk=); */
-    background-size: cover;
-    background-color: rgba(195, 0, 255, 0.452);
-  }
-/*general styles*/
-.glass2 {
-  background: rgba(206, 195, 195, 0.322);
+  /* background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp); */
+  /* background: url(https://media.istockphoto.com/photos/modern-abstract-wavy-background-picture-id1356565277?b=1&k=20&m=1356565277&s=170667a&w=0&h=gi9zLi3GT8_5xMp86vjFx0LPYDfoDeP5MEfARVj4JFk=); */
+  /*heroimg ? 
+   http://www.brabbu.com/en/inspiration-and-ideas/wp-content/uploads/2015/06/Digital-Art-Photography-for-Art-Lovers4.jpg
+   https://i.pinimg.com/564x/f9/25/fa/f925fab2abb9a650165acf62d3b7e867.jpg
+   https://i.pinimg.com/564x/3f/91/6f/3f916ff60ffa5093cf72dca8af50b785.jpg
+   https://i.pinimg.com/564x/b0/74/f9/b074f94a1eba3fd53053ffa591bfa751.jpg
+   https://i.pinimg.com/564x/df/eb/59/dfeb59b54648cb3c170bc540304f7163.jpg
+   https://i.pinimg.com/564x/35/6a/5f/356a5fe387d4469e0e833b0bdc4dbfb4.jpg
+   https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947__480.jpg*/
 
+  background-size: cover;
+  background: #757f9a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #d7dde8,
+    #757f9a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #d7dde8,
+    #757f9a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+/*general styles*/
+.gradient {
+}
+.glass2 {
+  background: rgba(241, 237, 237, 0.418);
   border: 1px solid rgba(124, 156, 156, 0.651);
   backdrop-filter: blur(10px);
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.295);
+}
 
-}
-.glass3 {
-  background: rgba(206, 195, 195, 0.541);
-  height: 80vh;
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid rgba(124, 156, 156, 0.651);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.295);
-  display: flex;
-}
-.glassnav{
-  background-color: rgba(17, 16, 16, 0.637)!important;
+.glassnav {
+  background-color: rgba(17, 16, 16, 0.397) !important;
   border-bottom: rgb(65, 63, 63) solid 1px;
   box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.35);
 }
 /*navbar*/
-  .navbar-brand{
-    letter-spacing: 7px;
-    text-decoration: none;
-    color: pink!important;
+.navbar-brand {
+  letter-spacing: 10px;
+  text-decoration: none;
+  color: pink !important;
 }
-.nav-item{
-  color: rgb(169, 170, 168)!important;
+.nav-item, .footer div {
+  color: rgb(169, 170, 168) !important;
   font-size: large;
 }
-.navbar{
-    background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
-    background-size: cover;
+.navbar, .footer {
+  background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
+  background-size: cover;
 }
-.nav-link:hover, .btn:hover{
-    box-shadow: 0 0px 15px 0 rgba(224, 219, 219, 0.829);
+
+.nav-link:hover,
+.btn:hover {
+  box-shadow: 0 0px 15px 0 rgba(224, 219, 219, 0.829);
+}
+
+.sidebar {
+  height: 100vh;
 }
 /* footer */
 
@@ -53,8 +69,17 @@ body {
   height: 10em;
   background-color: rgb(143, 165, 165);
 } */
+.carousel img {
+  height: 30em;
+  object-fit: cover;
+}
+.jumbotron img{
+  height: 15em;
+  width: 100%;
+  object-fit: cover;
 
-.btn{
-  color: rgb(199, 199, 199)!important;
+}
+.btn {
+  color: rgb(199, 199, 199) !important;
   font-size: large;
 }
