@@ -139,18 +139,18 @@ export const Register = () => {
     // </form>
     <div className="my-4 mx-auto p-4 rounded col-6 glass2">
       <div className="border border-secondary border-bottom-0 text-light rounded-top">
-        <h3 class="m-3">
+        <h3 className="m-3">
           Log In
         </h3>
       </div>
       <form>
         <div className="mb-3">
           <input
-            type="email"
+            type="username"
             className="form-control bg-default opacity-50"
             placeholder="Username"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            id="exampleInputUsername"
+            aria-describedby="usernameHelp"
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -159,14 +159,16 @@ export const Register = () => {
           <input
             type="text"
             aria-label="First name"
-            class="form-control bg-default opacity-50"
+            className="form-control bg-default opacity-50"
             placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
           />
           <input
             type="text"
             aria-label="Last name"
-            class="form-control bg-default opacity-50"
+            className="form-control bg-default opacity-50"
             placeholder="Lastname"
+            onChange={(e) => setLastname(e.target.value)}
           />
         </div>
 
@@ -194,7 +196,7 @@ export const Register = () => {
             type="password"
             className="form-control bg-default opacity-50"
             placeholder="Repeat Password"
-            id="exampleInputPassword1"
+            id="exampleInputPassword2"
           />
         </div>
         <div className="d-grid gap-2">
