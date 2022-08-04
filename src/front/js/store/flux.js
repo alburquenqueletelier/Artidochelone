@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       message: null,
-      login: null,
+      // login: null,
       user: null,
       demo: [
         {
@@ -37,17 +37,43 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((result) => console.log(result))
           .catch((error) => console.log("error !!!", data, error));
       },
-      
-      demoLogin:() => {
-        const {login, user} = getStore();
-        if (!login){
-          setStore({login: true})
-          setStore({user: "baal"})
-        } else {
-          setStore({login: false})
-          setStore({user: null})
-        }
+      // login fetch
+      login: async (event, user, pass) => {
+        event.preventDefault();
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json")
+
+        let requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          cors: 'cors',
+          body: JSON.stringify({
+            username: user,
+            password: pass
+          }),
+        };
+        await fetch(process.env.BACKEND_URL + "/api/login", requestOptions)
+          .then((response) => response.json())
+          .then((data) => {
+            // deberia guardar toda la info de user que esta en el serializador
+            return setStore({ user: data.user });
+          })
+          .catch((error) => console.log("mensaje error: ", error));
       },
+      logout: () => {
+        return setStore({ user: null });
+      },
+      // demoLogin:() => {
+      //   fetch(process.env.BACKEND_URL + "/api/hello", requestOptions)
+      //   const {login, user} = getStore();
+      //   if (!login){
+      //     setStore({login: true})
+      //     setStore({user: "baal"})
+      //   } else {
+      //     setStore({login: false})
+      //     setStore({user: null})
+      //   }
+      // },
 
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
