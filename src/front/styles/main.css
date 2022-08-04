@@ -34,7 +34,7 @@ body {
 }
 
 .glassnav {
-  background-color: rgba(17, 16, 16, 0.397) !important;
+  background-color: rgba(0, 0, 0, 0.445) !important;
   border-bottom: rgb(65, 63, 63) solid 1px;
   box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.35);
 }

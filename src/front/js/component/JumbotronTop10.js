@@ -6,7 +6,7 @@ export const JumbotronTop10 = () => {
 
 <div className="bg-warning">
   <h1>Exponer tu trabajo</h1>
- <p>El mejor lugar para publicar tu portafolio</p>
+ <p>El mejor lugar para publicar tu portafolio, esto va sobre los slides, falta posicionar </p>
 </div>
 
 

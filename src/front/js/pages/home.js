@@ -6,6 +6,7 @@ import { JumbotronTop10 } from "../component/JumbotronTop10";
 
 import "../../styles/main.css";
 import { Features } from "../component/features";
+import { GaleryHome } from "../component/galeryHome";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -32,6 +33,7 @@ export const Home = () => {
 
 <JumbotronTop10 />
 <Features />
+<GaleryHome />
       {/* </div>  */}
       {/* sidebar overflow, pos absolute*/}
     </>
