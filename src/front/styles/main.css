@@ -9,9 +9,9 @@ body {
    https://i.pinimg.com/564x/df/eb/59/dfeb59b54648cb3c170bc540304f7163.jpg
    https://i.pinimg.com/564x/35/6a/5f/356a5fe387d4469e0e833b0bdc4dbfb4.jpg
    https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947__480.jpg*/
-
-  background-size: cover;
-  background: #757f9a; /* fallback for old browsers */
+/* esta repitiendo el gradient arreglarr ver en w3school */
+  background-size: fill;
+  background: #0d48e7; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to top,
     #d7dde8,
@@ -58,6 +58,10 @@ body {
   box-shadow: 0 0px 15px 0 rgba(224, 219, 219, 0.829);
 }
 
+Link {
+  text-decoration: none;
+  color: red;
+}
 .sidebar {
   height: 100vh;
 }

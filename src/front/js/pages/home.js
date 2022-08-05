@@ -7,13 +7,14 @@ import { JumbotronTop10 } from "../component/JumbotronTop10";
 import "../../styles/main.css";
 import { Features } from "../component/features";
 import { GaleryHome } from "../component/galeryHome";
+import { Etiquetas } from "../component/etiquetas";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
   return (
     <>
-       {/* <div className="d-flex align-items-center sidebar">
+      {/* <div className="d-flex align-items-center sidebar">
          <div className="h-100 flex-column  flex-shrink-0 bg-dark opacity-50 sticky">
           <ul className="nav flex-column mt-3">
             <li className="nav-item my-2 ">
@@ -31,9 +32,10 @@ export const Home = () => {
 
       {/*  jumbotron descripcion pagina */}
 
-<JumbotronTop10 />
-<Features />
-<GaleryHome />
+      <JumbotronTop10 />
+      <Features />
+      <Etiquetas />
+      <GaleryHome />
       {/* </div>  */}
       {/* sidebar overflow, pos absolute*/}
     </>

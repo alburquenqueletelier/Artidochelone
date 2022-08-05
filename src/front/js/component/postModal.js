@@ -19,7 +19,7 @@ export const Postmodal = () => {
 
       {/* Modal */}
       <div
-        className="modal fade"
+        className="modal fade "
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
@@ -27,8 +27,8 @@ export const Postmodal = () => {
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
+        <div className="modal-dialog modal-lg ">
+          <div className="modal-content glass2 text-light">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
                 Create New Post
@@ -42,7 +42,7 @@ export const Postmodal = () => {
             </div>
             {/* Body (Formulario) */}
             <form>
-              <div className="modal-body">
+              <div className="modal-body mt-5">
                 <div className="row mb-3">
                   <label for="fileUp" className="col-sm-2 col-form-label">
                     Image/Video
@@ -52,7 +52,7 @@ export const Postmodal = () => {
                       type="file"
                       id="fileUp"
                       accept="image/*,video/*"
-                      className="form-control"
+                      className="form-control glass2"
                     />
                   </div>
                 </div>
@@ -61,7 +61,7 @@ export const Postmodal = () => {
                         Title
                     </label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="title" placeholder="Enter a Title"/>
+                        <input type="text" className="form-control glass2" id="title" placeholder="Enter a Title"/>
                     </div>
                 </div>
                 <div className="row mb-3">
@@ -69,7 +69,7 @@ export const Postmodal = () => {
                         Description
                     </label>
                     <div className="col-sm-10">
-                        <textarea id="description" className="form-control" placeholder="Describe your proyect..."/>
+                        <textarea id="description" className="form-control glass2" placeholder="Describe your proyect..."/>
                     </div>
                 </div>
               </div>
