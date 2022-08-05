@@ -2,6 +2,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+///hacer galeria en home y portafolio en perfil. convertir form a offvanvas right y dejar la ruta en register///
+///emmmet???jsx poner id al usuario id=contraseña? perfil hacer panel de adm
+
 
 //hacer el pull request en github y merge de inmediato, en gitpod ir a main y pull ir a mi rama y hacer merge main para mezlar con 
 //1-bajar la rama main 

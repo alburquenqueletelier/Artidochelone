@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { BsSearch, BsHeart, BsChatLeftDots } from "react-icons/bs";
+import { BsSearch, BsHeart, BsChatLeftDots, BsXLg } from "react-icons/bs";
 import { Context } from "../store/appContext";
 import { Postmodal } from "./postModal";
 
@@ -27,23 +27,23 @@ export const Navbar = () => {
 
           <div className="collapse navbar-collapse  " id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
-              {!!store.user && 
-              <div className="d-flex">
-                <li className="nav-item mx-3">
-                  <a className="nav-link  " aria-current="page" href="#"><BsChatLeftDots /></a> {/*onclick agregar clase =  active*/}
-                </li>
-                <li className="nav-item mx-3 ">
+              {!!store.user &&
+                <div className="d-flex">
+                  <li className="nav-item mx-3">
+                    <a className="nav-link btn " aria-current="page" href="#"><BsChatLeftDots /></a> {/*onclick agregar clase =  active*/}
+                  </li>
+                  <li className="nav-item mx-3 ">
                     <Postmodal>
                     </Postmodal>
-                </li>
-                <li className="nav-item mx-3">
-                  <a className="nav-link "><BsHeart className="icons"/></a>
-                </li>
-              </div>
+                  </li>
+                  <li className="nav-item mx-3">
+                    <a className="nav-link "><BsHeart className="icons" /></a>
+                  </li>
+                </div>
               }
               <li className="nav-item mx-3">
                 <form className="d-flex m-auto p-0" role="search">
-                  <button className="btn  " type="submit"><BsSearch className="text-light"/></button> {/*añadir tooltips a los iconos al clickearlo se abre el input click input .visible sino .invisible*/}
+                  <button className="btn  " type="submit"><BsSearch className="text-light" /></button> {/*añadir tooltips a los iconos al clickearlo se abre el input click input .visible sino .invisible*/}
                   <input className="form-control me-2 invisible" type="search" placeholder="Search" aria-label="Search" />
                 </form>
               </li>
@@ -52,7 +52,7 @@ export const Navbar = () => {
             <div className="nav-item dropdown ">
               {!!store.user ?
                 <Link to="/perfil" className="nav-link dropdown-toggle text-secondary" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {store.user.username}              
+                  {store.user.username}
                 </Link>
                 : <ul className="navbar-nav mx-auto">
                   {/* con modal para login y dar opción para derivar a registrarse 
@@ -66,45 +66,54 @@ export const Navbar = () => {
                     <li className="nav-item mx-3">Login</li>
                   </button>
                   {/* Este es el modal event.preventDefault(); */}
-                  <form className="mb-1" onSubmit={(event)=>actions.login(event, usernameInput.current.value, passwordInput.current.value)}>
+                  <form className="mb-1" onSubmit={(event) => actions.login(event, usernameInput.current.value, passwordInput.current.value)}>
                     <div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
                       <div className="modal-dialog">
-                        <div className="modal-content">
+                        <div className="modal-content glass2">
                           <div className="modal-header">
-                            <h5 className="modal-title" id="loginModalLabel">Enter your credentials</h5>
-                            <button type="button" className="btn" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 className="modal-title text-light" id="loginModalLabel">Enter your credentials</h5>
+                            <button type="button" className="btn" data-bs-dismiss="modal" aria-label="Close"><BsXLg/></button>
                           </div>
                           <div className="modal-body">
                             {/* se usa componente no controlados */}
-                            <input className="form-control" placeholder="Username" type="text" ref={usernameInput} ></input>
-                            <input className="form-control mb-1" placeholder="Password" type="password" ref={passwordInput} ></input>
+                            <input className="form-control my-4" placeholder="Username" type="text" ref={usernameInput} ></input>
+                            <input className="form-control mb-1 my-4" placeholder="Password" type="password" ref={passwordInput} ></input>
                             <a><small>Forgot your password?</small></a>
                           </div>
                           <div className="modal-footer">
-                            <button type="button" className="btn" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" className="btn" data-bs-dismiss="modal">Login</button>
+                            <button type="submit" className="btn btn-outline-light" data-bs-dismiss="modal">Login</button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </form>
-                  <Link to="/register" className="nav-item btn mx-3 ">Register</Link>
-                  </ul>
+                  {/* <Link to="/register" className="nav-item btn mx-3 ">Register</Link> */}
+                  {/* <button
+                //  onClick={()=> setModal(true)}
+                 >
+
+                 </button> */}
+
+                  {/* este es el boton del modal */}
+                  <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#registerModal">
+                    <li className="nav-item mx-3">Register</li>
+                  </button>
+
+                </ul>
               }
               <ul className="dropdown-menu dropdown-menu-end">
-                <li><a className="dropdown-item" href="#">Mi perfil</a></li>
+                <li><Link className="dropdown-item" to="/profile">Mi perfil</Link></li>
                 <li><a className="dropdown-item" href="#">Seguidos </a></li>
                 <li><a className="dropdown-item" href="#">Guardados</a></li>
                 <li><a className="dropdown-item" href="#">Mensajes</a></li>
 
                 <li><hr className="dropdown-divider" /></li>
                 {/* Funcion demo para deslogear. Cuando este listo el back end agregar la función correcta */}
-                <button className="btn" onClick={()=>actions.logout()}>
+                <button className="btn" onClick={() => actions.logout()}>
                   <li className="dropdown-item">Log Out</li>
                 </button>
               </ul>
             </div>
-
 
           </div>
         </div>
