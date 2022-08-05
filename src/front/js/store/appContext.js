@@ -29,6 +29,13 @@ const injectContext = PassedComponent => {
 			 * store, instead use actions, like this:
 			 **/
 			// state.actions.getMessage(); // <---- calling this function from the flux.js actions
+
+			// En caso de que el usuario refresque la pagina se mantiene su sesión abierta
+			// usando sessionStorage, y solo se cerrara cuando decida cerrar sesión o cuando
+			// salga del navegador.
+			if (sessionStorage.getItem('user')){
+				state.actions.loginRemember();
+			}
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

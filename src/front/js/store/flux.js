@@ -34,7 +34,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         await fetch(process.env.BACKEND_URL + "/api/register", requestOptions)
           .then((response) => response.json())
-          .then((result) => console.log(result))
+          .then((result) => {
+            console.log(result);
+            alert('Successfully registered')
+          })
           .catch((error) => console.log("error !!!", data, error));
       },
       // login fetch
@@ -56,11 +59,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => {
             // deberia guardar toda la info de user que esta en el serializador
+            console.log(data.message);
+            sessionStorage.setItem('user', JSON.stringify(data.user));
             return setStore({ user: data.user });
           })
           .catch((error) => console.log("mensaje error: ", error));
       },
+      loginRemember: ()=>setStore({user:JSON.parse(sessionStorage.getItem('user'))})
+      ,
       logout: () => {
+        sessionStorage.removeItem('user');
         return setStore({ user: null });
       },
       // demoLogin:() => {
