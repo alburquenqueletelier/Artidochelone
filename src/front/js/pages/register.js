@@ -26,10 +26,10 @@ export const Register = () => {
   };
   return (
 
-    <div className="my-4 mx-auto p-4 rounded col-6 glass2">
-      <div className="border border-secondary border-bottom-0 text-light rounded-top">
+    <div className="my-4 mx-auto p-4 rounded col-4 glass2">
+      <div className="border border-light border-bottom-0 text-light rounded-top">
         <h3 className="m-3">
-          Log In
+          Sign Up
         </h3>
       </div>
       <form>
@@ -87,10 +87,10 @@ export const Register = () => {
             id="exampleInputPassword2"
           />
         </div>
-        <div className="d-grid gap-2">
+        <div className="d-grid gap-2 my-3 ">
           <button
             type="submit"
-            className="btn btn-outline-dark opacity-70 my-3 "
+            className="btn btn-outline-light"
             onClick={() => {
               handleSubmit();
             }}
@@ -98,9 +98,9 @@ export const Register = () => {
             Submit
           </button>
         </div>
-        <div className="d-grid gap-2">
-          <button className="btn btn-outline-dark">
-            Or continue with <FcGoogle className="fs-1"/>
+        <div className="d-grid gap-2 my-3">
+          <button className="btn btn-outline-light">
+            Or continue with <FcGoogle className="fs-2"/>
           </button>
         </div>
       </form>

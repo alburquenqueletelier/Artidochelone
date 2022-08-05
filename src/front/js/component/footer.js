@@ -6,7 +6,7 @@ import { BsLinkedin, BsGithub, BsInstagram } from "react-icons/bs";
 export const Footer = () => {
   return (
     <footer className="footer text-secondary text-center   ">
-      <div className="container-fluid d-flex flex-column bg-warning p-5 px-5 glassnav">
+      <div className="container-fluid d-flex flex-column bg-warning p-4 px-5 glassnav">
         <div className="mx-5">
           <p className="navbar-brand fw-normal fs-5 text-secondary pt-5">
             CREADO POR EQUIPO NOMBRE
@@ -55,7 +55,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <p className="nav-item py-5">
+        <p className="nav-item pt-4">
           Made with <i className="fa fa-heart text-danger" />
         </p>
       </div >

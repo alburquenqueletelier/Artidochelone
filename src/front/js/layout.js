@@ -11,6 +11,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Register } from "./pages/register";
 import { Profile } from "./pages/profile";
+import { Loquesea } from "./pages/loquesea";
 
 
 
@@ -25,15 +26,16 @@ const Layout = () => {
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Navbar />
-
-          <Routes>
-            <Route element={<Register />} path="/register" />
-            <Route element={<About />} path="/about" />
-            {/* <Route element={<Features />} path="/features" /> */}
-            <Route element={<Home />} path="/" />
-            <Route element={<Profile />} path="/profile "/>
-            <Route element={<h1>Not found!</h1>} />
-          </Routes>
+         
+            <Routes>
+              <Route element={<Register />} path="/register" />
+              <Route element={<About />} path="/about" />
+              <Route element={<Home />} path="/" />
+              <Route element={<Profile />} path="/profile " />
+              <Route element={<Loquesea />} path="/loquesea" />
+              <Route element={<h1>Not found!</h1>} />
+            </Routes>
+         
           <Footer />
         </ScrollToTop>
       </BrowserRouter>

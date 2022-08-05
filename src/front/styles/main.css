@@ -12,25 +12,29 @@ body {
 /* esta repitiendo el gradient arreglarr ver en w3school */
   background-size: fill;
   background: #0d48e7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
+   background: -webkit-linear-gradient(
     to top,
     #d7dde8,
     #757f9a
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
+  ); /*Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(
     to top,
     #d7dde8,
     #757f9a
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  );/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 /*general styles*/
 .gradient {
 }
 .glass2 {
   background: rgba(241, 237, 237, 0.418);
-  border: 1px solid rgba(124, 156, 156, 0.651);
+  border: 1px solid rgba(150, 165, 165, 0.863);
   backdrop-filter: blur(10px);
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.295);
+}
+.glass2::after{
+  content: '';
+
 }
 
 .glassnav {
@@ -49,7 +53,7 @@ body {
   font-size: large;
 }
 .navbar, .footer {
-  background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
+  /* background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp); */
   background-size: cover;
 }
 
@@ -84,6 +88,10 @@ Link {
 
 }
 .btn {
-  color: rgb(199, 199, 199) !important;
   font-size: large;
+}
+.titulo-jumbotron{
+  top: 100px;
+  left: 50px;
+  
 }
