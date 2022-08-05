@@ -9,7 +9,9 @@ import "../../styles/main.css"
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
-  
+  const usernameInput = React.useRef()
+  const passwordInput = React.useRef()
+
   return (
 
     <>
@@ -25,7 +27,7 @@ export const Navbar = () => {
 
           <div className="collapse navbar-collapse  " id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
-              {!!store.login && 
+              {!!store.user && 
               <div className="d-flex">
                 <li className="nav-item mx-3">
                   <a className="nav-link btn " aria-current="page" href="#"><BsChatLeftDots /></a> {/*onclick agregar clase =  active*/}
@@ -48,13 +50,9 @@ export const Navbar = () => {
             </ul>
 
             <div className="nav-item dropdown ">
-              {!!store.login ?
-                <Link to="/perfil" className="nav-link dropdown-toggle text-secondary rounded-circle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img
-                        src="https://dummyimage.com/50x50/000/fff"
-                        className="p-0 rounded-circle"
-                        alt="..."
-                      />           
+              {!!store.user ?
+                <Link to="/perfil" className="nav-link dropdown-toggle text-secondary" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {store.user.username}              
                 </Link>
                 : <ul className="navbar-nav mx-auto">
                   {/* con modal para login y dar opción para derivar a registrarse 
@@ -62,9 +60,34 @@ export const Navbar = () => {
                       estado de la variable login a true para visaulizar como se ve la pagina
                       desde un usuario indentificado
                   */}
-                  <button className="btn " onClick={()=>actions.demoLogin()}>
+
+                  {/* este es el boton del modal */}
+                  <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
                     <li className="nav-item mx-3">Login</li>
                   </button>
+                  {/* Este es el modal event.preventDefault(); */}
+                  <form className="mb-1" onSubmit={(event)=>actions.login(event, usernameInput.current.value, passwordInput.current.value)}>
+                    <div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="loginModalLabel">Enter your credentials</h5>
+                            <button type="button" className="btn" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div className="modal-body">
+                            {/* se usa componente no controlados */}
+                            <input className="form-control" placeholder="Username" type="text" ref={usernameInput} ></input>
+                            <input className="form-control mb-1" placeholder="Password" type="password" ref={passwordInput} ></input>
+                            <a><small>Forgot your password?</small></a>
+                          </div>
+                          <div className="modal-footer">
+                            <button type="button" className="btn" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" className="btn" data-bs-dismiss="modal">Login</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                   <Link to="/register" className="nav-item btn mx-3 ">Register</Link>
                  {/* <button
                 //  onClick={()=> setModal(true)}
@@ -81,7 +104,7 @@ export const Navbar = () => {
 
                 <li><hr className="dropdown-divider" /></li>
                 {/* Funcion demo para deslogear. Cuando este listo el back end agregar la función correcta */}
-                <button className="btn" onClick={()=>actions.demoLogin()}>
+                <button className="btn" onClick={()=>actions.logout()}>
                   <li className="dropdown-item">Log Out</li>
                 </button>
               </ul>

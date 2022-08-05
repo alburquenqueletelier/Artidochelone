@@ -23,7 +23,7 @@ export const Postmodal = () => {
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
@@ -44,7 +44,7 @@ export const Postmodal = () => {
             <form>
               <div className="modal-body mt-5">
                 <div className="row mb-3">
-                  <label for="fileUp" className="col-sm-2 col-form-label">
+                  <label htmlFor="fileUp" className="col-sm-2 col-form-label">
                     Image/Video
                   </label>
                   <div className="col-sm-10">
@@ -57,7 +57,7 @@ export const Postmodal = () => {
                   </div>
                 </div>
                 <div className="row mb-3">
-                    <label for="title" className="col-sm-2 col-form-label">
+                    <label htmlFor="title" className="col-sm-2 col-form-label">
                         Title
                     </label>
                     <div className="col-sm-10">
@@ -65,7 +65,7 @@ export const Postmodal = () => {
                     </div>
                 </div>
                 <div className="row mb-3">
-                    <label for="description" className="col-sm-2 col-form-label">
+                    <label htmlFor="description" className="col-sm-2 col-form-label">
                         Description
                     </label>
                     <div className="col-sm-10">

@@ -4,6 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint, json
 from api.models import db, User, Post, Comment, Hashtag
 from api.utils import generate_sitemap, APIException
+from flask_cors import CORS
 #import datetime
 #from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -20,37 +21,38 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-@api.route('/login', methods=['POST', 'GET'])
+@api.route('/alluser', methods=['GET'])
+def list_users():
+
+    response = dict()
+    allUsers = db.session.query(User).all()
+    for user in allUsers:
+        response[user.username] = user.serialize()
+
+    return jsonify({"allUsers": response}), 200
+
+@api.route('/login', methods=['POST'])
 def login():
     #recibo informacion de la solicitud (fetch)
     body = request.get_json()
-    # if "email" not in body:
-    #    return jsonify({
-    #        "message":"Specify email"
-    #    })
-    #if "password" not in body:
-    #    return jsonify({
-    #        "message": "Specify password"
-    #   })
-    #else:
-    #    return jsonify({
-    #        "message": "funcionando"
-    #    })
+    username = body["username"]
+    password = body["password"]
     #checkear si el usuario existe
-    user = User.query.filter_by(email=body["email"]).first()
+    user = db.session.query(User).filter_by(username=username).first()
     if user: #si el resultado de user es diferente a None
         if user.password == body["password"]:
             #usuario y clave correcto
             #el token tendrá un tiempo de vida dependiendo de los minutos indicados
             #expiration = datetime.timedelta(minutes=30)
             #access_token = create_access_token(identity=user.email, expires_delta=expiration)
-        
+            print("usuario autenticado")
             return jsonify({
                 "message": "logued in",
-                "data": user.serialize(),
+                "user": user.serialize(),
                # "expire_seconds": expiration.total_seconds()
             })
         else:
+            print("usuario o clave no validos")
             return jsonify({
                 "message": "wrong user or password"
             })
@@ -59,7 +61,7 @@ def login():
     })
 
 
-@api.route('/register', methods=['POST', 'GET'])
+@api.route('/register', methods=['POST'])
 def register():
     decoded_object = json.loads(request.data)
     check_email = User.query.filter_by(email=decoded_object["email"]).all()
@@ -74,7 +76,7 @@ def register():
     })
     new_user = User()
     new_user.name = decoded_object["name"]
-    new_user.lastName = decoded_object["last_name"]
+    new_user.lastname = decoded_object["lastname"]
     new_user.username = decoded_object["username"]
     new_user.email = decoded_object["email"]
     new_user.password = decoded_object["password"]
