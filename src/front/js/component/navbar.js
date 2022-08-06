@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { BsSearch, BsHeart, BsChatLeftDots, BsXLg } from "react-icons/bs";
+import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+
 import { Context } from "../store/appContext";
 import { Postmodal } from "./postModal";
 
@@ -19,7 +21,7 @@ export const Navbar = () => {
         <div className="container-fluid glassnav p-4 ">
 
 
-          <a className="navbar-brand fw-normal fs-4 text-secondary" href="/">ARTIDOCHELONE</a>
+          <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/">ARTIDOCHELONE</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -27,7 +29,7 @@ export const Navbar = () => {
 
           <div className="collapse navbar-collapse  " id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
-              {!!store.user &&
+              {/* {!!store.user && comentado para ver postmodal*/}
                 <div className="d-flex">
                   <li className="nav-item mx-3">
                     <a className="nav-link btn " aria-current="page" href="#"><BsChatLeftDots /></a> {/*onclick agregar clase =  active*/}
@@ -35,18 +37,21 @@ export const Navbar = () => {
                   <li className="nav-item mx-3 ">
                     <Postmodal>
                     </Postmodal>
+                    <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
+
                   </li>
                   <li className="nav-item mx-3">
                     <a className="nav-link "><BsHeart className="icons" /></a>
                   </li>
                 </div>
-              }
+              {/* } comentado para ver el modal*/}
               <li className="nav-item mx-3">
                 <form className="d-flex m-auto p-0" role="search">
                   <button className="btn  " type="submit"><BsSearch className="text-light" /></button> {/*añadir tooltips a los iconos al clickearlo se abre el input click input .visible sino .invisible*/}
                   <input className="form-control me-2 invisible" type="search" placeholder="Search" aria-label="Search" />
                 </form>
               </li>
+
             </ul>
 
             <div className="nav-item dropdown ">
@@ -100,7 +105,7 @@ export const Navbar = () => {
                   </button>
 
                 </ul>
-              }
+               } 
               <ul className="dropdown-menu dropdown-menu-end">
                 <li><Link className="dropdown-item" to="/profile">Mi perfil</Link></li>
                 <li><a className="dropdown-item" href="#">Seguidos </a></li>

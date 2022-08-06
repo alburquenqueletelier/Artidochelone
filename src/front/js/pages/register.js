@@ -111,9 +111,9 @@ export const Register = () => {
           <button
             type="submit"
 
-            className="btn btn-outline-light"
-          onClick={(e) => {
-            handleSubmit(e);
+            className="btn btn-outline-dark opacity-70 my-3 "
+            onClick={(e) => {
+              handleSubmit(e);
             }}
           >
           Submit

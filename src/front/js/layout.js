@@ -11,7 +11,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Register } from "./pages/register";
 import { Profile } from "./pages/profile";
-import { Loquesea } from "./pages/loquesea";
+import { Post } from "./pages/post";
 
 
 
@@ -31,9 +31,10 @@ const Layout = () => {
               <Route element={<Register />} path="/register" />
               <Route element={<About />} path="/about" />
               <Route element={<Home />} path="/" />
-              <Route element={<Profile />} path="/profile " />
-              <Route element={<Loquesea />} path="/loquesea" />
+              <Route element={<Post />} path="/post" />
+
               <Route element={<h1>Not found!</h1>} />
+              
             </Routes>
          
           <Footer />
