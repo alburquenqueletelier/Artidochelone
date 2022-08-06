@@ -235,7 +235,7 @@ export const Register = () => {
           </button>
         </div>
         <div className="d-grid gap-2">
-          <button className="btn btn-outline-dark">
+          <button className="btn btn-outline-dark" onClick={()=>actions.googleLogin()}>
             Or continue with <FcGoogle />
           </button>
         </div>

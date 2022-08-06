@@ -71,6 +71,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         sessionStorage.removeItem('user');
         return setStore({ user: null });
       },
+      googleLogin: async () => {
+        await fetch(process.env.BACKEND_URL + "/api/googlelogin")
+        .then(response=> response.json())
+        .then(data=>{
+          setStore({user:data.user});
+          sessionStorage.setItem('user', JSON.stringify(data.user))
+        })
+        .catch(error=>console.log(error))
+      },
       // demoLogin:() => {
       //   fetch(process.env.BACKEND_URL + "/api/hello", requestOptions)
       //   const {login, user} = getStore();

@@ -8,9 +8,7 @@ from flask_cors import CORS
 #import datetime
 #from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
-
 api = Blueprint('api', __name__)
-
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -30,6 +28,8 @@ def list_users():
         response[user.username] = user.serialize()
 
     return jsonify({"allUsers": response}), 200
+
+
 
 @api.route('/login', methods=['POST'])
 def login():
