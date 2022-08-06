@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         let requestOptions = {
           method: "POST",
           headers: myHeaders,
-          cors: 'cors',
+          cors: 'no-cors',
           body: JSON.stringify({
             username: user,
             password: pass
@@ -59,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => {
             // deberia guardar toda la info de user que esta en el serializador
-            console.log(data.message);
+            console.log(data);
             sessionStorage.setItem('user', JSON.stringify(data.user));
             return setStore({ user: data.user });
           })

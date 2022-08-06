@@ -1,15 +1,15 @@
-"""
-This module takes care of starting the API Server, Loading the DB and Adding the endpoints
-"""
+
 from flask import Flask, request, jsonify, url_for, Blueprint, json
 from api.models import db, User, Post, Comment, Hashtag
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-#import datetime
-#from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+import datetime
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 
 api = Blueprint('api', __name__)
+
+
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -31,7 +31,7 @@ def list_users():
 
     return jsonify({"allUsers": response}), 200
 
-@api.route('/login', methods=['POST'])
+@api.route('/login', methods=['POST', 'GET'])
 def login():
     #recibo informacion de la solicitud (fetch)
     body = request.get_json()
@@ -43,13 +43,14 @@ def login():
         if user.password == body["password"]:
             #usuario y clave correcto
             #el token tendrá un tiempo de vida dependiendo de los minutos indicados
-            #expiration = datetime.timedelta(minutes=30)
-            #access_token = create_access_token(identity=user.email, expires_delta=expiration)
+            expiration = datetime.timedelta(minutes=30)
+            access_token = create_access_token(identity=user.username, expires_delta=expiration)
             print("usuario autenticado")
             return jsonify({
                 "message": "logued in",
                 "user": user.serialize(),
-               # "expire_seconds": expiration.total_seconds()
+                "expire_seconds": expiration.total_seconds(),
+                "token": access_token
             })
         else:
             print("usuario o clave no validos")
@@ -57,7 +58,7 @@ def login():
                 "message": "wrong user or password"
             })
     return jsonify({
-        "message": "miau"
+        "message": "unable to login"
     })
 
 
