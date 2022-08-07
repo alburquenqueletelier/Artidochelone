@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { BsSearch, BsHeart, BsChatLeftDots, BsXLg } from "react-icons/bs";
+import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+
 import { Context } from "../store/appContext";
 import { Postmodal } from "./postModal";
 
@@ -15,18 +17,14 @@ export const Navbar = () => {
     <>
       <nav className=" navbar navbar-dark p-0 navbar-expand-md bg-light  ">
         <div className="container-fluid glassnav p-4 ">
-          <a className="navbar-brand fw-normal fs-4 text-secondary" href="/">
-            ARTIDOCHELONE
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+
+         
+=======
+
+
+          <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/">ARTIDOCHELONE</Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
             <span className="navbar-toggler-icon"></span>
           </button>
 
@@ -35,7 +33,11 @@ export const Navbar = () => {
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
-              {!!store.user && (
+
+             
+=======
+              {/* {!!store.user && comentado para ver postmodal*/}
+
                 <div className="d-flex">
                   <li className="nav-item mx-3">
                     <a className="nav-link btn " aria-current="page" href="#">
@@ -44,7 +46,14 @@ export const Navbar = () => {
                     {/*onclick agregar clase =  active*/}
                   </li>
                   <li className="nav-item mx-3 ">
-                    <Postmodal></Postmodal>
+
+                   
+=======
+                    <Postmodal>
+                    </Postmodal>
+                    <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
+
+
                   </li>
                   <li className="nav-item mx-3">
                     <a className="nav-link ">
@@ -52,7 +61,11 @@ export const Navbar = () => {
                     </a>
                   </li>
                 </div>
-              )}
+
+             
+=======
+              {/* } comentado para ver el modal*/}
+
               <li className="nav-item mx-3">
                 <form className="d-flex m-auto p-0" role="search">
                   <button className="btn  " type="submit">
@@ -67,6 +80,7 @@ export const Navbar = () => {
                   />
                 </form>
               </li>
+
             </ul>
 
             <div className="nav-item dropdown ">
@@ -181,7 +195,11 @@ export const Navbar = () => {
                     <li className="nav-item mx-3">Register</li>
                   </button>
                 </ul>
-              )}
+
+             
+=======
+               } 
+
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
                   <Link className="dropdown-item" to="/profile">

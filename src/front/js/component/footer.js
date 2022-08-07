@@ -56,7 +56,7 @@ export const Footer = () => {
         </div>
 
         <p className="nav-item pt-4">
-          Made with <i className="fa fa-heart text-danger" />
+          Made with <i className="fa fa-heart text-danger corazon" />
         </p>
       </div >
     </footer >

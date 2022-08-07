@@ -16,31 +16,25 @@ export const Register = () => {
   const [info, setInfo] = useState();
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.length < 1 || typeof name.charAt(0) === number || name.charAt(0) == ' '){
+    if (name.length < 1 || typeof name.charAt(0) === number || name.charAt(0) == ' ') {
       alert('Name Error: must be greater than 1, start with a letter (don\'t use space or especial character');
       return false;
     }
-    if (lastname.length < 1 || typeof lastname.charAt(0) === number || lastname.charAt(0) == ' '){
+    if (lastname.length < 1 || typeof lastname.charAt(0) === number || lastname.charAt(0) == ' ') {
       alert('Lastname Error: must be greater than 1, start with a letter (don\'t use space or especial character');
       return false;
     }
-    if (password != password2){
+    if (password != password2) {
       alert('Password must coincide');
       return false;
     }
-    if (!email.includes('@')){
+    if (!email.includes('@')) {
       alert('Enter a valid email');
       return false;
     }
     setInfo(data), actions.postRegister(data);
   };
-  // const userRegister = () => {
-  //    actions.postRegister(info)
-  // };
   let data = {
-    // replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase()))); 
-    // el codigo de arriba pone en mayuscula la primera letra de cada palabra
-    // que contega el string.
     name: name.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase()))),
     lastname: lastname.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase()))),
     username: username,
@@ -123,15 +117,15 @@ export const Register = () => {
               handleSubmit(e);
             }}
           >
-            Submit
-          </button>
-        </div>
-        <div className="d-grid gap-2 my-3">
-          <button className="btn btn-outline-light">
-            Or continue with <FcGoogle className="fs-2"/>
-          </button>
-        </div>
-      </form>
+          Submit
+        </button>
     </div>
+    <div className="d-grid gap-2 my-3">
+      <button className="btn btn-outline-light">
+        Or continue with <FcGoogle className="fs-2" />
+      </button>
+    </div>
+      </form >
+    </div >
   );
 };
