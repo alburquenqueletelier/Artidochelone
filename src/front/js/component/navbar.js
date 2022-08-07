@@ -19,7 +19,7 @@ export const Navbar = () => {
         <div className="container-fluid glassnav p-4 ">
 
          
-=======
+
 
 
           <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/">ARTIDOCHELONE</Link>
@@ -35,7 +35,7 @@ export const Navbar = () => {
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
 
              
-=======
+
               {/* {!!store.user && comentado para ver postmodal*/}
 
                 <div className="d-flex">
@@ -48,7 +48,7 @@ export const Navbar = () => {
                   <li className="nav-item mx-3 ">
 
                    
-=======
+
                     <Postmodal>
                     </Postmodal>
                     <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
@@ -63,7 +63,7 @@ export const Navbar = () => {
                 </div>
 
              
-=======
+
               {/* } comentado para ver el modal*/}
 
               <li className="nav-item mx-3">
@@ -197,8 +197,8 @@ export const Navbar = () => {
                 </ul>
 
              
-=======
-               } 
+
+              )} 
 
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
