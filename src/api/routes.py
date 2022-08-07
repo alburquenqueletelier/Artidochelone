@@ -1,6 +1,6 @@
 
 from flask import Flask, request, jsonify, url_for, Blueprint, json
-from api.models import db, User, Post, Comment, Hashtag
+from api.models import db, User, Profile, Post, Comment, Hashtag
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import datetime
@@ -86,3 +86,16 @@ def register():
     return jsonify({
         "message": "New user created :D"
     })
+
+    @api.route('/profile', methods=['POST', 'GET'])
+    @jwt_required()
+    def profile():
+        get_token = get_jwt_identity()
+        user = db.session.query(User).filter_by(username=get_token).first()
+        profile = db.session.query(Profile).filter_by(user_id=user.id).first()
+        if user:
+            return jsonify( profile.serialize() )
+     ## body = request.get_json()
+      ## username = body["username"]
+       
+        
