@@ -36,6 +36,7 @@ class Post(db.Model):
         db.DateTime, nullable=False, default=datetime.utcnow)
     # owner_id = db.Column(db.Integer, db.ForeignKey('user.id'),
     #     nullable=False)
+    # liked = db.Column(db.Integer) many to many relations
 
     def serialize(self):
         return {

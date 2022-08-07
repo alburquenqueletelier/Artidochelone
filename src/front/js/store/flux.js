@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       message: null,
       // login: null,
       user: null,
+      googleUser: null,
       demo: [
         {
           title: "FIRST",
@@ -68,16 +69,36 @@ const getState = ({ getStore, getActions, setStore }) => {
       loginRemember: ()=>setStore({user:JSON.parse(sessionStorage.getItem('user'))})
       ,
       logout: () => {
-        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('user');       
         return setStore({ user: null });
       },
-      googleLogin: async () => {
-        await fetch(process.env.BACKEND_URL + "/api/googlelogin")
-        .then(response=> response.json())
-        .then(data=>{
-          setStore({user:data.user});
-          sessionStorage.setItem('user', JSON.stringify(data.user))
+      googleLogin: async (googleData) => {
+        const res = await fetch('/api/google-login', {
+          method: 'POST',
+          body: JSON.stringify({
+            token: googleData.tokenId,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        const data = await res.json();
+        setStore({googleUser:true});
+        fetch('/api/googleuser', {
+          method: 'POST',
+          body:JSON.stringify({
+            googleUser:data
+          }),
+          headers: {
+            'Content-type': 'application/json',
+          },
         })
+        .then(res=res.json())
+        .then(data=>{
+          setStore({user:data.user})
+          sessionStorage.setItem('user', JSON.stringify(data.user))
+         })
         .catch(error=>console.log(error))
       },
       // demoLogin:() => {

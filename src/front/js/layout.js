@@ -13,6 +13,7 @@ import { Register } from "./pages/register";
 import { Profile } from "./pages/profile";
 import { Loquesea } from "./pages/loquesea";
 
+import GoogleLogin from "react-google-login";
 
 
 //create your first component

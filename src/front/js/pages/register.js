@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { FcGoogle } from "react-icons/fc";
 import "../../styles/main.css";
 import { number } from "prop-types";
+import GoogleLogin from "react-google-login";
 
 export const Register = () => {
   const { store, actions } = useContext(Context);
@@ -14,6 +15,11 @@ export const Register = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [info, setInfo] = useState();
+
+  const handleFailure = (result) => {
+    alert(result);
+  }
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name.length < 1 || typeof name.charAt(0) === number || name.charAt(0) == ' '){
@@ -126,9 +132,16 @@ export const Register = () => {
           </button>
         </div>
         <div className="d-grid gap-2 my-3">
-          <button className="btn btn-outline-light" onClick={()=>actions.googleLogin()}>
-            Or continue with <FcGoogle className="fs-2"/>
-          </button>
+          {/* <button className="btn btn-outline-light" onClick={()=>actions.googleLogin()}> */}
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+            buttonText={"Or continue with"+<FcGoogle className="fs-2"/>}
+            onSuccess={actions.googleLogin}
+            onFailure={handleFailure}
+            cookiePolicy={"single_host_origin"}
+          >
+
+          </GoogleLogin>
         </div>
       </form>
     </div>
