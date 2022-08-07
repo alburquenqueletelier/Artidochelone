@@ -96,6 +96,7 @@ export const Register = () => {
             className="form-control bg-default opacity-50"
             placeholder="Password"
             id="exampleInputPassword1"
+            onChange={(e)=> setPassword(e.target.value)}
           />
         </div>
         <div className="mb-3">
