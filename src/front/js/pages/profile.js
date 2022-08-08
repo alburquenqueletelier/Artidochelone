@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { username } from "react-lorem-ipsum";
+import { useParams } from "react-router-dom";
 import "../../styles/main.css";
 import { GaleryHome } from "../component/galeryHome";
-
-
+import { Context } from "../store/appContext";
 
 export const Profile = () => {
+  const { store, actions } = useContext(Context);
+  const params = useParams();
+
   return (
     <div className="container-fluid mb-0">
       <div className="text-center my-5">
@@ -13,7 +17,7 @@ export const Profile = () => {
           className="d-block w-100"
           alt="..."
         />
-        <h1>perfil</h1>
+        <h1>{store.user.username}</h1>
         <p>descripcion</p>
         <div>
           <button>boton</button>

@@ -27,6 +27,24 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
 
+class Profile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=False, nullable=False)
+    photo = db.Column(db.String(50), unique=False, nullable=False)
+    description = db.Column(db.String(50), unique=False, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique = False, nullable = False)
+    user = db.relationship(User)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "photo": self.photo,
+            "description": self.description
+
+        }
+
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)

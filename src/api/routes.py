@@ -1,14 +1,13 @@
-"""
-This module takes care of starting the API Server, Loading the DB and Adding the endpoints
-"""
+
 from flask import Flask, request, jsonify, url_for, Blueprint, json
-from api.models import db, User, Post, Comment, Hashtag
+from api.models import db, User, Profile, Post, Comment, Hashtag
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-#import datetime
-#from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+import datetime
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 api = Blueprint('api', __name__)
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -55,6 +54,7 @@ def googleUser():
             })
 
 @api.route('/login', methods=['POST'])
+
 def login():
     #recibo informacion de la solicitud (fetch)
     body = request.get_json()
@@ -66,13 +66,14 @@ def login():
         if user.password == body["password"]:
             #usuario y clave correcto
             #el token tendrá un tiempo de vida dependiendo de los minutos indicados
-            #expiration = datetime.timedelta(minutes=30)
-            #access_token = create_access_token(identity=user.email, expires_delta=expiration)
+            expiration = datetime.timedelta(minutes=30)
+            access_token = create_access_token(identity=user.username, expires_delta=expiration)
             print("usuario autenticado")
             return jsonify({
                 "message": "logued in",
                 "user": user.serialize(),
-               # "expire_seconds": expiration.total_seconds()
+                "expire_seconds": expiration.total_seconds(),
+                "token": access_token
             })
         else:
             print("usuario o clave no validos")
@@ -80,7 +81,7 @@ def login():
                 "message": "wrong user or password"
             })
     return jsonify({
-        "message": "miau"
+        "message": "unable to login"
     })
 
 
@@ -108,3 +109,16 @@ def register():
     return jsonify({
         "message": "New user created :D"
     })
+
+    @api.route('/profile', methods=['POST', 'GET'])
+    @jwt_required()
+    def profile():
+        get_token = get_jwt_identity()
+        user = db.session.query(User).filter_by(username=get_token).first()
+        profile = db.session.query(Profile).filter_by(user_id=user.id).first()
+        if user:
+            return jsonify( profile.serialize() )
+     ## body = request.get_json()
+      ## username = body["username"]
+       
+        
