@@ -48,7 +48,7 @@ export const Register = () => {
       alert("Enter a valid email");
       return false;
     }
-    setInfo(data), actions.postRegister(data);
+    setInfo(data), actions.register(data);
   };
   let data = {
     name: name.replace(/\w\S*/g, (w) =>
