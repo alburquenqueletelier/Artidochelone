@@ -1,7 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import MetaData
 from datetime import datetime
 
 db = SQLAlchemy()
+Base = MetaData()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,7 +15,8 @@ class User(db.Model):
     #is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     #is_admin = db.Column(db.Boolean(), unique=False, nullable=False)
     #created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    #posts = db.relationship('Post', backref='user', lazy=True)
+    # posts = db.relationship('Post', backref='user')
+    # comments = db.relationship('Comment', backref='user')
 
     def serialize(self):
         return {
@@ -48,12 +51,11 @@ class Profile(db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text)
+    description = db.Column(db.Text, nullable=True)
     image = db.Column(db.String(), nullable=False)
     created = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
-    # owner_id = db.Column(db.Integer, db.ForeignKey('user.id'),
-    #     nullable=False)
+    # owner_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     # liked = db.Column(db.Integer) many to many relations
 
     def serialize(self):
@@ -69,6 +71,9 @@ class Comment(db.Model):
     text = db.Column(db.Text)
     created = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
+    # emisor_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    # receptor_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    
 
     def serialize(self):
         return {
