@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { About } from "./pages/about";
+import { Admin } from "./pages/admin";
 // import { Features } from "./pages/features";
 import injectContext from "./store/appContext";
 
@@ -12,8 +13,6 @@ import { Footer } from "./component/footer";
 import { Register } from "./pages/register";
 import { Profile } from "./pages/profile";
 import { Post } from "./pages/post";
-
-import GoogleLogin from "react-google-login";
 
 
 //create your first component
@@ -27,19 +26,18 @@ const Layout = () => {
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Navbar />
-         
-            <Routes>
-              <Route element={<Register />} path="/register" />
-              <Route element={<Post />} path="/post" />
-              <Route element={<About />} path="/about" />
-              <Route element={<Home />} path="/" />
 
-              <Route component ={Profile} path={"/profile/:user"} />
+          <Routes>
+            <Route element={<Profile />} path={"/profile/:username"} />
+            <Route element={<Admin />} path="/admin" />
+            <Route element={<Register />} path="/register" />
+            <Route element={<Post />} path="/post" />
+            <Route element={<About />} path="/about" />
+            <Route element={<Home />} path="/" />
 
-              <Route element={<h1>Not found!</h1>} />
-              
-            </Routes>
-         
+            <Route element={<h1>Not found!</h1>} />
+          </Routes>
+
           <Footer />
         </ScrollToTop>
       </BrowserRouter>

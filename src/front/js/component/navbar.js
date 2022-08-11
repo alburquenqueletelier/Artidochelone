@@ -82,11 +82,15 @@ export const Navbar = () => {
               </li>
 
             </ul>
+            {!!store.user && store.admin &&
+              <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/admin">Admin</Link>
+            
+            }
 
             <div className="nav-item dropdown ">
               {!!store.user ? (
                 <Link
-                  to="/perfil"
+                  to="/asfd"
                   className="nav-link dropdown-toggle text-secondary"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -178,14 +182,6 @@ export const Navbar = () => {
                       </div>
                     </div>
                   </form>
-                  {/* <Link to="/register" className="nav-item btn mx-3 ">Register</Link> */}
-                  {/* <button
-                //  onClick={()=> setModal(true)}
-                 >
-
-                 </button> */}
-
-                  {/* este es el boton del modal */}
                   <Link to="/register">
                       <button 
                         type="button"
@@ -204,7 +200,7 @@ export const Navbar = () => {
 
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
-                  <Link className="dropdown-item" to="/profile">
+                  <Link className="dropdown-item" to={"/profile/"+store.user?.username}>
                     Mi perfil
                   </Link>
                 </li>
