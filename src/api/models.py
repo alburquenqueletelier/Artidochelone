@@ -71,6 +71,15 @@ class Comment(db.Model):
     text = db.Column(db.Text)
     created = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
+    # emisor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # receptor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#     users = db.relationship(
+#     'User',
+#     primaryjoin='Comment.emisor_id == User.id and Comment.receptor_id == User.id',
+#     backref='comment',
+#     uselist=False,
+#     lazy='select'
+# ) 
     # emisor_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     # receptor_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     
