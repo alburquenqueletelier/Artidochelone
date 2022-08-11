@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { BsLinkedin, BsGithub, BsInstagram } from "react-icons/bs";
 
+
 // mt-auto
 export const Footer = () => {
   return (

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { BsSearch, BsHeart, BsChatLeftDots } from "react-icons/bs";
 import { Postmodal } from "../component/postModal";
@@ -11,9 +11,17 @@ import { Etiquetas } from "../component/etiquetas";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+
+ 
+  //useEffect(() => {
+   // actions.getProfiles()
+   // console.log(store.profiles, "store")
+  //}, []);
+
   // Set the Cloud configuration and URL configuration
   // let cloudConfig = new CloudConfig({cloudName: 'demo'});
   // let urlConfig = new URLConfig({secure: true});
+
 
   // // Instantiate and configure a CloudinaryImage object.
   // let myImage = new CloudinaryImage('docs/shoes', cloudConfig, urlConfig);

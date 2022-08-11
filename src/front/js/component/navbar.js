@@ -12,7 +12,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const usernameInput = React.useRef();
   const passwordInput = React.useRef();
-
+ 
   return (
     <>
       <nav className=" navbar navbar-dark p-0 navbar-expand-md bg-light  ">
@@ -186,14 +186,16 @@ export const Navbar = () => {
                  </button> */}
 
                   {/* este es el boton del modal */}
-                  <button
-                    type="button"
-                    className="btn"
-                    data-bs-toggle="modal"
-                    data-bs-target="#registerModal"
-                  >
-                    <li className="nav-item mx-3">Register</li>
-                  </button>
+                  <Link to="/register">
+                      <button 
+                        type="button"
+                        className="btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#registerModal"
+                      >
+                      <li className="nav-item mx-3">Register</li>
+                    </button>
+                  </Link>
                 </ul>
 
              

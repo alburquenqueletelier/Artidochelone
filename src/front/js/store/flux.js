@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      profiles: [],
     },
     actions: {
       postRegister: async (data) => {
@@ -175,8 +176,26 @@ const getState = ({ getStore, getActions, setStore }) => {
         //reset the global store
         setStore({ demo: demo });
       },
+
+      //getProfiles: async () => {
+        
+        
+        //var requestOptions = {
+       //   method: 'GET',
+        //  redirect: 'follow'
+       // };
+        
+        //await fetch(process.env.BACKEND_URL + "/api/alluser", requestOptions)
+        //  .then(response => response.json())
+        //  .then(result => { console.log(result),
+        //    setStore({profiles: result})})
+        //  .catch(error => console.log('error', error));
+        
+       // }
     },
   };
 };
+
+
 
 export default getState;
