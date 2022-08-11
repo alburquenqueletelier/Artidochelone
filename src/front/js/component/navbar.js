@@ -4,7 +4,7 @@ import { BsSearch, BsHeart, BsChatLeftDots, BsXLg } from "react-icons/bs";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 import { Context } from "../store/appContext";
-import { Postmodal } from "./postModal";
+// import { Postmodal } from "./postModal";
 
 import "../../styles/main.css";
 
@@ -49,8 +49,8 @@ export const Navbar = () => {
 
                    
 
-                    <Postmodal>
-                    </Postmodal>
+                    {/* <Postmodal>
+                    </Postmodal> */}
                     <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
 
 

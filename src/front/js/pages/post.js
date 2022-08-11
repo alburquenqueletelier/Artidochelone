@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
+import { Image } from "cloudinary-react"
+
 
 export const Post = () => {
+
+  const { store, actions } = useContext(Context);
+  const [file, setFile] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  // const toBase64 = (e) => {
+  //   var reader = new FileReader();
+  //   reader.readAsDataURL(e[0]);
+  //   reader.onload = () =>{
+  //     // let arrayAuxiliar = [];
+  //     let base64 = reader.result;
+  //     // arrayAuxiliar = base64.split(',');
+  //     setFile(base64);
+  //     // console.log(arrayAuxiliar[1]);
+  //   } 
+  //   console.log(file)
+  // }
+
   return (
     <div>
       <div className="modal-dialog modal-lg ">
@@ -17,7 +38,7 @@ export const Post = () => {
             ></button>
           </div>
           {/* Body (Formulario) */}
-          <form>
+          <form onSubmit={(e)=>actions.post(e, file, title, description)}>
             <div className="modal-body mt-5">
               <div className="row mb-3">
                 <label htmlFor="fileUp" className="col-sm-2 col-form-label">
@@ -29,6 +50,7 @@ export const Post = () => {
                     id="fileUp"
                     accept="image/*,video/*"
                     className="form-control glass2"
+                    onChange={(e)=>setFile(e.target.files[0])}
                   />
                 </div>
               </div>
@@ -41,7 +63,9 @@ export const Post = () => {
                     type="text"
                     className="form-control glass2"
                     id="title"
+                    value={title}
                     placeholder="Enter a Title"
+                    onChange={(e)=>setTitle(e.target.value)}
                   />
                 </div>
               </div>
@@ -57,6 +81,8 @@ export const Post = () => {
                     id="description"
                     className="form-control glass2"
                     placeholder="Describe your proyect..."
+                    value={description}
+                    onChange={(e)=>setDescription(e.target.value)}
                   />
                 </div>
               </div>
@@ -69,7 +95,7 @@ export const Post = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Submit
               </button>
             </div>

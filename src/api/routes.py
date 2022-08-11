@@ -6,10 +6,7 @@ from flask_cors import CORS
 import datetime
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
-
 api = Blueprint('api', __name__)
-
-
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -31,7 +28,33 @@ def list_users():
 
     return jsonify({"allUsers": response}), 200
 
-@api.route('/login', methods=['POST', 'GET'])
+# @api.route('/googleuser', methods=['POST'])
+# def googleUser():
+#     body = request.get_json()
+#     if db.session.query(User).filter_by(email=body["email"]).first():
+#         user = db.session.query(User).filter_by(email=body["email"]).first()
+#         return jsonify({
+#                 "message": "logued in",
+#                 "user": user.serialize(),
+#                # "expire_seconds": expiration.total_seconds()
+#             })
+#     else:
+#         new_user = User()
+#         new_user.name = body["name"]
+#         new_user.lastname = body["lastname"]
+#         new_user.username = body["username"]
+#         new_user.email = body["email"]
+#         new_user.password = "cualquier_valor_random"
+#         db.session.add(new_user)
+#         db.session.commit()
+#         return jsonify({
+#                 "message": "logued in",
+#                 "user": new_user.serialize(),
+#                # "expire_seconds": expiration.total_seconds()
+#             })
+
+@api.route('/login', methods=['POST'])
+
 def login():
     #recibo informacion de la solicitud (fetch)
     body = request.get_json()
@@ -98,4 +121,21 @@ def register():
      ## body = request.get_json()
       ## username = body["username"]
        
-        
+@api.route('/post', methods=['POST'])
+def post():
+
+    body = request.get_json()
+    if body["image"] and body["title"]:
+        newPost = Post()
+        newPost.title = body["title"]
+        newPost.description = body["description"]
+        newPost.image = body["image"]
+        db.session.add(newPost)
+        db.session.commit()
+        return jsonify({
+            'message': 'Post exitoso'
+        }), 200
+    else:
+        return jsonify({
+            'message': 'Error, falta imagen y/o titulo'
+        }), 400
