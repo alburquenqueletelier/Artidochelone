@@ -14,8 +14,10 @@ export const Profile = () => {
     <div className="container-fluid mb-0">
       <div className="container-fluid p-5 glass2 text-start my-5">
         <img src="https://public.slidesharecdn.com/v2/images/profile-picture.png" className="img-circle rounded-circle float-start" />
-        <h1 className="display-2"> {store.profiles.name? store.profiles.name : "UserName"}</h1>
-        <p>{store.profiles.description? store.profiles.description :"Write a description here"}</p>
+        <h1 className="display-2">{store.user?.username} </h1>
+        {!!store.demo && store.demo.profiles.map((item,index) => {
+          return(<p key={index}>{item.description2}</p>)
+        })}
         <div>
         </div>
       </div>

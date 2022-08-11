@@ -28,7 +28,7 @@ const Layout = () => {
           <Navbar />
 
           <Routes>
-            <Route element={<Profile />} path={"/profile"} />
+            <Route element={<Profile />} path={"/profile/:user"} />
             <Route element={<Admin />} path="/admin" />
             <Route element={<Register />} path="/register" />
             <Route element={<Post />} path="/post" />
