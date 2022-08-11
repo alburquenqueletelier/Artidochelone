@@ -1,11 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      message: null,
-      // login: null,
       user: null,
-      // admin debiese venir como atributo de usuario pero se usa esto temporlamente
-      admin: true,
       imageData: {},
       demo: {
         users: [
@@ -82,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             title: "imagen 1",
             description: "Imagen random para pobrar",
             image: "www.cualquie_ruta_de_imagen.com/cambiaresto",
-            created: "24-06-2022",
+            created: "14/6/2020",
             owner_id: 1,
           },
           {
@@ -90,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             title: "imagen 2",
             description: "Otra imagen",
             image: "www.cualquie_ruta_de_imagen.com/cambiaresto",
-            created: "24-06-2022",
+            created: "14/6/2020",
             owner_id: 2,
           },
           {
@@ -98,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             title: "imagen 3",
             description: "Tercera imagen",
             image: "www.cualquie_ruta_de_imagen.com/cambiaresto",
-            created: "24-06-2022",
+            created: "14/6/2020",
             owner_id: 2,
           },
         ],
@@ -106,39 +102,44 @@ const getState = ({ getStore, getActions, setStore }) => {
           {
             id: 1,
             text: "Que gran trabajo! #magnifico",
-            created: "24-06-2022",
+            created: "14/6/2020",
             emisor_id: 1,
             receptor_id: 2,
           },
           {
             id: 2,
             text: "Falta iluminacion",
-            created: "24-06-2022",
+            created: "14/6/2020",
             emisor_id: 1,
             receptor_id: 2,
           },
           {
             id: 3,
             text: "Das clases ?",
-            created: "24-06-2022",
+            created: "14/6/2020",
             emisor_id: 3,
             receptor_id: 2,
           },
           {
             id: 4,
             text: "OJala pudiera haccer eso",
-            created: "24-06-2022",
+            created: "14/6/2020",
             emisor_id: 3,
             receptor_id: 2,
           },
         ],
-        hashtag: [
-          { id: 1, label: "magnifico", count: 1, created: "24-06-2022" },
+        hashtags: [
+          { id: 1, label: "magnifico", count: 1, created: "14/6/2020" },
         ],
       },
       profiles: [],
     },
     actions: {
+      loadChanges: (table) => {
+        const {demo} = getStore();
+        demo[table] = JSON.parse(sessionStorage.getItem(table))
+        return setStore({demo:demo})
+      },
       loginRemember: () =>
         setStore({ user: JSON.parse(sessionStorage.getItem("user")) }),
       logout: () => {
@@ -147,6 +148,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       post: async (e, file, title, description = null) => {
         e.preventDefault();
+        const {demo, user} = getStore();
+        if (!user) return alert("Prohibido: debes autentificarte para poder postear")
+        if (!file || !title) return alert('Debes ingresar imagen y titulo');
+        
         const formdata = new FormData();
         formdata.append("file", file);
         formdata.append("upload_preset", "artidochelone");
@@ -155,34 +160,85 @@ const getState = ({ getStore, getActions, setStore }) => {
         // fetch a cloudinary para subir la imagen.
         await fetch("https://api.cloudinary.com/v1_1/baal1992/image/upload", {
           method: "POST",
-          // mode: 'no-cors',
-          // headers: myHeaders,
           body: formdata,
         })
           .then((res) => res.json())
           .then((data) => {
-            // Fetch a la API interna para guardar la info del post
-
             // guardamos la respuesta
             setStore({ imageData: data });
-            // imageData.url
-            // console.log(imageData);
           })
-          // .then(()=>{
-          //   const {imageData} = getStore();
-          //   console.log(imageData);
-          // })
           .catch((error) => console.log(error));
-      },
-      demoLogin:() => {
-        fetch(process.env.BACKEND_URL + "/api/hello", requestOptions)
-        const {login, user} = getStore();
-        if (!login){
-          setStore({login: true})
-          setStore({user: "baal"})
+
+        // Se crea el post para guardar en el front
+        const {imageData} = getStore();
+        if (imageData){
+          let idpost = demo.posts[demo.posts.length-1].id;
+          const tiempoTranscurrido = Date.now();
+          const hoy = new Date(tiempoTranscurrido);
+          demo.posts.push({
+            id: idpost,
+            title: title,
+            description: description,
+            image: imageData.url,
+            created: hoy.toLocaleDateString(),
+            owner_id: user.id
+          })
+          setStore({demo:demo})
+          sessionStorage.setItem('posts', JSON.stringify(demo.posts));
+          setStore({imageData:null})
+          return alert("Post exitoso")
         } else {
-          setStore({login: false})
-          setStore({user: null})
+          return alert("No fue posible crear el post porque no se guardo la imagen")
+        }
+      },
+      register: (data) => {
+        try{
+          const {demo} = getStore();
+          if (demo.users.filter(user=> user.username == data.username)){
+            return alert("Error: username en uso.")
+          }
+          if (demo.users.filter(user=> user.email == data.email)){
+            return alert("Error: correo ya registrado")
+          }
+          const idUser = demo.users[demo.users.length-1].id;
+          demo.users.push({
+            id: idUser,
+            name: data.name,
+            lastname: data.lastname,
+            username: data.username,
+            email: data.email,
+            password: data.password
+          });
+          demo.profiles.push({
+            id: idUser,
+            name: data.name,
+            photo: null,
+            description: null,
+            user_id: idUser
+          });
+          setStore({demo:demo});
+          sessionStorage.setItem('users', JSON.stringify(demo.users));
+          sessionStorage.setItem('profiles', JSON.stringify(demo.profiles));
+          alert("Usuario registrado con exito");
+          return getActions.login(e, data.username, data.password)
+        } catch (error) {
+          alert("No se pudo crear el registro");
+          return console.log(error);
+        }
+      },
+      login:(e, username, password) => {
+        e.preventDefault();
+        if (!username || !password){
+          return alert("Debes ingresar usuario y contraseña")
+        }
+        const {demo} = getStore();
+        // console.log(demo.users.filter(user => user.username == username).map(user=> user.password))
+        if (demo.users.filter(user=> user.username == username) && password == demo.users.filter(user => user.username == username).map(user=> user.password)[0]){
+          setStore({user:demo.users.filter(user=> user.username == username)[0]});
+          sessionStorage.setItem("user", JSON.stringify(demo.users.filter(user=> user.username == username)[0]));
+          return console.log('login con exito');
+        } else {
+          return alert("Usuario o contraseña no valido");
         }
       },
     },

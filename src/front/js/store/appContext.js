@@ -22,21 +22,30 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			/**
-			 * EDIT THIS!
-			 * This function is the equivalent to "window.onLoad", it only runs once on the entire application lifetime
-			 * you should do your ajax requests or fetch api requests here. Do not use setState() to save data in the
-			 * store, instead use actions, like this:
-			 **/
-			// state.actions.getMessage(); // <---- calling this function from the flux.js actions
-
 			// En caso de que el usuario refresque la pagina se mantiene su sesión abierta
 			// usando sessionStorage, y solo se cerrara cuando decida cerrar sesión o cuando
 			// salga del navegador.
 			if (sessionStorage.getItem('user')){
 				state.actions.loginRemember();
 			}
-			
+			// Almacena todos los cambios que haga el usuario en su session storage
+			// Otros usuarios no podran ver las modificaciones, pero servira para 
+			// mostrar el funcionamineto de la pagina
+			if (sessionStorage.getItem('users')){
+				state.actions.loadChanges('users');
+			}
+			if (sessionStorage.getItem('posts')){
+				state.actions.loadChanges('posts');
+			}
+			if (sessionStorage.getItem('comments')){
+				state.actions.loadChanges('comments');
+			}
+			if (sessionStorage.getItem('hashtags')){
+				state.actions.loadChanges('hashtags');
+			}
+			if (sessionStorage.getItem('profiles')){
+				state.actions.loadChanges('profiles');
+			}
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

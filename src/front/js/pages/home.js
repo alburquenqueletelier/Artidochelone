@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { BsSearch, BsHeart, BsChatLeftDots } from "react-icons/bs";
-import { Postmodal } from "../component/postModal";
 import { JumbotronTop10 } from "../component/JumbotronTop10";
 
 import "../../styles/main.css";

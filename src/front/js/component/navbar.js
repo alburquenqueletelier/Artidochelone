@@ -37,35 +37,28 @@ export const Navbar = () => {
              
 
               {/* {!!store.user && comentado para ver postmodal*/}
-
-                <div className="d-flex">
+              <div className="d-flex">
+              {!!store.user &&
                   <li className="nav-item mx-3">
                     <a className="nav-link btn " aria-current="page" href="#">
                       <BsChatLeftDots />
                     </a>{" "}
                     {/*onclick agregar clase =  active*/}
                   </li>
+              }
+              {!!store.user &&
                   <li className="nav-item mx-3 ">
-
-                   
-
-                    {/* <Postmodal>
-                    </Postmodal> */}
                     <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
-
-
                   </li>
+              }
+              {!!store.user &&
                   <li className="nav-item mx-3">
                     <a className="nav-link ">
                       <BsHeart className="icons" />
                     </a>
                   </li>
+              }
                 </div>
-
-             
-
-              {/* } comentado para ver el modal*/}
-
               <li className="nav-item mx-3">
                 <form className="d-flex m-auto p-0" role="search">
                   <button className="btn  " type="submit">
@@ -82,7 +75,7 @@ export const Navbar = () => {
               </li>
 
             </ul>
-            {!!store.user && store.admin &&
+            {!!store.user && store.user.admin &&
               <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/admin">Admin</Link>
             
             }
@@ -90,7 +83,7 @@ export const Navbar = () => {
             <div className="nav-item dropdown ">
               {!!store.user ? (
                 <Link
-                  to="/asfd"
+                  to="/"
                   className="nav-link dropdown-toggle text-secondary"
                   role="button"
                   data-bs-toggle="dropdown"
@@ -186,8 +179,6 @@ export const Navbar = () => {
                       <button 
                         type="button"
                         className="btn"
-                        data-bs-toggle="modal"
-                        data-bs-target="#registerModal"
                       >
                       <li className="nav-item mx-3">Register</li>
                     </button>
