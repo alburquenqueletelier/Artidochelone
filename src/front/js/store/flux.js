@@ -4,19 +4,138 @@ const getState = ({ getStore, getActions, setStore }) => {
       message: null,
       // login: null,
       user: null,
+      // admin debiese venir como atributo de usuario pero se usa esto temporlamente
+      admin: true,
       imageData: {},
-      demo: [
-        {
-          title: "FIRST",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "SECOND",
-          background: "white",
-          initial: "white",
-        },
-      ],
+      demo: {
+        users: [
+          {
+            id: 1,
+            name: "bryan",
+            lastname: "alburquenque",
+            username: "baal",
+            email: "bryan@gmail.com",
+            password: "123456",
+            admin: true,
+          },
+          {
+            id: 2,
+            name: "demian",
+            lastname: "hernandez",
+            username: "demian",
+            email: "demian@gmail.com",
+            password: "123456",
+            admin: true,
+          },
+          {
+            id: 3,
+            name: "lys",
+            lastname: "4geeks",
+            username: "lys",
+            email: "lys@gmail.com",
+            password: "123456",
+            admin: true,
+          },
+          {
+            id: 4,
+            name: "dummy",
+            lastname: "dummy",
+            username: "dummy",
+            email: "dummy@gmail.com",
+            password: "123456",
+            admin: false,
+          },
+        ],
+        profiles: [
+          {
+            id: 1,
+            name: "bryan",
+            photo: "www.link_a_foto.com",
+            description: "Bienvenido a mi perfil, disfrutalo!",
+            user_id: 1,
+          },
+          {
+            id: 2,
+            name: "demian",
+            photo: "www.link_a_foto.com",
+            description: "Artidochelone principal partnership",
+            user_id: 2,
+          },
+          {
+            id: 3,
+            name: "lys",
+            photo: "www.link_a_foto.com",
+            description: "Bienvenido a mi perfil, disfrutalo!",
+            user_id: 3,
+          },
+          {
+            id: 4,
+            name: "lys",
+            photo: "www.link_a_foto.com",
+            description: "Dummy User",
+            user_id: 4,
+          },
+        ],
+        posts: [
+          {
+            id: 1,
+            title: "imagen 1",
+            description: "Imagen random para pobrar",
+            image: "www.cualquie_ruta_de_imagen.com/cambiaresto",
+            created: "24-06-2022",
+            owner_id: 1,
+          },
+          {
+            id: 2,
+            title: "imagen 2",
+            description: "Otra imagen",
+            image: "www.cualquie_ruta_de_imagen.com/cambiaresto",
+            created: "24-06-2022",
+            owner_id: 2,
+          },
+          {
+            id: 3,
+            title: "imagen 3",
+            description: "Tercera imagen",
+            image: "www.cualquie_ruta_de_imagen.com/cambiaresto",
+            created: "24-06-2022",
+            owner_id: 2,
+          },
+        ],
+        comments: [
+          {
+            id: 1,
+            text: "Que gran trabajo! #magnifico",
+            created: "24-06-2022",
+            emisor_id: 1,
+            receptor_id: 2,
+          },
+          {
+            id: 2,
+            text: "Falta iluminacion",
+            created: "24-06-2022",
+            emisor_id: 1,
+            receptor_id: 2,
+          },
+          {
+            id: 3,
+            text: "Das clases ?",
+            created: "24-06-2022",
+            emisor_id: 3,
+            receptor_id: 2,
+          },
+          {
+            id: 4,
+            text: "OJala pudiera haccer eso",
+            created: "24-06-2022",
+            emisor_id: 3,
+            receptor_id: 2,
+          },
+        ],
+        hashtag: [
+          { id: 1, label: "magnifico", count: 1, created: "24-06-2022" },
+        ],
+      },
       profiles: [],
     },
     actions: {
@@ -145,57 +264,25 @@ const getState = ({ getStore, getActions, setStore }) => {
       //   }
       // },
 
-      // Use getActions to call a function within a fuction
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
-
-      getMessage: async () => {
-        try {
-          // fetching data from the backend
-          const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
-          const data = await resp.json();
-          setStore({ message: data.message });
-          // don't forget to return something, that is how the async resolves
-          return data;
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
-      changeColor: (index, color) => {
-        //get the store
-        const store = getStore();
-
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
-
-        //reset the global store
-        setStore({ demo: demo });
-      },
-
       //getProfiles: async () => {
-        
-        
-        //var requestOptions = {
-       //   method: 'GET',
-        //  redirect: 'follow'
-       // };
-        
-        //await fetch(process.env.BACKEND_URL + "/api/alluser", requestOptions)
-        //  .then(response => response.json())
-        //  .then(result => { console.log(result),
-        //    setStore({profiles: result})})
-        //  .catch(error => console.log('error', error));
-        
-       // }
+
+      //var requestOptions = {
+      //   method: 'GET',
+      //  redirect: 'follow'
+      // };
+
+      //await fetch(process.env.BACKEND_URL + "/api/alluser", requestOptions)
+      //  .then(response => response.json())
+      //  .then(result => { console.log(result),
+      //    setStore({profiles: result})})
+      //  .catch(error => console.log('error', error));
+
+      // }
     },
+    demoActions: {
+
+    }
   };
 };
-
-
 
 export default getState;

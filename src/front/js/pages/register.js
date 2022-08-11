@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { FcGoogle } from "react-icons/fc";
 import "../../styles/main.css";
 import { number } from "prop-types";
-import GoogleLogin from "react-google-login";
 
 export const Register = () => {
   const { store, actions } = useContext(Context);
@@ -137,16 +135,6 @@ export const Register = () => {
           >
             Submit
           </button>
-        </div>
-        <div className="d-grid gap-2 my-3">
-          {/* <button className="btn btn-outline-light" onClick={()=>actions.googleLogin()}> */}
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_ID}
-            buttonText="Or continue with"
-            onSuccess={actions.googleLogin}
-            onFailure={handleFailure}
-            cookiePolicy={"single_host_origin"}
-          ></GoogleLogin>
         </div>
       </form>
     </div>
