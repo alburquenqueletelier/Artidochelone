@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { BsSearch, BsHeart, BsChatLeftDots } from "react-icons/bs";
-import { Postmodal } from "../component/postModal";
 import { JumbotronTop10 } from "../component/JumbotronTop10";
 
 import "../../styles/main.css";
@@ -48,12 +47,12 @@ export const Home = () => {
 
       {/*  jumbotron descripcion pagina */}
 
-      <JumbotronTop10 />
-      <Features />
-      <Etiquetas />
-      <GaleryHome />
-      {/* </div>  */}
-      {/* sidebar overflow, pos absolute*/}
+        <JumbotronTop10 />
+        <Features />
+        <Etiquetas />
+        <GaleryHome />
+        {/* </div>  */}
+        {/* sidebar overflow, pos absolute*/}
     </>
   );
 };

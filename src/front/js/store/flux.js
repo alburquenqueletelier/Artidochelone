@@ -109,6 +109,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             created: "24-06-2022",
             emisor_id: 1,
             receptor_id: 2,
+            name: "John Doe",
           },
           {
             id: 2,
@@ -116,6 +117,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             created: "24-06-2022",
             emisor_id: 1,
             receptor_id: 2,
+            name: "Sylvia Harrison",
           },
           {
             id: 3,
@@ -123,13 +125,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             created: "24-06-2022",
             emisor_id: 3,
             receptor_id: 2,
+            name: "Rashida Jones",
           },
           {
             id: 4,
-            text: "OJala pudiera haccer eso",
+            text: "Excelente trabajo, ojalá poder hablar de tu proceso creativo",
             created: "24-06-2022",
             emisor_id: 3,
             receptor_id: 2,
+            name: "Richard Hasekura",
           },
         ],
         hashtag: [
