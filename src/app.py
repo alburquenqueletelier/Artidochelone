@@ -11,6 +11,7 @@ from api.models import db, User, Post, Comment, Hashtag
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+
 import datetime
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 

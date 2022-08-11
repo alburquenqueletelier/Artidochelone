@@ -13,6 +13,7 @@ import { Register } from "./pages/register";
 import { Profile } from "./pages/profile";
 import { Post } from "./pages/post";
 
+import GoogleLogin from "react-google-login";
 
 
 //create your first component
@@ -29,6 +30,7 @@ const Layout = () => {
          
             <Routes>
               <Route element={<Register />} path="/register" />
+              <Route element={<Post />} path="/post" />
               <Route element={<About />} path="/about" />
               <Route element={<Home />} path="/" />
 
