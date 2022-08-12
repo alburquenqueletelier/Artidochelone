@@ -12,11 +12,6 @@ export const Register = () => {
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [info, setInfo] = useState();
-
-  const handleFailure = (result) => {
-    console.log(result);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +43,7 @@ export const Register = () => {
       alert("Enter a valid email");
       return false;
     }
-    setInfo(data), actions.register(data);
+    return actions.register(e, data);
   };
   let data = {
     name: name.replace(/\w\S*/g, (w) =>
@@ -68,7 +63,9 @@ export const Register = () => {
       <div className="border border-light border-bottom-0 text-light rounded-top">
         <h3 className="m-3">Sign Up</h3>
       </div>
-      <form>
+      <form             onSubmit={(e) => {
+              handleSubmit(e);
+            }}>
         <div className="mb-3">
           <input
             type="username"
@@ -76,6 +73,7 @@ export const Register = () => {
             placeholder="Username"
             id="exampleInputUsername"
             aria-describedby="usernameHelp"
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -86,6 +84,7 @@ export const Register = () => {
             aria-label="First name"
             className="form-control bg-default opacity-50"
             placeholder="Name"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <input
@@ -93,6 +92,7 @@ export const Register = () => {
             aria-label="Last name"
             className="form-control bg-default opacity-50"
             placeholder="Lastname"
+            value={lastname}
             onChange={(e) => setLastname(e.target.value)}
           />
         </div>
@@ -104,6 +104,7 @@ export const Register = () => {
             placeholder="Email address"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -113,6 +114,7 @@ export const Register = () => {
             className="form-control bg-default opacity-50"
             placeholder="Password"
             id="exampleInputPassword1"
+            value={password}
             onChange={(e)=> setPassword(e.target.value)}
           />
         </div>
@@ -122,6 +124,7 @@ export const Register = () => {
             className="form-control bg-default opacity-50"
             placeholder="Repeat Password"
             id="exampleInputPassword2"
+            value={password2}
             onChange={(e) => setPassword2(e.target.value)}
           />
         </div>
@@ -129,9 +132,6 @@ export const Register = () => {
           <button
             type="submit"
             className="btn btn-outline-dark opacity-70 my-3 "
-            onClick={(e) => {
-              handleSubmit(e);
-            }}
           >
             Submit
           </button>

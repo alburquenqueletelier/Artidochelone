@@ -66,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           {
             id: 4,
-            name: "lys",
+            name: "Dummy",
             photo: "www.link_a_foto.com",
             description: "Dummy User",
             user_id: 4,
@@ -153,7 +153,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const tiempoTranscurrido = Date.now();
         const hoy = new Date(tiempoTranscurrido);
         demo.comments.push({
-          id: postID,
+          id: postID+1,
           text: commentData,
           created: hoy.toLocaleDateString(),
           emisor_id: user.id,
@@ -194,7 +194,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const tiempoTranscurrido = Date.now();
           const hoy = new Date(tiempoTranscurrido);
           demo.posts.push({
-            id: idpost,
+            id: idpost+1,
             title: title,
             description: description,
             image: imageData.url,
@@ -211,18 +211,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
         }
       },
-      register: (data) => {
+      register: (e, data) => {
+        e.preventDefault();
         try {
           const { demo } = getStore();
-          if (demo.users.filter((user) => user.username == data.username)) {
+          if (demo.users.filter((user) => user.username == data.username).length > 0) {
             return alert("Error: username en uso.");
           }
-          if (demo.users.filter((user) => user.email == data.email)) {
+          if (demo.users.filter((user) => user.email == data.email).length > 0) {
             return alert("Error: correo ya registrado");
           }
           const idUser = demo.users[demo.users.length - 1].id;
           demo.users.push({
-            id: idUser,
+            id: idUser+1,
             name: data.name,
             lastname: data.lastname,
             username: data.username,
@@ -230,7 +231,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             password: data.password,
           });
           demo.profiles.push({
-            id: idUser,
+            id: idUser+1,
             name: data.name,
             photo: null,
             description: null,
@@ -240,14 +241,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           sessionStorage.setItem("users", JSON.stringify(demo.users));
           sessionStorage.setItem("profiles", JSON.stringify(demo.profiles));
           alert("Usuario registrado con exito");
-          return getActions.login(e, data.username, data.password);
+          return getActions().login(e, data.username, data.password);
         } catch (error) {
           alert("No se pudo crear el registro");
           return console.log(error);
         }
       },
-      login: (e, username, password) => {
-        e.preventDefault();
+      login: (e=null, username, password) => {
+        if (!e) {
+          e.preventDefault();
+        }
         if (!username || !password) {
           return alert("Debes ingresar usuario y contraseña");
         }
