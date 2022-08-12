@@ -36,10 +36,6 @@ export const Navbar = () => {
       <nav className=" navbar navbar-dark p-0 navbar-expand-md bg-light  ">
         <div className="container-fluid glassnav p-4 ">
 
-         
-
-
-
           <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/">ARTIDOCHELONE</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 
@@ -50,9 +46,7 @@ export const Navbar = () => {
             className="collapse navbar-collapse  "
             id="navbarSupportedContent"
           >
-            <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
-
-             
+            <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">         
 
               {/* {!!store.user && comentado para ver postmodal*/}
               <div className="d-flex">
@@ -66,7 +60,8 @@ export const Navbar = () => {
               }
               {!!store.user &&
                   <li className="nav-item mx-3 ">
-                    <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
+                    <Link className="navbar-link btn" to="/post">
+                      <MdOutlineAddPhotoAlternate /></Link>
                   </li>
               }
               {!!store.user &&
@@ -97,7 +92,7 @@ export const Navbar = () => {
 
             </ul>
             {!!store.user && store.user.admin &&
-              <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/admin">Admin</Link>
+              <Link className="btn text-light" to="/admin">Admin</Link>
             
             }
 
@@ -127,7 +122,7 @@ export const Navbar = () => {
                     data-bs-toggle="modal"
                     data-bs-target="#loginModal"
                   >
-                    <li className="nav-item mx-3">Login</li>
+                    <li className="nav-item text-white mx-3">Iniciar sesión</li>
                   </button>
                   {/* Este es el modal event.preventDefault(); */}
                   <form
@@ -154,7 +149,7 @@ export const Navbar = () => {
                               className="modal-title text-light"
                               id="loginModalLabel"
                             >
-                              Enter your credentials
+                              Iniciar sesión
                             </h5>
                             <button
                               type="button"
@@ -180,7 +175,7 @@ export const Navbar = () => {
                               ref={passwordInput}
                             ></input>
                             <a>
-                              <small>Forgot your password?</small>
+                              <small>¿Olvidaste tu contraseña?</small>
                             </a>
                           </div>
                           <div className="modal-footer">
@@ -189,7 +184,7 @@ export const Navbar = () => {
                               className="btn btn-outline-light"
                               data-bs-dismiss="modal"
                             >
-                              Login
+                              Inicia sesión
                             </button>
                           </div>
                         </div>
@@ -201,13 +196,10 @@ export const Navbar = () => {
                         type="button"
                         className="btn"
                       >
-                      <li className="nav-item mx-3">Register</li>
+                      <li className="nav-item mx-3">Registro</li>
                     </button>
                   </Link>
                 </ul>
-
-             
-
               )} 
 
               <ul className="dropdown-menu dropdown-menu-end">

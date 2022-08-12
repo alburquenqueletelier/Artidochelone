@@ -63,9 +63,10 @@ export const Register = () => {
       <div className="border border-light border-bottom-0 text-light rounded-top">
         <h3 className="m-3">Sign Up</h3>
       </div>
-      <form             onSubmit={(e) => {
-              handleSubmit(e);
-            }}>
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}>
         <div className="mb-3">
           <input
             type="username"
@@ -115,7 +116,7 @@ export const Register = () => {
             placeholder="Password"
             id="exampleInputPassword1"
             value={password}
-            onChange={(e)=> setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="mb-3">

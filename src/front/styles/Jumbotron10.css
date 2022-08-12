@@ -1,0 +1,21 @@
+.home__Jumbotron-section {
+    background-color: #fff;
+    color: #fff;
+    }
+     
+    .dark {
+      color: #1c2237;
+    }
+    
+    .darkBg {
+      background-color: #1c2237;
+    }
+  
+    
+    @media screen and (max-width: 991px) {
+      .container {
+        padding-right: 30px;
+        padding-left: 30px;
+      }
+    }
+  
