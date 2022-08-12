@@ -17,8 +17,15 @@ export const Profile = () => {
           className="d-block w-100"
           alt="..."
         />
-        <h1>{store.user.username}</h1>
+        <h1>{store.user?.username}</h1>
         <p>descripcion</p>
+        <ul>
+          {!!store.demo && 
+            store.demo.posts.map((item,index) => {
+              return <li key={index}>{item.title}</li>
+            })
+          }
+        </ul>
         <div>
           <button>boton</button>
         </div>
