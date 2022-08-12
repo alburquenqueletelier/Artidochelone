@@ -47,12 +47,12 @@ export const Home = () => {
 
       {/*  jumbotron descripcion pagina */}
 
-      <JumbotronTop10 />
-      <Features />
-      <Etiquetas />
-      <GaleryHome />
-      {/* </div>  */}
-      {/* sidebar overflow, pos absolute*/}
+        <JumbotronTop10 />
+        <Features />
+        <Etiquetas />
+        <GaleryHome />
+        {/* </div>  */}
+        {/* sidebar overflow, pos absolute*/}
     </>
   );
 };
