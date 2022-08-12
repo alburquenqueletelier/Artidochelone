@@ -49,7 +49,6 @@ export const Home = () => {
 
         <JumbotronTop10 />
         <Features />
-        <Etiquetas />
         <GaleryHome />
         {/* </div>  */}
         {/* sidebar overflow, pos absolute*/}

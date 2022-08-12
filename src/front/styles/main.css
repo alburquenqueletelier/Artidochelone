@@ -24,8 +24,7 @@ body {
   );/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 /*general styles*/
-.gradient {
-}
+
 .glass2 {
   background: rgba(241, 237, 237, 0.418);
   border: 1px solid rgba(150, 165, 165, 0.863);
@@ -49,7 +48,7 @@ body {
   color: pink !important;
 }
 .nav-item, .footer div {
-  color: rgb(169, 170, 168) !important;
+  color: rgb(239, 239, 239) !important;
   font-size: large;
 }
 .navbar, .footer {

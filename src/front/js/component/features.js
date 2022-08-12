@@ -11,7 +11,7 @@ export const Features = () => {
       className='home__hero-section' >
       <div className='container'>
         <div className='row home__hero-row'>
-        <h1 className="heading dark">Una nueva forma de exlorar y exponer contenido</h1>
+        <h1 className="heading dark">Una nueva forma de explorar y exponer contenido</h1>
             <p className='top-line'>
               Aquí encontrarás una comunidad formada por diversos artistas esperando conocer tu trabajo y compartir ideas
             </p>

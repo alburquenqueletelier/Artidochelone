@@ -18,7 +18,7 @@ export const Footer = () => {
             Unete a NUESTRA EXCLUSIVA comunidad. comparte tu trabajo con otros artistas
           </p>
           <div className="SIGNUP">
-            <Link to='/sign-up'>
+            <Link to='/register'>
               <button className='btn blue'>
                 Sign up
               </button>

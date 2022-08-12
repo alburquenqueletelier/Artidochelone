@@ -122,7 +122,7 @@ export const Navbar = () => {
                     data-bs-toggle="modal"
                     data-bs-target="#loginModal"
                   >
-                    <li className="nav-item text-white mx-3">Iniciar sesión</li>
+                    <li className="nav-item text-white mx-3">Log in</li>
                   </button>
                   {/* Este es el modal event.preventDefault(); */}
                   <form
@@ -149,7 +149,7 @@ export const Navbar = () => {
                               className="modal-title text-light"
                               id="loginModalLabel"
                             >
-                              Iniciar sesión
+                              Log in
                             </h5>
                             <button
                               type="button"
@@ -175,7 +175,7 @@ export const Navbar = () => {
                               ref={passwordInput}
                             ></input>
                             <a>
-                              <small>¿Olvidaste tu contraseña?</small>
+                              <small>¿Forgot your password?</small>
                             </a>
                           </div>
                           <div className="modal-footer">
@@ -184,7 +184,7 @@ export const Navbar = () => {
                               className="btn btn-outline-light"
                               data-bs-dismiss="modal"
                             >
-                              Inicia sesión
+                              Log in
                             </button>
                           </div>
                         </div>
@@ -196,7 +196,7 @@ export const Navbar = () => {
                         type="button"
                         className="btn"
                       >
-                      <li className="nav-item mx-3">Registro</li>
+                      <li className="nav-item mx-3">Sign up</li>
                     </button>
                   </Link>
                 </ul>
@@ -205,22 +205,22 @@ export const Navbar = () => {
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
                   <Link className="dropdown-item" to={"/profile/"+store.user?.username}>
-                    Mi perfil
+                    My profile
                   </Link>
                 </li>
                 <li>
                   <a className="dropdown-item" href="#">
-                    Seguidos{" "}
+                    Followed{" "}
                   </a>
                 </li>
                 <li>
                   <a className="dropdown-item" href="#">
-                    Guardados
+                    Saved
                   </a>
                 </li>
                 <li>
                   <a className="dropdown-item" href="#">
-                    Mensajes
+                    Messages
                   </a>
                 </li>
 
