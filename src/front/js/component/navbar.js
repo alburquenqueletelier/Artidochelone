@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { BsSearch, BsHeart, BsChatLeftDots, BsXLg } from "react-icons/bs";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 // import { Postmodal } from "./postModal";
@@ -12,6 +13,23 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const usernameInput = React.useRef();
   const passwordInput = React.useRef();
+  const [inputClass, setInputClass] = useState('form-control me-2 invisible');
+  const [search, setSearch] = useState('');
+
+  const submitForm = (e,data) => {
+    if (e.key === 'Enter'){
+      let navigate = useNavigate();
+      navigate("/search", { replace: true });
+    }
+  }
+
+  const inputVisbility = () => {
+    if (inputClass.includes('invisible')) {
+      return setInputClass('form-control me-2');
+    } else {
+      return setInputClass('form-control me-2 invisible');
+    }
+  }
  
   return (
     <>
@@ -60,18 +78,21 @@ export const Navbar = () => {
               }
                 </div>
               <li className="nav-item mx-3">
-                <form className="d-flex m-auto p-0" role="search">
-                  <button className="btn  " type="submit">
+                <div className="d-flex m-auto p-0">
+                  <button className="btn  "type="button" onClick={inputVisbility}>
                     <BsSearch className="text-light" />
                   </button>{" "}
                   {/*añadir tooltips a los iconos al clickearlo se abre el input click input .visible sino .invisible*/}
                   <input
-                    className="form-control me-2 invisible"
-                    type="search"
+                    className={inputClass}
+                    type="text"
+                    value={search}
                     placeholder="Search"
                     aria-label="Search"
+                    onChange={(e)=>setSearch(e.target.value)}
+                    onKeyPress={(e)=>submitForm(e,search)}
                   />
-                </form>
+                </div>
               </li>
 
             </ul>

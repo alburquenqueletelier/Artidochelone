@@ -47,28 +47,28 @@ const getState = ({ getStore, getActions, setStore }) => {
             id: 1,
             name: "bryan",
             photo: "www.link_a_foto.com",
-            description1: "Bienvenido a mi perfil, disfrutalo!",
+            description: "Bienvenido a mi perfil, disfrutalo!",
             user_id: 1,
           },
           {
             id: 2,
             name: "Demian",
             photo: "www.link_a_foto.com",
-            description2: "Artidochelone principal partnership",
+            description: "Artidochelone principal partnership",
             user_id: 2,
           },
           {
             id: 3,
             name: "lys",
             photo: "www.link_a_foto.com",
-            description3: "Bienvenido a mi perfil, disfrutalo!",
+            description: "Bienvenido a mi perfil, disfrutalo!",
             user_id: 3,
           },
           {
             id: 4,
             name: "lys",
             photo: "www.link_a_foto.com",
-            description4: "Dummy User",
+            description: "Dummy User",
             user_id: 4,
           },
         ],
@@ -105,7 +105,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             created: "14/6/2020",
             emisor_id: 1,
             receptor_id: 2,
-            name: "John Doe",
           },
           {
             id: 2,
@@ -113,37 +112,32 @@ const getState = ({ getStore, getActions, setStore }) => {
             created: "14/6/2020",
             emisor_id: 1,
             receptor_id: 2,
-            name: "Sylvia Harrison",
           },
           {
             id: 3,
             text: "Das clases ?",
             created: "14/6/2020",
             emisor_id: 3,
-            receptor_id: 2,
-            name: "Rashida Jones",
+            receptor_id: 1,
           },
           {
             id: 4,
             text: "OJala pudiera haccer eso",
             created: "14/6/2020",
-
             emisor_id: 3,
             receptor_id: 2,
-            name: "Richard Hasekura",
           },
         ],
         hashtags: [
           { id: 1, label: "magnifico", count: 1, created: "14/6/2020" },
         ],
       },
-      profiles: [],
     },
     actions: {
       loadChanges: (table) => {
-        const {demo} = getStore();
-        demo[table] = JSON.parse(sessionStorage.getItem(table))
-        return setStore({demo:demo})
+        const { demo } = getStore();
+        demo[table] = JSON.parse(sessionStorage.getItem(table));
+        return setStore({ demo: demo });
       },
       loginRemember: () =>
         setStore({ user: JSON.parse(sessionStorage.getItem("user")) }),
@@ -151,12 +145,31 @@ const getState = ({ getStore, getActions, setStore }) => {
         sessionStorage.removeItem("user");
         return setStore({ user: null });
       },
+      comment: (e, commentData, receptorID) => {
+        e.preventDefault();
+        if (!commentData) return alert("Error: no puedes comentar vacio")
+        const { demo, user } = getStore();
+        const postID = demo.comments[demo.comments.length - 1].id;
+        const tiempoTranscurrido = Date.now();
+        const hoy = new Date(tiempoTranscurrido);
+        demo.comments.push({
+          id: postID,
+          text: commentData,
+          created: hoy.toLocaleDateString(),
+          emisor_id: user.id,
+          receptor_id: receptorID,
+        });
+        setStore({ demo: demo });
+        sessionStorage.setItem("comments", JSON.stringify(demo.comments));
+        return alert("Comentario exitoso")
+      },
       post: async (e, file, title, description = null) => {
         e.preventDefault();
-        const {demo, user} = getStore();
-        if (!user) return alert("Prohibido: debes autentificarte para poder postear")
-        if (!file || !title) return alert('Debes ingresar imagen y titulo');
-        
+        const { demo, user } = getStore();
+        if (!user)
+          return alert("Prohibido: debes autentificarte para poder postear");
+        if (!file || !title) return alert("Debes ingresar imagen y titulo");
+
         const formdata = new FormData();
         formdata.append("file", file);
         formdata.append("upload_preset", "artidochelone");
@@ -175,9 +188,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.log(error));
 
         // Se crea el post para guardar en el front
-        const {imageData} = getStore();
-        if (imageData){
-          let idpost = demo.posts[demo.posts.length-1].id;
+        const { imageData } = getStore();
+        if (imageData) {
+          let idpost = demo.posts[demo.posts.length - 1].id;
           const tiempoTranscurrido = Date.now();
           const hoy = new Date(tiempoTranscurrido);
           demo.posts.push({
@@ -186,62 +199,77 @@ const getState = ({ getStore, getActions, setStore }) => {
             description: description,
             image: imageData.url,
             created: hoy.toLocaleDateString(),
-            owner_id: user.id
-          })
-          setStore({demo:demo})
-          sessionStorage.setItem('posts', JSON.stringify(demo.posts));
-          setStore({imageData:null})
-          return alert("Post exitoso")
+            owner_id: user.id,
+          });
+          setStore({ demo: demo });
+          sessionStorage.setItem("posts", JSON.stringify(demo.posts));
+          setStore({ imageData: null });
+          return alert("Post exitoso");
         } else {
-          return alert("No fue posible crear el post porque no se guardo la imagen")
+          return alert(
+            "No fue posible crear el post porque no se guardo la imagen"
+          );
         }
       },
       register: (data) => {
-        try{
-          const {demo} = getStore();
-          if (demo.users.filter(user=> user.username == data.username)){
-            return alert("Error: username en uso.")
+        try {
+          const { demo } = getStore();
+          if (demo.users.filter((user) => user.username == data.username)) {
+            return alert("Error: username en uso.");
           }
-          if (demo.users.filter(user=> user.email == data.email)){
-            return alert("Error: correo ya registrado")
+          if (demo.users.filter((user) => user.email == data.email)) {
+            return alert("Error: correo ya registrado");
           }
-          const idUser = demo.users[demo.users.length-1].id;
+          const idUser = demo.users[demo.users.length - 1].id;
           demo.users.push({
             id: idUser,
             name: data.name,
             lastname: data.lastname,
             username: data.username,
             email: data.email,
-            password: data.password
+            password: data.password,
           });
           demo.profiles.push({
             id: idUser,
             name: data.name,
             photo: null,
             description: null,
-            user_id: idUser
+            user_id: idUser,
           });
-          setStore({demo:demo});
-          sessionStorage.setItem('users', JSON.stringify(demo.users));
-          sessionStorage.setItem('profiles', JSON.stringify(demo.profiles));
+          setStore({ demo: demo });
+          sessionStorage.setItem("users", JSON.stringify(demo.users));
+          sessionStorage.setItem("profiles", JSON.stringify(demo.profiles));
           alert("Usuario registrado con exito");
-          return getActions.login(e, data.username, data.password)
+          return getActions.login(e, data.username, data.password);
         } catch (error) {
           alert("No se pudo crear el registro");
           return console.log(error);
         }
       },
-      login:(e, username, password) => {
+      login: (e, username, password) => {
         e.preventDefault();
-        if (!username || !password){
-          return alert("Debes ingresar usuario y contraseña")
+        if (!username || !password) {
+          return alert("Debes ingresar usuario y contraseña");
         }
-        const {demo} = getStore();
+        const { demo } = getStore();
         // console.log(demo.users.filter(user => user.username == username).map(user=> user.password))
-        if (demo.users.filter(user=> user.username == username) && password == demo.users.filter(user => user.username == username).map(user=> user.password)[0]){
-          setStore({user:demo.users.filter(user=> user.username == username)[0]});
-          sessionStorage.setItem("user", JSON.stringify(demo.users.filter(user=> user.username == username)[0]));
-          return console.log('login con exito');
+        if (
+          demo.users.filter((user) => user.username == username) &&
+          password ==
+            demo.users
+              .filter((user) => user.username == username)
+              .map((user) => user.password)[0]
+        ) {
+          setStore({
+            user: demo.users.filter((user) => user.username == username)[0],
+          });
+          sessionStorage.setItem(
+            "user",
+            JSON.stringify(
+              demo.users.filter((user) => user.username == username)[0]
+            )
+          );
+          return console.log("login con exito");
         } else {
           return alert("Usuario o contraseña no valido");
         }
