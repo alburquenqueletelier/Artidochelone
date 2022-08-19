@@ -1,13 +1,32 @@
+
 import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "../component/Button";
+import '../../styles/CarouselJumbotron10.css'
+import '../../styles/Jumbotron10.css'
 
 export const JumbotronTop10 = () => {
   return (
-    <>
-      <div className="position-relative">
-        <div className="bg-warning position-absolute titulo-jumbotron">
-          <h1>Exponer tu trabajo</h1>
-          <p>El mejor lugar para publicar tu portafolio, esto va sobre los slides, falta posicionar </p>
+    <div className="wrap-hero">
+        <div className=" titulo-hero  carousel-caption home__hero-text-wrapper  ">
+          <div className="contenido-hero  carouseltext-center">
+            <h5 className="fw-bold">CREA TU PROPIO PORTAFOLIO WEB</h5>
+            <p className="py-3">
+            MUESTRA Y EXPLORA TU CREATIVIDAD</p>
+              <p className="py-2">
+              O EXPLORA EL CONTENIDO QUE NUESTROS USUARIOS ESTAN SUBIENDO</p>              
+            <Link to='/galeria'>
+              <button className='btn blue'>
+              ir a galeria!
+              </button>
+            </Link>
+          </div>
         </div>
+
+
+
+
+
 
 
         <div
@@ -79,23 +98,28 @@ export const JumbotronTop10 = () => {
               aria-label="Slide 3"
             ></button>
           </div>
-          <div className="carousel-inner">
+          <div className="carousel-inner ">
             <div className="carousel-item active">
               <img
-                src="https://images.unsplash.com/photo-1659124172741-96b753e526ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"
+                src="
+https://images.pexels.com/photos/9436715/pexels-photo-9436715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
+                "
                 className="d-block w-100"
                 alt="..."
               />
               <div className="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
+                <h5>intento</h5>
                 <p>
-                  Some representative placeholder content for the first slide.
+                  descripcion
                 </p>
+
               </div>
             </div>
             <div className="carousel-item">
               <img
-                src="https://images.unsplash.com/photo-1641526775432-74faf9c9a494?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                src="
+                https://images.pexels.com/photos/7976210/pexels-photo-7976210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1                
+                "
                 className="d-block w-100"
                 alt="..."
               />
@@ -238,6 +262,5 @@ export const JumbotronTop10 = () => {
           </button>
         </div>
       </div>
-    </>
   );
 };

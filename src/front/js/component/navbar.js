@@ -36,7 +36,7 @@ export const Navbar = () => {
 
              
 
-              {/* {!!store.user && comentado para ver postmodal*/}
+              {!!store.user &&
 
                 <div className="d-flex">
                   <li className="nav-item mx-3">
@@ -46,14 +46,7 @@ export const Navbar = () => {
                     {/*onclick agregar clase =  active*/}
                   </li>
                   <li className="nav-item mx-3 ">
-
-                   
-
-                    {/* <Postmodal>
-                    </Postmodal> */}
                     <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
-
-
                   </li>
                   <li className="nav-item mx-3">
                     <a className="nav-link ">
@@ -61,11 +54,7 @@ export const Navbar = () => {
                     </a>
                   </li>
                 </div>
-
-             
-
-              {/* } comentado para ver el modal*/}
-
+             }
               <li className="nav-item mx-3">
                 <form className="d-flex m-auto p-0" role="search">
                   <button className="btn  " type="submit">

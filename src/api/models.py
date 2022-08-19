@@ -3,7 +3,7 @@ from sqlalchemy import MetaData
 from datetime import datetime
 
 db = SQLAlchemy()
-Base = MetaData()
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,6 +71,7 @@ class Comment(db.Model):
     text = db.Column(db.Text)
     created = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
+    emisor_id = db.Column(db.Integer)
     # emisor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     # receptor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 #     users = db.relationship(
