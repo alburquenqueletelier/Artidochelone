@@ -1,31 +1,45 @@
-import React, { useContext } from "react";
-import { username } from "react-lorem-ipsum";
-import { useParams } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { useParams, Navigate } from "react-router-dom";
 import "../../styles/main.css";
-import { GaleryHome } from "../component/galeryHome";
+import { Usergallery } from "../component/usergallery";
 import { Context } from "../store/appContext";
+import { CommentSection } from "../component/commentsection";
 
 export const Profile = () => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const username = params.username;
+  // const searchUser = store.user.filter(user=> user.username == userName)[0];
+  const [redirect, setRedirect] = useState("");
+
+  useEffect(() => {
+    if (!!store?.user) {
+      setRedirect("");
+    } else {
+      setRedirect(<Navigate to="/" />);
+    }
+  }, [store?.user]);
 
   return (
     <div className="container-fluid mb-0">
-      <div className="text-center my-5">
+      {!store?.user && redirect}
+      <div className="container-fluid p-5 glass2 text-start my-5">
         <img
-          src="https://images.unsplash.com/photo-1659124172741-96b753e526ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"
-          className="d-block w-100"
-          alt="..."
+          src="https://public.slidesharecdn.com/v2/images/profile-picture.png"
+          className="img-circle rounded-circle float-start"
         />
-        <h1>{store.user.username}</h1>
-        <p>descripcion</p>
-        <div>
-          <button>boton</button>
-        </div>
+        {/* <h1 className="display-2">{searchUser?.username} </h1> */}
+        {/* {!!store.demo &&
+          store.demo.profiles
+            .filter((user) => user.user_id === searchUser?.id)
+            .map((item, index) => {
+              return <p key={index}>{item.description}</p>;
+            })} */}
       </div>
-      <div className="portafolio">
-        <GaleryHome />
-      </div>
+      {/* <div className="portafolio">
+        <Usergallery userID={searchUser?.id} />
+        <CommentSection userID={searchUser?.id} />
+      </div> */}
     </div>
   );
 };
