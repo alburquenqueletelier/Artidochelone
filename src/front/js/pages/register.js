@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/main.css";
 import { number } from "prop-types";
 
+
 export const Register = () => {
   const { store, actions } = useContext(Context);
   const [name, setName] = useState("");

@@ -1,65 +1,169 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { BsLinkedin, BsGithub, BsInstagram } from "react-icons/bs";
-
+import React from 'react';
+import { Link } from 'react-router-dom';
+import {
+  FaInstagram,
+  FaTwitter,
+  FaLinkedin
+} from 'react-icons/fa';
+import '../../styles/Footer.css';
 
 // mt-auto
 export const Footer = () => {
   return (
-    <footer className="footer text-secondary text-center   ">
-      <div className="container-fluid d-flex flex-column bg-warning p-4 px-5 glassnav">
-        <div className="mx-5">
-          <p className="navbar-brand fw-normal fs-5 text-secondary pt-5">
-            CREADO POR EQUIPO NOMBRE
+
+    <div className="footer">
+      <div className='footer-container glassnav-footer'>
+        <section className='footer-subscription '>
+          <p className='footer-subscription-heading'>
+            Unete a NUESTRA EXCLUSIVA comunidad. comparte tu trabajo con otros artistas
           </p>
-
-          {/* dejar contenido con alineacion izquierda*/}
-
-          <div className="container ">
-            <div className="row">
-              <div className="col">
-                <Link className="nav-link text-decoration-none" to="/creador1">
-                  creador1
-                </Link>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                <div className="d-flex justify-content-evenly">
-                 <Link to="/"><BsLinkedin /></Link> 
-                  <Link to="/"><BsGithub /></Link> 
-                  <Link to="/"><BsInstagram /></Link> 
-                </div>
-              </div>
-              <div className="col">
-                <Link className="nav-link" to="/creador2">
-                  creador2
-                </Link>
-                <p className="">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing.
-                </p>
-                <div className="d-flex justify-content-evenly">
-                  <Link to="/"><BsLinkedin /></Link> 
-                  <Link to="/"><BsGithub /></Link> 
-                  <Link to="/"><BsInstagram /></Link> 
-                </div>
-              </div>
-              <div className="col">
-                <Link className="nav-link " to="/creador3">
-                  creador3
-                </Link>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                <div className="d-flex justify-content-evenly">
-                  <Link to="/"><BsLinkedin /></Link> 
-                  <Link to="/"><BsGithub /></Link> 
-                  <Link to="/"><BsInstagram /></Link> 
-                </div>
-              </div>
+          <div className="SIGNUP">
+            <Link to='/register'>
+              <button className='btn blue'>
+                Sign up
+              </button>
+            </Link>
+          </div>
+        </section>
+        <div className='footer-links'>
+          <div className='footer-link-wrapper'>
+            <div className='footer-link-items'>
+              <h4>About Us</h4>
+              <Link to='/sign-up'>Mision Vision</Link>
+              <Link to='/'>Terminos y condiciones</Link>
+            </div>
+            <div className='footer-link-items'>
+              <h4>Bryan</h4>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='Instagram'
+              >
+                <FaInstagram />
+                Instagram
+              </Link>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='Twitter'
+              >
+                <FaTwitter />
+                Twitter
+              </Link>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='LinkedIn'
+              >
+                <FaLinkedin />
+                Linkedin
+              </Link>
+            </div>
+          </div>
+          <div className='footer-link-wrapper'>
+            <div className='footer-link-items'>
+              <h4>Demian</h4>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='Instagram'
+              >
+                <FaInstagram />
+                Instagram
+              </Link>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='Twitter'
+              >
+                <FaTwitter />
+                Twitter
+              </Link>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='LinkedIn'
+              >
+                <FaLinkedin />
+                Linkedin
+              </Link>
+            </div>
+            <div className='footer-link-items'>
+              <h4>Lys</h4>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='Instagram'
+              >
+                <FaInstagram />
+                Instagram
+              </Link>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='Twitter'
+              >
+                <FaTwitter />
+                Twitter
+              </Link>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='LinkedIn'
+              >
+                <FaLinkedin />
+                Linkedin
+              </Link>
             </div>
           </div>
         </div>
+        <section className='social-media'>
+          <div className='social-media-wrap'>
 
-        <p className="nav-item pt-4">
-          Made with <i className="fa fa-heart text-danger corazon" />
-        </p>
-      </div >
-    </footer >
+            <div className='footer-logo'>
+              <Link to='/' className='social-logo navbar-brand-footer'>
+                ARTIDOCHELONE
+              </Link>
+            </div>
+            <div className='social-icons'>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='Instagram'
+              >
+                <FaInstagram />
+              </Link>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='Twitter'
+              >
+                <FaTwitter />
+              </Link>
+              <Link
+                className='social-icon-link'
+                to='/'
+                target='_blank'
+                aria-label='LinkedIn'
+              >
+                <FaLinkedin />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
   );
 };
