@@ -8,16 +8,6 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 
 api = Blueprint('api', __name__)
 
-
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
-
-    return jsonify(response_body), 200
-
 @api.route('/alluser', methods=['GET'])
 def list_users():
 
@@ -28,33 +18,7 @@ def list_users():
 
     return jsonify({"allUsers": response}), 200
 
-# @api.route('/googleuser', methods=['POST'])
-# def googleUser():
-#     body = request.get_json()
-#     if db.session.query(User).filter_by(email=body["email"]).first():
-#         user = db.session.query(User).filter_by(email=body["email"]).first()
-#         return jsonify({
-#                 "message": "logued in",
-#                 "user": user.serialize(),
-#                # "expire_seconds": expiration.total_seconds()
-#             })
-#     else:
-#         new_user = User()
-#         new_user.name = body["name"]
-#         new_user.lastname = body["lastname"]
-#         new_user.username = body["username"]
-#         new_user.email = body["email"]
-#         new_user.password = "cualquier_valor_random"
-#         db.session.add(new_user)
-#         db.session.commit()
-#         return jsonify({
-#                 "message": "logued in",
-#                 "user": new_user.serialize(),
-#                # "expire_seconds": expiration.total_seconds()
-#             })
-
 @api.route('/login', methods=['POST'])
-
 def login():
     #recibo informacion de la solicitud (fetch)
     body = request.get_json()
@@ -104,24 +68,40 @@ def register():
     new_user.username = decoded_object["username"]
     new_user.email = decoded_object["email"]
     new_user.password = decoded_object["password"]
-    db.session.add(new_user)
+    new_profile = Profile()
+    new_profile.name = decoded_object["name"]
+    new_user.profile = new_profile
+    db.session.add_all([new_profile, new_user ])
     db.session.commit()
     return jsonify({
         "message": "New user created :D"
     })
 
-    @api.route('/profile', methods=['POST', 'GET'])
-    @jwt_required()
-    def profile():
-        get_token = get_jwt_identity()
-        user = db.session.query(User).filter_by(username=get_token).first()
-        profile = db.session.query(Profile).filter_by(user_id=user.id).first()
-        if user:
-            return jsonify( profile.serialize() )
-     ## body = request.get_json()
-      ## username = body["username"]
+@api.route('/profile', methods=['POST', 'GET'])
+@jwt_required()
+def profile():
+    get_token = get_jwt_identity()
+    user = db.session.query(User).filter_by(username=get_token).first()
+    profile = db.session.query(Profile).filter_by(user_id=user.id).first()
+    if user:
+        return jsonify( {
+            "profile":profile.serialize(),
+            "user" : user.serialize()
+            } )
+    ## body = request.get_json()
+    ## username = body["username"]
        
+@api.route('/profile/<string:username>', methods=['POST', 'GET'])
+def get_user_profile(username):
+    user = db.session.query(User).filter_by(username=username).first()
+    profile = db.session.query(Profile).filter_by(user_id=user.id).first()
+    if user:
+        return jsonify( profile.serialize() )
+    ## body = request.get_json()
+    ## username = body["username"]
+
 @api.route('/post', methods=['POST'])
+@jwt_required()
 def post():
 
     body = request.get_json()

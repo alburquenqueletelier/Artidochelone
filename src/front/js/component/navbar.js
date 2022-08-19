@@ -189,7 +189,7 @@ export const Navbar = () => {
 
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
-                  <Link className="dropdown-item" to={"/profile/"+store.user?.username}>
+                  <Link className="dropdown-item" to="/profile">
                     Mi perfil
                   </Link>
                 </li>

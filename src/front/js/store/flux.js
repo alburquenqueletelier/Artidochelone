@@ -139,6 +139,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profiles: [],
     },
     actions: {
+      // Crear nuevo usuario
       postRegister: async (data) => {
         console.log(data);
         var myHeaders = new Headers();
@@ -150,10 +151,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           method: "POST",
           headers: myHeaders,
           body: raw,
-          redirect: "follow",
         };
 
-        await fetch(process.env.BACKEND_URL + "/api/register", requestOptions)
+        await fetch(process.env.BACKEND_URL + "/api/register", {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: raw
+        })
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
@@ -192,6 +196,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         sessionStorage.removeItem("user");
         return setStore({ user: null });
       },
+      // Crear post (requiere usuario autentificado)
       post: async (e, file, title, description = null) => {
         e.preventDefault();
         const formdata = new FormData();
@@ -252,35 +257,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         // console.log("description: ", e.target.description.value);
         // console.log("file", file)
       },
-      // demoLogin:() => {
-      //   fetch(process.env.BACKEND_URL + "/api/hello", requestOptions)
-      //   const {login, user} = getStore();
-      //   if (!login){
-      //     setStore({login: true})
-      //     setStore({user: "baal"})
-      //   } else {
-      //     setStore({login: false})
-      //     setStore({user: null})
-      //   }
-      // },
-
-      //getProfiles: async () => {
-
-      //var requestOptions = {
-      //   method: 'GET',
-      //  redirect: 'follow'
-      // };
-
-      //await fetch(process.env.BACKEND_URL + "/api/alluser", requestOptions)
-      //  .then(response => response.json())
-      //  .then(result => { console.log(result),
-      //    setStore({profiles: result})})
-      //  .catch(error => console.log('error', error));
-
-      // }
     },
-    demoActions: {
-
+    getProfile: async()=>{
+      const response = await fetch(process.env.BACKEND_URL + "/api/profile");
+      const profile = await response.json()
+      return profile
+    }
+    ,
+    getAllUsers: async()=>{
+      const response = await fetch(process.env.BACKEND_URL + "/api/alluser");
+      const users = await response.json()
+      return users
+    },
+    getUserProfile: async(id) => {
+      const response = await fetch(process.env.BACKEND_URL + "/api/user/"+id);
+      const user = await response.json()
+      return user
     }
   };
 };
