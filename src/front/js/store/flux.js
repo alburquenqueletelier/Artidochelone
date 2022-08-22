@@ -7,136 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       // admin debiese venir como atributo de usuario pero se usa esto temporlamente
       admin: true,
       imageData: {},
-      demo: {
-        users: [
-          {
-            id: 1,
-            name: "bryan",
-            lastname: "alburquenque",
-            username: "baal",
-            email: "bryan@gmail.com",
-            password: "123456",
-            admin: true,
-          },
-          {
-            id: 2,
-            name: "demian",
-            lastname: "hernandez",
-            username: "demian",
-            email: "demian@gmail.com",
-            password: "123456",
-            admin: true,
-          },
-          {
-            id: 3,
-            name: "lys",
-            lastname: "4geeks",
-            username: "lys",
-            email: "lys@gmail.com",
-            password: "123456",
-            admin: true,
-          },
-          {
-            id: 4,
-            name: "dummy",
-            lastname: "dummy",
-            username: "dummy",
-            email: "dummy@gmail.com",
-            password: "123456",
-            admin: false,
-          },
-        ],
-        profiles: [
-          {
-            id: 1,
-            name: "bryan",
-            photo: "www.link_a_foto.com",
-            description: "Bienvenido a mi perfil, disfrutalo!",
-            user_id: 1,
-          },
-          {
-            id: 2,
-            name: "demian",
-            photo: "www.link_a_foto.com",
-            description: "Artidochelone principal partnership",
-            user_id: 2,
-          },
-          {
-            id: 3,
-            name: "lys",
-            photo: "www.link_a_foto.com",
-            description: "Bienvenido a mi perfil, disfrutalo!",
-            user_id: 3,
-          },
-          {
-            id: 4,
-            name: "lys",
-            photo: "www.link_a_foto.com",
-            description: "Dummy User",
-            user_id: 4,
-          },
-        ],
-        posts: [
-          {
-            id: 1,
-            title: "imagen 1",
-            description: "Imagen random para pobrar",
-            image: "www.cualquie_ruta_de_imagen.com/cambiaresto",
-            created: "24-06-2022",
-            owner_id: 1,
-          },
-          {
-            id: 2,
-            title: "imagen 2",
-            description: "Otra imagen",
-            image: "www.cualquie_ruta_de_imagen.com/cambiaresto",
-            created: "24-06-2022",
-            owner_id: 2,
-          },
-          {
-            id: 3,
-            title: "imagen 3",
-            description: "Tercera imagen",
-            image: "www.cualquie_ruta_de_imagen.com/cambiaresto",
-            created: "24-06-2022",
-            owner_id: 2,
-          },
-        ],
-        comments: [
-          {
-            id: 1,
-            text: "Que gran trabajo! #magnifico",
-            created: "24-06-2022",
-            emisor_id: 1,
-            receptor_id: 2,
-          },
-          {
-            id: 2,
-            text: "Falta iluminacion",
-            created: "24-06-2022",
-            emisor_id: 1,
-            receptor_id: 2,
-          },
-          {
-            id: 3,
-            text: "Das clases ?",
-            created: "24-06-2022",
-            emisor_id: 3,
-            receptor_id: 2,
-          },
-          {
-            id: 4,
-            text: "OJala pudiera haccer eso",
-            created: "24-06-2022",
-            emisor_id: 3,
-            receptor_id: 2,
-          },
-        ],
-        hashtag: [
-          { id: 1, label: "magnifico", count: 1, created: "24-06-2022" },
-        ],
-      },
-      profiles: [],
+      profile: null,
     },
     actions: {
       // Crear nuevo usuario
@@ -186,14 +57,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             // deberia guardar toda la info de user que esta en el serializador
             console.log(data);
             sessionStorage.setItem("user", JSON.stringify(data.user));
-            return setStore({ user: data.user });
+            sessionStorage.setItem("token", JSON.stringify(data.token));
+            return setStore({ user: data.user, token:data.token });
           })
           .catch((error) => console.log("mensaje error: ", error));
       },
-      loginRemember: () =>
-        setStore({ user: JSON.parse(sessionStorage.getItem("user")) }),
+      loginRemember: () => {
+        setStore({
+          user: JSON.parse(sessionStorage.getItem("user")),
+          token: JSON.parse(sessionStorage.getItem("token"))                  
+      })
+    },
       logout: () => {
         sessionStorage.removeItem("user");
+        sessionStorage.removeItem("token");
         return setStore({ user: null });
       },
       // Crear post (requiere usuario autentificado)
@@ -257,23 +134,26 @@ const getState = ({ getStore, getActions, setStore }) => {
         // console.log("description: ", e.target.description.value);
         // console.log("file", file)
       },
+
+      getProfile: async()=>{
+        const response = await fetch(process.env.BACKEND_URL + "/api/profile");
+        const profile = await response.json()
+        return profile
+      }
+      ,
+      getAllUsers: async()=>{
+        const response = await fetch(process.env.BACKEND_URL + "/api/alluser");
+        const users = await response.json()
+        return users
+      },
+      getUserProfile: async(id) => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/profile/"+id);
+        const user = await response.json()
+        setStore({profile:user})
+        return user
+      }
+      // Hasta aca son las funciones, OJO !
     },
-    getProfile: async()=>{
-      const response = await fetch(process.env.BACKEND_URL + "/api/profile");
-      const profile = await response.json()
-      return profile
-    }
-    ,
-    getAllUsers: async()=>{
-      const response = await fetch(process.env.BACKEND_URL + "/api/alluser");
-      const users = await response.json()
-      return users
-    },
-    getUserProfile: async(id) => {
-      const response = await fetch(process.env.BACKEND_URL + "/api/user/"+id);
-      const user = await response.json()
-      return user
-    }
   };
 };
 

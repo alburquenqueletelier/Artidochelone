@@ -77,26 +77,28 @@ def register():
         "message": "New user created :D"
     })
 
-@api.route('/profile', methods=['POST', 'GET'])
-@jwt_required()
-def profile():
-    get_token = get_jwt_identity()
-    user = db.session.query(User).filter_by(username=get_token).first()
-    profile = db.session.query(Profile).filter_by(user_id=user.id).first()
-    if user:
-        return jsonify( {
-            "profile":profile.serialize(),
-            "user" : user.serialize()
-            } )
+# @api.route('/profile', methods=['POST', 'GET'])
+# @jwt_required()
+# def profile():
+#     get_token = get_jwt_identity()
+#     user = db.session.query(User).filter_by(username=get_token).first()
+#     profile = db.session.query(Profile).filter_by(user_id=user.id).first()
+#     if user:
+#         return jsonify( {
+#             "user" : user.serialize()
+#             } )
     ## body = request.get_json()
     ## username = body["username"]
        
 @api.route('/profile/<string:username>', methods=['POST', 'GET'])
 def get_user_profile(username):
     user = db.session.query(User).filter_by(username=username).first()
-    profile = db.session.query(Profile).filter_by(user_id=user.id).first()
     if user:
-        return jsonify( profile.serialize() )
+        return jsonify( user.serialize() )
+    else:
+        return jsonify({
+            "Error": "No se encontro el usurio"
+        }), 400
     ## body = request.get_json()
     ## username = body["username"]
 

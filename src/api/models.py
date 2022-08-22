@@ -38,7 +38,8 @@ class User(db.Model):
             "username": self.username,
             "email": self.email,
             "posts": [post.serialize() for post in self.posts] if self.posts else [],
-            "profile": self.profile.serialize() if self.profile else []
+            "profile": self.profile.serialize() if self.profile else [],
+            "comments": [comment.serialize() for comment in self.users_comments] if self.users_comments else []
             #"admin": self.is_admin,
             #"created": self.created
             # do not serialize the password, its a security breach
@@ -72,14 +73,15 @@ class Post(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
 
     def __repr__(self):
-        return f'<Title={self.title} owner={self.owner_id.username if self.owner_id else "NN"}>'
+        return f'<Title={self.title} owner={self.owner_id if self.owner_id else "NN"}>'
 
     def serialize(self):
         return {
             "id": self.id,
             "title": self.title,
             "description": self.description,
-            "image": self.image
+            "image": self.image,
+            "created": self.created
         }
 
 class Comment(db.Model):
