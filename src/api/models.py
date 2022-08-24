@@ -4,11 +4,6 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
-users_comments = db.Table('users_comments',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-    db.Column('comment_id', db.Integer, db.ForeignKey('comment.id'), primary_key=True)
-)
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=False, nullable=False)
@@ -20,15 +15,16 @@ class User(db.Model):
         backref=db.backref('user', lazy='joined'))
     posts = db.relationship('Post', lazy='select',
         backref=db.backref('user', lazy='joined'))
-    # send_comments = db.relationship('Comment', lazy='select',
-    #     backref=db.backref('send_user', lazy='joined'))
-    users_comments = db.relationship('Comment', secondary=users_comments, lazy='subquery',
-        backref=db.backref('users', lazy=True))
+    send_comments = db.relationship('Comment', lazy='select', foreign_keys='[Comment.emisor_id]',
+        backref=db.backref('emisor', lazy='joined'))
+    # received_comments_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
+    received_comments = db.relationship("Comment", post_update=True, backref=db.backref('receptor', lazy='joined'),
+                                  foreign_keys='[Comment.receptor_id]')
     #is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     #is_admin = db.Column(db.Boolean(), unique=False, nullable=False)
     #created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<User {self.username} ID={self.id}>'
 
     def serialize(self):
         return {
@@ -39,7 +35,7 @@ class User(db.Model):
             "email": self.email,
             "posts": [post.serialize() for post in self.posts] if self.posts else [],
             "profile": self.profile.serialize() if self.profile else [],
-            "comments": [comment.serialize() for comment in self.users_comments] if self.users_comments else []
+            "received_comments": [comment.serialize() for comment in self.received_comments] if self.received_comments else [],
             #"admin": self.is_admin,
             #"created": self.created
             # do not serialize the password, its a security breach
@@ -89,15 +85,23 @@ class Comment(db.Model):
     text = db.Column(db.Text)
     created = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
+    # emisor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # receptor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # emisor = db.relationship("User", foreign_keys=[emisor_id])
+    # receptor = db.relationship("User", foreign_keys=[receptor_id])
+    emisor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    receptor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return f'<Comment id={self.id} date={self.created}>'
+        return f'Emisor={self.emisor_id} Receptor={self.receptor_id} date={self.created}>'
     
     def serialize(self):
         return {
             "id": self.id,
             "text": self.text,
             "created": self.created,
+            "emisor": self.emisor_id,
+            "receptor": self.receptor_id
         }
 
 class Hashtag(db.Model):

@@ -90,17 +90,39 @@ def register():
     ## body = request.get_json()
     ## username = body["username"]
        
-@api.route('/profile/<string:username>', methods=['POST', 'GET'])
+@api.route('/profile/<string:username>', methods=['GET'])
 def get_user_profile(username):
     user = db.session.query(User).filter_by(username=username).first()
+    lista_emisores = db.session.query(User).join(Comment, Comment.receptor_id == user.id)
+    # print(lista_emisores)
     if user:
-        return jsonify( user.serialize() )
+        return jsonify( {
+            "user": user.serialize(),
+            "emisores": [emisor.serialize() for emisor in lista_emisores]
+            })
     else:
         return jsonify({
             "Error": "No se encontro el usurio"
         }), 400
     ## body = request.get_json()
     ## username = body["username"]
+
+@api.route('/profile/<int:id>', methods=['GET'])
+def get_user_by_id(id):
+    user = db.session.query(User).get(id)
+    # lista_emisores = user.received_comments
+    if user:
+        lista_emisores = db.session.query(User).join(Comment, Comment.receptor_id == user.id )
+        print(lista_emisores)
+        # emisores_username = db.session.query(User.username).filter(User.id.in_(lista_emisores))
+        return jsonify( {
+            "user": user.serialize(),
+            "emisores": [emisor.serialize() for emisor in lista_emisores]
+            })
+    else:
+        return jsonify({
+            "Error": "No se encontro el usurio"
+        }), 400
 
 @api.route('/post', methods=['POST'])
 @jwt_required()

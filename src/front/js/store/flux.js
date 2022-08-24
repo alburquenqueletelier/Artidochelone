@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       admin: true,
       imageData: {},
       profile: null,
+      received_com: null,
     },
     actions: {
       // Crear nuevo usuario
@@ -134,13 +135,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         // console.log("description: ", e.target.description.value);
         // console.log("file", file)
       },
-
-      getProfile: async()=>{
-        const response = await fetch(process.env.BACKEND_URL + "/api/profile");
-        const profile = await response.json()
-        return profile
-      }
-      ,
       getAllUsers: async()=>{
         const response = await fetch(process.env.BACKEND_URL + "/api/alluser");
         const users = await response.json()
@@ -148,9 +142,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getUserProfile: async(id) => {
         const response = await fetch(process.env.BACKEND_URL + "/api/profile/"+id);
-        const user = await response.json()
-        setStore({profile:user})
-        return user
+        const data = await response.json()
+        setStore({profile:data.user, received_com:data.emisores})
+        return data
       }
       // Hasta aca son las funciones, OJO !
     },
