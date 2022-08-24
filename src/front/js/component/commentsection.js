@@ -8,13 +8,13 @@ export const CommentSection = (props) => {
     return (
         <div className="container-fluid glass2">
             <div className="row">
-                <h2>Comments |{store.received_com.length}|</h2> 
+                <h2>Comments |{store.profile.received_comments.length}|</h2> 
             </div>
             {!!store.user && 
                 <div className="row" id="addcomment">
-                    <form>
+                    <form onSubmit={(e)=>actions.comment(e,commentInput)}>
                         <textarea value={commentInput} className="form-control" placeholder="Comment content..." onChange={(e)=>setCommentInput(e.target.value)}></textarea><br/>
-                        <button type="submit" className="btn btn-primary" onClick={(e)=>actions.comment(e,commentInput, props.userID)}>Send</button>
+                        <button type="submit" className="btn btn-primary" >Send</button>
                     </form>
                 </div>
             }

@@ -13,18 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       // Crear nuevo usuario
       postRegister: async (data) => {
-        console.log(data);
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+        // console.log(data);
 
         var raw = JSON.stringify(data);
-
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-        };
-
         await fetch(process.env.BACKEND_URL + "/api/register", {
           method: "POST",
           headers: {"Content-Type":"application/json"},
@@ -33,7 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => {
             console.log(result);
-            alert("Successfully registered");
+            alert(JSON.stringify(result));
           })
           .catch((error) => console.log("error !!!", data, error));
       },
@@ -56,10 +47,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => {
             // deberia guardar toda la info de user que esta en el serializador
-            console.log(data);
+            // console.log(data);
             sessionStorage.setItem("user", JSON.stringify(data.user));
             sessionStorage.setItem("token", JSON.stringify(data.token));
-            return setStore({ user: data.user, token:data.token });
+            setStore({ user: data.user, token:data.token });
+            return alert(JSON.stringify(data.message))
           })
           .catch((error) => console.log("mensaje error: ", error));
       },
@@ -72,11 +64,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       logout: () => {
         sessionStorage.removeItem("user");
         sessionStorage.removeItem("token");
-        return setStore({ user: null });
+        return setStore({ user: null, token:null });
       },
       // Crear post (requiere usuario autentificado)
       post: async (e, file, title, description = null) => {
         e.preventDefault();
+        const {token} = getStore();
         const formdata = new FormData();
         formdata.append("file", file);
         formdata.append("upload_preset", "artidochelone");
@@ -106,6 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append('Authorization', 'Bearer '+token);
 
         const { imageData } = getStore();
 
@@ -123,11 +117,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         // console.log("requestopti: ", requestOptions);
         await fetch(process.env.BACKEND_URL + "/api/post", requestOptions)
           .then((response) => {
-            console.log("pase por response");
+            // console.log("pase por response");
             return response.json();
           })
           .then((data) => {
-            return console.log(data);
+            return alert(JSON.stringify(data));
           })
           .catch((error) => console.log("mensaje error: ", error));
         // console.log("fileUp: ", e.target.fileUp.value);
@@ -145,6 +139,33 @@ const getState = ({ getStore, getActions, setStore }) => {
         const data = await response.json()
         setStore({profile:data.user, received_com:data.emisores})
         return data
+      },
+      comment: async(e, data) => {
+        e.preventDefault();
+        // console.log("evento", e, "comentario", data)
+        const {user, profile, token} = getStore();
+        if (data.length > 0 && data != ' ' && !!user && !!profile){
+          await fetch(process.env.BACKEND_URL + "/api/comment", {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer "+token
+            },
+            body: JSON.stringify({
+              text: data,
+              emisor_id: user.id,
+              receptor_id: profile.id
+            })
+          })
+          .then((resp)=>resp.json())
+          .then((data)=>alert(JSON.stringify(data)))
+          .catch(error=>console.log(error))
+        }
+        else{
+          console.log("data", data, "user", user.username, "profile", profile.username);
+          alert("Comment context can't be empty");
+        }
+        return false
       }
       // Hasta aca son las funciones, OJO !
     },
