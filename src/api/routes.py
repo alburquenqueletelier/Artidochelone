@@ -77,28 +77,52 @@ def register():
         "message": "New user created :D"
     })
 
-@api.route('/profile', methods=['POST', 'GET'])
-@jwt_required()
-def profile():
-    get_token = get_jwt_identity()
-    user = db.session.query(User).filter_by(username=get_token).first()
-    profile = db.session.query(Profile).filter_by(user_id=user.id).first()
-    if user:
-        return jsonify( {
-            "profile":profile.serialize(),
-            "user" : user.serialize()
-            } )
+# @api.route('/profile', methods=['POST', 'GET'])
+# @jwt_required()
+# def profile():
+#     get_token = get_jwt_identity()
+#     user = db.session.query(User).filter_by(username=get_token).first()
+#     profile = db.session.query(Profile).filter_by(user_id=user.id).first()
+#     if user:
+#         return jsonify( {
+#             "user" : user.serialize()
+#             } )
     ## body = request.get_json()
     ## username = body["username"]
        
-@api.route('/profile/<string:username>', methods=['POST', 'GET'])
+@api.route('/profile/<string:username>', methods=['GET'])
 def get_user_profile(username):
     user = db.session.query(User).filter_by(username=username).first()
-    profile = db.session.query(Profile).filter_by(user_id=user.id).first()
+    lista_emisores = db.session.query(User).join(Comment, Comment.receptor_id == user.id)
+    # print(lista_emisores)
     if user:
-        return jsonify( profile.serialize() )
+        return jsonify( {
+            "user": user.serialize(),
+            "emisores": [emisor.serialize() for emisor in lista_emisores]
+            })
+    else:
+        return jsonify({
+            "Error": "No se encontro el usurio"
+        }), 400
     ## body = request.get_json()
     ## username = body["username"]
+
+@api.route('/profile/<int:id>', methods=['GET'])
+def get_user_by_id(id):
+    user = db.session.query(User).get(id)
+    # lista_emisores = user.received_comments
+    if user:
+        lista_emisores = db.session.query(User).join(Comment, Comment.receptor_id == user.id )
+        print(lista_emisores)
+        # emisores_username = db.session.query(User.username).filter(User.id.in_(lista_emisores))
+        return jsonify( {
+            "user": user.serialize(),
+            "emisores": [emisor.serialize() for emisor in lista_emisores]
+            })
+    else:
+        return jsonify({
+            "Error": "No se encontro el usurio"
+        }), 400
 
 @api.route('/post', methods=['POST'])
 @jwt_required()

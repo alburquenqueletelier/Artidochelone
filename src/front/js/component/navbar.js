@@ -17,11 +17,6 @@ export const Navbar = () => {
     <>
       <nav className=" navbar navbar-dark p-0 navbar-expand-md bg-light  ">
         <div className="container-fluid glassnav p-4 ">
-
-         
-
-
-
           <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/">ARTIDOCHELONE</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 
@@ -189,7 +184,7 @@ export const Navbar = () => {
 
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
-                  <Link className="dropdown-item" to="/profile">
+                  <Link className="dropdown-item" to={"/profile/"+store.user?.username}>
                     Mi perfil
                   </Link>
                 </li>
