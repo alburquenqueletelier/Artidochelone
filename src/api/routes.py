@@ -76,19 +76,6 @@ def register():
     return jsonify({
         "message": "New user created :D"
     })
-
-# @api.route('/profile', methods=['POST', 'GET'])
-# @jwt_required()
-# def profile():
-#     get_token = get_jwt_identity()
-#     user = db.session.query(User).filter_by(username=get_token).first()
-#     profile = db.session.query(Profile).filter_by(user_id=user.id).first()
-#     if user:
-#         return jsonify( {
-#             "user" : user.serialize()
-#             } )
-    ## body = request.get_json()
-    ## username = body["username"]
        
 @api.route('/profile/<string:username>', methods=['GET'])
 def get_user_profile(username):
@@ -127,13 +114,16 @@ def get_user_by_id(id):
 @api.route('/post', methods=['POST'])
 @jwt_required()
 def post():
-
+    
+    current_user_id = get_jwt_identity()
+    user_id = User.query.filter_by(username=current_user_id).first()
     body = request.get_json()
     if body["image"] and body["title"]:
         newPost = Post()
         newPost.title = body["title"]
         newPost.description = body["description"]
         newPost.image = body["image"]
+        newPost.owner_id = user_id.id
         db.session.add(newPost)
         db.session.commit()
         return jsonify({
@@ -142,4 +132,26 @@ def post():
     else:
         return jsonify({
             'message': 'Error, falta imagen y/o titulo'
+        }), 400
+
+@api.route('/comment', methods=['POST'])
+@jwt_required()
+def comment():
+
+    body = request.get_json()
+    if body["text"] and body["emisor_id"] and body["receptor_id"]:
+        newComment = Comment()
+        newComment.text = body["text"]
+        newComment.emisor_id = body["emisor_id"]
+        newComment.receptor_id = body["receptor_id"]
+        db.session.add(newComment)
+        db.session.commit()
+        print("Pase por http 200")
+        return jsonify({
+            "messeage": "Comentario creado con exito"
+        }), 200
+    else:
+        print("Pase por http 400")
+        return jsonify({
+            'message': 'Error, no se creo comentario porque falta informacion (texto, emisor o receptor)'
         }), 400
