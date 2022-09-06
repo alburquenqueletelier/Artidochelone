@@ -5,6 +5,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import datetime
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from sqlalchemy import func, desc
 
 api = Blueprint('api', __name__)
 
@@ -17,6 +18,17 @@ def list_users():
         response[user.username] = user.serialize()
 
     return jsonify({"allUsers": response}), 200
+
+@api.route('/top10post', methods=['GET'])
+def top_10_post():
+
+    response = []
+    allUsers = db.session.query(User).all()
+    for user in sorted(allUsers, key=lambda x: len(x.received_comments), reverse=True):
+        response.append(user)
+    # for i in response:
+    #     print(len(i.received_comments))
+    return jsonify({"top10": [user.serialize() for user in response[:10]]}), 200
 
 @api.route('/login', methods=['POST'])
 def login():

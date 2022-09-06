@@ -36,6 +36,7 @@ const injectContext = PassedComponent => {
 			if (sessionStorage.getItem('user')){
 				state.actions.loginRemember();
 			}
+			state.actions.loadTop10();
 			
 		}, []);
 
