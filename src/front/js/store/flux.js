@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       imageData: {},
       profile: null,
       received_com: null,
+      top10:null,
     },
     actions: {
       // Crear nuevo usuario
@@ -18,8 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         var raw = JSON.stringify(data);
         await fetch(process.env.BACKEND_URL + "/api/register", {
           method: "POST",
-          headers: {"Content-Type":"application/json"},
-          body: raw
+          headers: { "Content-Type": "application/json" },
+          body: raw,
         })
           .then((response) => response.json())
           .then((result) => {
@@ -50,33 +51,33 @@ const getState = ({ getStore, getActions, setStore }) => {
             // console.log(data);
             sessionStorage.setItem("user", JSON.stringify(data.user));
             sessionStorage.setItem("token", JSON.stringify(data.token));
-            setStore({ user: data.user, token:data.token });
-            return alert(JSON.stringify(data.message))
+            setStore({ user: data.user, token: data.token });
+            return alert(JSON.stringify(data.message));
           })
           .catch((error) => console.log("mensaje error: ", error));
       },
       loginRemember: () => {
         setStore({
           user: JSON.parse(sessionStorage.getItem("user")),
-          token: JSON.parse(sessionStorage.getItem("token"))                  
-      })
-    },
+          token: JSON.parse(sessionStorage.getItem("token")),
+        });
+      },
       logout: () => {
         sessionStorage.removeItem("user");
         sessionStorage.removeItem("token");
-        return setStore({ user: null, token:null });
+        return setStore({ user: null, token: null });
       },
       // Crear post (requiere usuario autentificado)
       post: async (e, file, title, description = null) => {
         e.preventDefault();
-        const {token} = getStore();
+        const { token } = getStore();
         const formdata = new FormData();
         formdata.append("file", file);
         formdata.append("upload_preset", "artidochelone");
 
         // console.log('file: ', file)
         // fetch a cloudinary para subir la imagen.
-        await fetch("https://api.cloudinary.com/v1_1/baal1992/image/upload", {
+        await fetch("https://api.cloudinary.com/v1_1/baal1992/auto/upload", {
           method: "POST",
           // mode: 'no-cors',
           // headers: myHeaders,
@@ -99,7 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append('Authorization', 'Bearer '+token);
+        myHeaders.append("Authorization", "Bearer " + token);
 
         const { imageData } = getStore();
 
@@ -129,43 +130,56 @@ const getState = ({ getStore, getActions, setStore }) => {
         // console.log("description: ", e.target.description.value);
         // console.log("file", file)
       },
-      getAllUsers: async()=>{
+      getAllUsers: async () => {
         const response = await fetch(process.env.BACKEND_URL + "/api/alluser");
-        const users = await response.json()
-        return users
+        const users = await response.json();
+        return users;
       },
-      getUserProfile: async(id) => {
-        const response = await fetch(process.env.BACKEND_URL + "/api/profile/"+id);
-        const data = await response.json()
-        setStore({profile:data.user, received_com:data.emisores})
-        return data
+      getUserProfile: async (id) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/profile/" + id
+        );
+        const data = await response.json();
+        setStore({ profile: data.user, received_com: data.emisores });
+        return data;
       },
-      comment: async(e, data) => {
+      comment: async (e, data) => {
         e.preventDefault();
         // console.log("evento", e, "comentario", data)
-        const {user, profile, token} = getStore();
-        if (data.length > 0 && data != ' ' && !!user && !!profile){
+        const { user, profile, token } = getStore();
+        if (data.length > 0 && data != " " && !!user && !!profile) {
           await fetch(process.env.BACKEND_URL + "/api/comment", {
-            method: 'POST',
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": "Bearer "+token
+              Authorization: "Bearer " + token,
             },
             body: JSON.stringify({
               text: data,
               emisor_id: user.id,
-              receptor_id: profile.id
-            })
+              receptor_id: profile.id,
+            }),
           })
-          .then((resp)=>resp.json())
-          .then((data)=>alert(JSON.stringify(data)))
-          .catch(error=>console.log(error))
-        }
-        else{
-          console.log("data", data, "user", user.username, "profile", profile.username);
+            .then((resp) => resp.json())
+            .then((data) => alert(JSON.stringify(data)))
+            .catch((error) => console.log(error));
+        } else {
+          console.log(
+            "data",
+            data,
+            "user",
+            user.username,
+            "profile",
+            profile.username
+          );
           alert("Comment context can't be empty");
         }
-        return false
+        return false;
+      },
+      loadTop10: async () => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/top10post");
+        const users = await response.json();
+        return setStore({top10:users})
       }
       // Hasta aca son las funciones, OJO !
     },

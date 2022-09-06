@@ -24,7 +24,7 @@ class User(db.Model):
     #is_admin = db.Column(db.Boolean(), unique=False, nullable=False)
     #created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     def __repr__(self):
-        return f'<User {self.username} ID={self.id}>'
+        return f'<User {self.username} ID={self.id}>' 
 
     def serialize(self):
         return {
