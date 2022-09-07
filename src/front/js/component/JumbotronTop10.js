@@ -1,10 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "../component/Button";
+import React, {useContext} from "react";
+import { Context } from "../store/appContext";
 import "../../styles/CarouselJumbotron10.css";
 import "../../styles/Jumbotron10.css";
+import { Link } from "react-router-dom";
 
 export const JumbotronTop10 = () => {
+  const {store} = useContext(Context);
+  const posts = store.top10?.top10;
   return (
     <div className="wrap-hero">
       <div className=" titulo-hero  carousel-caption home__hero-text-wrapper  ">
@@ -90,11 +92,27 @@ export const JumbotronTop10 = () => {
           ></button>
         </div>
         <div className="carousel-inner ">
-          <div className="carousel-item active">
+          {!!posts && 
+            posts.map((item, index)=>{
+              return (
+                item.posts.length == 0
+                ? <Link to={"/profile/"+item.username} key={index} className={index<1 ? "carousel-item active" : "carousel-item"}>
+                  <img src={"https://dummyimage.com/600x400/000/fff&text="+item.username+" has no post"} className="d-block w-100" alt="..."/>
+                </Link>
+                : item.posts.map((post, indexPost)=>{
+                  return (
+                    <Link to={"/profile/"+item.username} className={index<1 ? "carousel-item active" : "carousel-item"} key={indexPost}>
+                      <img src={post.image} className="d-block w-100" alt="..."/>
+                    </Link>
+                  )
+                })
+              )
+            })
+          }
+
+          {/* <div className="carousel-item active">
             <img
-              src="
-https://images.pexels.com/photos/9436715/pexels-photo-9436715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1
-                "
+              src="https://images.pexels.com/photos/9436715/pexels-photo-9436715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               className="d-block w-100"
               alt="..."
             />
@@ -222,7 +240,7 @@ https://images.pexels.com/photos/9436715/pexels-photo-9436715.jpeg?auto=compress
                 Some representative placeholder content for the third slide.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
         <button
           className="carousel-control-prev"
