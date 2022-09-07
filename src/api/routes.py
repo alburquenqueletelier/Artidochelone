@@ -167,3 +167,24 @@ def comment():
         return jsonify({
             'message': 'Error, no se creo comentario porque falta informacion (texto, emisor o receptor)'
         }), 400
+
+########  Admin Controls API ######
+@api.route('/admin/load/<string:model>', methods=['GET'])
+@jwt_required()
+def load_model(model):
+
+    current_user_id = get_jwt_identity()
+    user = User.query.filter_by(username=current_user_id).first()
+    if not user.is_admin:
+        return jsonify({
+            "Error": "You don't have access to this"
+        }), 401
+    info = db.session.query(eval(model)).all()
+    if info:
+        return jsonify({
+            model:[data.serialize() for data in info]
+        })
+    else:
+        return jsonify({
+            "Error":"Wrong model syntax or doesn't exist"
+        })

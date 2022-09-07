@@ -66,7 +66,7 @@ export const Navbar = () => {
               </li>
 
             </ul>
-            {!!store.user && store.admin &&
+            {!!store.user?.admin &&
               <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/admin">Admin</Link>
             
             }

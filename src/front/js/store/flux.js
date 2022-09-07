@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       // login: null,
       user: null,
       // admin debiese venir como atributo de usuario pero se usa esto temporlamente
-      admin: true,
+      // admin: null,
       imageData: {},
       profile: null,
       received_com: null,
