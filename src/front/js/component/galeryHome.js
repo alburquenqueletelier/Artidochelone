@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaRegComment } from "react-icons/fa";
 import { Context } from "../store/appContext";
 import "../../styles/GaleryHome.css";
+import { none } from "@cloudinary/url-gen/qualifiers/progressive";
 
 export const GaleryHome = () => {
   const { store } = useContext(Context);
@@ -13,6 +14,12 @@ export const GaleryHome = () => {
   //   "https://i.pinimg.com/564x/df/eb/59/dfeb59b54648cb3c170bc540304f7163.jpg",
   //   "https://i.pinimg.com/564x/f9/25/fa/f925fab2abb9a650165acf62d3b7e867.jpg",
   // ]);
+  const refArray = useRef({});
+  const hideModal = index => {
+    const modal = new bootstrap.Modal(refArray[index]);
+    return console.log(modal);
+  }
+
 
   return (
     <div id="galery-home" className="container-fluid p-5 glass2">
@@ -23,7 +30,7 @@ export const GaleryHome = () => {
               store?.top10.top10.map((item, index) => {
                 return (
                   <div key={index}>
-                    <div className="row justify-content-center m-1">
+                    <div className="row justify-content-center my-2 ">
                       <div className="col-auto">
                         <h3>{item.username} </h3>
                       </div>
@@ -37,11 +44,74 @@ export const GaleryHome = () => {
                       item.posts.slice(0, 3).map((post, indexPost) => {
                         return (
                           <div key={indexPost}>
-                            <img
-                              className="galeriaimg"
-                              src={post.image}
-                              alt="post"
-                            />
+                            <button
+                              type="button"
+                              className="btn"
+                              data-bs-toggle="modal"
+                              data-bs-target={"#idModal" + post.id}
+                            >
+                              <img
+                                className="galeriaimg"
+                                src={post.image}
+                                alt="post"
+                              />
+                            </button>
+
+                            <div
+                              className="modal fade"
+                              id={"idModal" + post.id}
+                              tabIndex="-1"
+                              aria-labelledby={"postModalLabel" + post.id}
+                              aria-hidden="true"
+                              style={{ position: "sticky", top: 0 }}
+                              ref={ref =>{
+                                refArray.current[''+index+indexPost] = ref;
+                              }}
+                            >
+                              <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div className="modal-content">
+                                  <div className="modal-header">
+                                    <Link
+                                      className="btn"
+                                      to={"/profile/"+item.username}
+                                      onClick={()=>hideModal(refArray[''+index+indexPost])}
+                                    >
+                                      <h5
+                                        className="modal-title text-success"
+                                        id={"postModalLabel" + post.id}
+                                      >
+                                        {post.title} &nbsp;&nbsp;
+                                        <small>
+                                          <b>by {item.username}</b>
+                                        </small>
+                                      </h5>
+                                    </Link>
+
+                                    <button
+                                      type="button"
+                                      className="btn-close"
+                                      data-bs-dismiss="modal"
+                                      aria-label="Close"
+                                    ></button>
+                                  </div>
+                                  <div className="modal-body">
+                                    <p>{post.description}</p>
+                                  </div>
+                                  <div className="modal-footer">
+                                    <p className="me-5">
+                                      At: <small>{post.created}</small>
+                                    </p>
+                                    <button
+                                      type="button"
+                                      className="btn btn-secondary ms-5 text-center"
+                                      data-bs-dismiss="modal"
+                                    >
+                                      Close
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         );
                       })
