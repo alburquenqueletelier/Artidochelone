@@ -9,9 +9,12 @@ export const Admin = () => {
   const { store } = useContext(Context);
   const [showData, setShowData] = useState(null);
   const [labelsData, setLabelsData] = useState(null);
+  const [loadFetch, setLoadFetch] = useState("d-none");
   const [redirect, setRedirect] = useState("");
 
   const loadData = async (model) => {
+    setShowData(null);
+    setLoadFetch("");
     const response = await fetch(
       process.env.BACKEND_URL + "/api/admin/load/" + model,
       {
@@ -21,14 +24,15 @@ export const Admin = () => {
     let dataModel = await response.json();
 
     let labels = Object.keys(dataModel[Object.keys(dataModel)[0]][0]).sort();
-    labels = labels.filter(item=> item != 'id');
-    labels.unshift('id');
+    labels = labels.filter((item) => item != "id");
+    labels.unshift("id");
     // const index0 = labels[0]
     // if (index0)
     // labels.splice(1, 1, 'Jessica');
     // labels.splice(3, 1, 'Luis');
     setLabelsData(labels);
-    return setShowData(dataModel);
+    setShowData(dataModel);
+    return setLoadFetch("d-none")
   };
 
   useEffect(() => {
@@ -84,19 +88,22 @@ export const Admin = () => {
         </button>
       </div>
       <div className="table-responsive">
+        <div className={"text-center "+loadFetch}>
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
         {!!showData && (
           <table className="table table-striped">
             <thead>
               <tr>
-                {labelsData.map(
-                  (item, index) => {
-                    return (
-                      <th scope="col" key={index}>
-                        {item}
-                      </th>
-                    );
-                  }
-                )}
+                {labelsData.map((item, index) => {
+                  return (
+                    <th scope="col" key={index}>
+                      {item}
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
             <tbody>
