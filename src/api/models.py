@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from datetime import datetime
+from sqlalchemy.sql import expression
 
 db = SQLAlchemy()
 
@@ -21,7 +22,7 @@ class User(db.Model):
     received_comments = db.relationship("Comment", post_update=True, backref=db.backref('receptor', lazy='joined'),
                                   foreign_keys='[Comment.receptor_id]')
     #is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    #is_admin = db.Column(db.Boolean(), unique=False, nullable=False)
+    is_admin = db.Column(db.Boolean(), unique=False, nullable=True, server_default=expression.false())
     #created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     def __repr__(self):
         return f'<User {self.username} ID={self.id}>' 
@@ -36,7 +37,7 @@ class User(db.Model):
             "posts": [post.serialize() for post in self.posts] if self.posts else [],
             "profile": self.profile.serialize() if self.profile else [],
             "received_comments": [comment.serialize() for comment in self.received_comments] if self.received_comments else [],
-            #"admin": self.is_admin,
+            "admin": self.is_admin,
             #"created": self.created
             # do not serialize the password, its a security breach
         }

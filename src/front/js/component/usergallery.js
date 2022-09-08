@@ -6,7 +6,7 @@ export const Usergallery = () => {
     const { store, actions } = useContext(Context);
     return(
         <div className="card-group mb-5">
-            {!!store.profile?.posts ?
+            {store.profile?.posts > 0?
                 store.profile.posts.map((item, index) => {
                     return (
                         <div className="card glass2" key={index}>
@@ -21,8 +21,8 @@ export const Usergallery = () => {
                         </div>           
                     )
                 })
-                : <div>
-                    <h2>No tienes posts. Haz el primero pinchando <Link to="/post">aqui</Link></h2>
+                : <div className="row mt-3">
+                    <h2>No hay publicaciones. {store.profile.username == store.user?.username ? <p>Haz el primero <Link to="../post">aqui</Link></p> : ""}</h2>
                 </div>
             }
         </div>
