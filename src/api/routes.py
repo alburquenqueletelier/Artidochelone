@@ -42,7 +42,7 @@ def login():
         if user.password == body["password"]:
             #usuario y clave correcto
             #el token tendrá un tiempo de vida dependiendo de los minutos indicados
-            expiration = datetime.timedelta(minutes=30)
+            expiration = datetime.timedelta(minutes=180)
             access_token = create_access_token(identity=user.username, expires_delta=expiration)
             print("usuario autenticado")
             return jsonify({
@@ -173,6 +173,10 @@ def comment():
 @jwt_required()
 def load_model(model):
 
+    if not model in ['User','Post','Profile','Comment','Hashtag']:
+        return jsonify({
+            "Error":"Wrong model syntax or doesn't exist"
+        })
     current_user_id = get_jwt_identity()
     user = User.query.filter_by(username=current_user_id).first()
     if not user.is_admin:
@@ -183,8 +187,4 @@ def load_model(model):
     if info:
         return jsonify({
             model:[data.serialize() for data in info]
-        })
-    else:
-        return jsonify({
-            "Error":"Wrong model syntax or doesn't exist"
         })
