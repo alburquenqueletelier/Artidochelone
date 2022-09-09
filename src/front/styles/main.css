@@ -23,6 +23,12 @@ body {
     #757f9a
   );/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+.hover-effect:hover {
+  cursor: pointer;
+  border: 1px solid rgba(241, 237, 237, 0.418);
+}
+
 /*general styles*/
 .gradient {
 }
