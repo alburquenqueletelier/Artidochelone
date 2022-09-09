@@ -188,3 +188,24 @@ def load_model(model):
         return jsonify({
             model:[data.serialize() for data in info]
         })
+
+        ### Edit <model> <id> ###
+@api.route('/admin/edit/<string:model>/<int:id>', methods=['PUT'])
+@jwt_required()
+def edit_by_modelID(model,id):
+
+    if not model in ['User','Post','Profile','Comment','Hashtag']:
+        return jsonify({
+            "Error":"Wrong model syntax or doesn't exist"
+        })
+    current_user_id = get_jwt_identity()
+    user = User.query.filter_by(username=current_user_id).first()
+    if not user.is_admin:
+        return jsonify({
+            "Error": "You don't have access to this"
+        }), 401
+    info = db.session.query(eval(model)).get(id)
+    if info:
+        return jsonify({
+            model:info.serialize()
+        })

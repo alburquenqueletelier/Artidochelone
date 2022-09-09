@@ -57,7 +57,8 @@ class Profile(db.Model):
             "id": self.id,
             "name": self.name,
             "photo": self.photo,
-            "description": self.description
+            "description": self.description,
+            "owner_id": self.user_id
         }
 
 class Post(db.Model):
@@ -78,7 +79,8 @@ class Post(db.Model):
             "title": self.title,
             "description": self.description,
             "image": self.image,
-            "created": self.created
+            "created": self.created,
+            "owner_id": self.owner_id
         }
 
 class Comment(db.Model):
