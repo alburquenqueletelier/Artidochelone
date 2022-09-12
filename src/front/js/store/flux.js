@@ -141,7 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         );
         const data = await response.json();
         setStore({ user: data.user });
-        return data;
+        return sessionStorage.setItem("user", JSON.stringify(data.user));
       },
       getUserProfile: async (id) => {
         const response = await fetch(

@@ -199,9 +199,9 @@ export const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Mensajes
-                  </a>
+                  <Link to={"/profile/setting/"+store.user?.username} className="dropdown-item" href="#">
+                    Settings
+                  </Link>
                 </li>
 
                 <li>

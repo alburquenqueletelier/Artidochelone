@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../store/appContext";
 import { Navigate } from "react-router-dom";
 import { FaTrash, FaPencilAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 import "../../styles/main.css";
 

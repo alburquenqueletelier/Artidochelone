@@ -6,6 +6,7 @@ import { Navigate } from "react-router-dom";
 export const Post = () => {
   const { store, actions } = useContext(Context);
   const [file, setFile] = useState("");
+  const [fileSelected, setFileSelected] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [redirect, setRedirect] = useState("");
@@ -18,6 +19,15 @@ export const Post = () => {
     }
   }, [store?.user]);
 
+  useEffect(()=> {
+    if (!!file){
+      const objectUrl = URL.createObjectURL(file);
+      setFileSelected(objectUrl);
+      // free memory when ever this component is unmounted
+      return () => URL.revokeObjectURL(objectUrl);
+    }
+  },[file])
+
   return (
     <div>
       {!!store?.user ? (
@@ -27,12 +37,6 @@ export const Post = () => {
               <h5 className="modal-title" id="staticBackdropLabel">
                 Create New Post
               </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
             </div>
             {/* Body (Formulario) */}
             <form onSubmit={(e) => actions.post(e, file, title, description)}>
@@ -50,6 +54,11 @@ export const Post = () => {
                       onChange={(e) => setFile(e.target.files[0])}
                     />
                   </div>
+                </div>
+                <div className="row justify-content-center mb-2">
+                  {!!fileSelected &&
+                    <img style={{width: "600px", height: "480px"}} src={fileSelected} />
+                  }
                 </div>
                 <div className="row mb-3">
                   <label htmlFor="title" className="col-sm-2 col-form-label">
@@ -85,13 +94,6 @@ export const Post = () => {
                 </div>
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
                 <button type="submit" className="btn btn-primary">
                   Submit
                 </button>
