@@ -9,6 +9,19 @@ from sqlalchemy import func, desc
 
 api = Blueprint('api', __name__)
 
+@api.route('/user/<int:id>', methods=['GET'])
+def get_user(id):
+    user = db.session.query(User).get(id)
+    if user:
+        return jsonify({
+            "user":user.serialize()
+        })
+    else:
+        return jsonify({
+            "message":f"Error, User ID={id} doesn't exist"
+        })
+
+
 @api.route('/alluser', methods=['GET'])
 def list_users():
 
@@ -188,6 +201,10 @@ def load_model(model):
         return jsonify({
             model:[data.serialize() for data in info]
         })
+    else:
+        return jsonify({
+            "Empty": "Module without inputs"
+        }), 404
 
         ### Edit <model> <id> ###
 @api.route('/admin/edit/<string:model>/<int:id>', methods=['PUT'])
@@ -209,3 +226,31 @@ def edit_by_modelID(model,id):
         return jsonify({
             model:info.serialize()
         })
+
+        ### Delete <model> <id> ###
+@api.route('/admin/delete/<string:model>/<int:id>', methods=['DELETE'])
+@jwt_required()
+def delete_by_modelID(model, id):
+
+    if not model in ['User','Post','Profile','Comment','Hashtag']:
+        return jsonify({
+            "Error":"Wrong model syntax or doesn't exist"
+        })
+    current_user_id = get_jwt_identity()
+    user = User.query.filter_by(username=current_user_id).first()
+    if not user.is_admin:
+        return jsonify({
+            "Error": "You don't have access to this"
+        }), 401
+    info = db.session.query(eval(model)).get(id)
+    if info:
+        db.session.delete(info)
+        db.session.commit()
+        return jsonify({
+            "message": f"{model} ID={id} delete from DB"
+        })
+    else:
+        return jsonify({
+            "message": f"{model} ID={id} doesn't exist"
+        })
+

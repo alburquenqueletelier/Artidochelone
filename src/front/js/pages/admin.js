@@ -7,14 +7,13 @@ import { Link } from "react-router-dom";
 import "../../styles/main.css";
 
 export const Admin = () => {
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [showData, setShowData] = useState(null);
   const [model, setModel] = useState("");
+  const [modelDataID, setModelDataID] = useState(null);
   const [labelsData, setLabelsData] = useState(null);
-  const [activeTr, setActiveTr] = useState("probando ");
   const [loadFetch, setLoadFetch] = useState("d-none");
   const [redirect, setRedirect] = useState("");
-  const modalAlert = useRef();
 
   const editrow = (fetchModel, fetchId) => {
     modalConfirm(function (confirm) {
@@ -28,6 +27,7 @@ export const Admin = () => {
         .catch(error=>console.log(error))
 
         console.log("confirmado");
+
       } else {
         console.log("rechazado");
       }
@@ -35,16 +35,18 @@ export const Admin = () => {
   };
 
   const deleterow = (fetchModel, fetchId) => {
+    setModelDataID(fetchId);
     modalConfirm(function (confirm) {
       if (confirm) {
-        fetch(process.env.BACKEND_URL + `/api/admin/edit/${fetchModel}/${fetchId}`, {
-          method: 'PUT',
+        fetch(process.env.BACKEND_URL + `/api/admin/delete/${fetchModel}/${fetchId}`, {
+          method: 'DELETE',
           headers: {Authorization: "Bearer " + store.token}
         })
         .then(response=>response.json())
         .then(message=> console.log(message))
         .catch(error=>console.log(error))
 
+        actions.getUser(store.user.id);
         console.log("confirmado");
       } else {
         console.log("rechazado");
@@ -57,7 +59,7 @@ export const Admin = () => {
       keyboard: false,
     });
     myModal.show();
-    myModal._element.querySelector("button.btn-secondary").onclick = () =>
+    myModal._element.querySelector("button.btn-danger").onclick = () =>
       callback(false);
     myModal._element.querySelector("button.btn-primary").onclick = () =>
       callback(true);
@@ -72,18 +74,22 @@ export const Admin = () => {
         headers: { Authorization: "Bearer " + store.token },
       }
     );
-    let dataModel = await response.json();
-
-    let labels = Object.keys(dataModel[Object.keys(dataModel)[0]][0]).sort();
-    labels = labels.filter((item) => item != "id");
-    labels.unshift("action", "id");
-    // const index0 = labels[0]
-    // if (index0)
-    // labels.splice(1, 1, 'Jessica');
-    // labels.splice(3, 1, 'Luis');
-    setLabelsData(labels);
-    setShowData(dataModel);
-    return setLoadFetch("d-none");
+    if (response.status == 200){
+      let dataModel = await response.json();
+  
+      let labels = Object.keys(dataModel[Object.keys(dataModel)[0]][0]).sort();
+      labels = labels.filter((item) => item != "id");
+      labels.unshift("action", "id");
+      // const index0 = labels[0]
+      // if (index0)
+      // labels.splice(1, 1, 'Jessica');
+      // labels.splice(3, 1, 'Luis');
+      setLabelsData(labels);
+      setShowData(dataModel);
+      return setLoadFetch("d-none");
+    } else {
+      return setLoadFetch("d-none");
+    }
   };
 
   useEffect(() => {
@@ -99,7 +105,6 @@ export const Admin = () => {
       {/* <!-- Modal --> */}
       <div
         className="modal fade"
-        ref={modalAlert}
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
@@ -111,7 +116,7 @@ export const Admin = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Modal title
+                Are you sure you want delete {model} ID={modelDataID}
               </h5>
               <button
                 type="button"
@@ -120,21 +125,20 @@ export const Admin = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">...</div>
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-danger"
                 data-bs-dismiss="modal"
               >
-                Close
+                Cancel
               </button>
               <button
                 data-bs-dismiss="modal"
                 type="button"
                 className="btn btn-primary"
               >
-                Understood
+                Accept
               </button>
             </div>
           </div>
@@ -204,7 +208,7 @@ export const Admin = () => {
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
-        {!!showData && (
+        {!!showData && Object.keys(showData)[0] == model ? (
           <table className="table table-hover">
             <thead>
               <tr>
@@ -260,7 +264,9 @@ export const Admin = () => {
               })}
             </tbody>
           </table>
-        )}
+        )
+        : !!model && !!loadFetch && <h2 className="text-center mt-2">Empty: Module "{model}" without inputs</h2>
+      }
       </div>
     </div>
   );

@@ -135,6 +135,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         const users = await response.json();
         return users;
       },
+      getUser: async(id) =>{
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/user/" + id
+        );
+        const data = await response.json();
+        setStore({ user: data.user });
+        return data;
+      },
       getUserProfile: async (id) => {
         const response = await fetch(
           process.env.BACKEND_URL + "/api/profile/" + id
