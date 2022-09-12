@@ -12,14 +12,14 @@ class User(db.Model):
     username = db.Column(db.String(60), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    profile = db.relationship('Profile', lazy='select', uselist=False,
+    profile = db.relationship('Profile', cascade='all,delete-orphan', lazy='select', uselist=False,
         backref=db.backref('user', lazy='joined'))
-    posts = db.relationship('Post', lazy='select',
+    posts = db.relationship('Post', lazy='select', cascade='all,delete-orphan',
         backref=db.backref('user', lazy='joined'))
-    send_comments = db.relationship('Comment', lazy='select', foreign_keys='[Comment.emisor_id]',
+    send_comments = db.relationship('Comment', lazy='select',cascade='all, delete', foreign_keys='[Comment.emisor_id]',
         backref=db.backref('emisor', lazy='joined'))
     # received_comments_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
-    received_comments = db.relationship("Comment", post_update=True, backref=db.backref('receptor', lazy='joined'),
+    received_comments = db.relationship("Comment", cascade='all,delete',  post_update=True, backref=db.backref('receptor', lazy='joined'),
                                   foreign_keys='[Comment.receptor_id]')
     #is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     is_admin = db.Column(db.Boolean(), unique=False, nullable=True, server_default=expression.false())
@@ -47,7 +47,7 @@ class Profile(db.Model):
     name = db.Column(db.String(50), unique=False, nullable=False)
     photo = db.Column(db.String(50), unique=False, nullable=True)
     description = db.Column(db.String(50), unique=False, nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable = True)
 
     def __repr__(self):
         return f'<User {self.name}>'
@@ -68,7 +68,7 @@ class Post(db.Model):
     image = db.Column(db.String(), nullable=False)
     created = db.Column(
         db.DateTime, nullable=False, default=datetime.utcnow)
-    owner_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey("user.id", ondelete='cascade'), nullable=True)
 
     def __repr__(self):
         return f'<Title={self.title} owner={self.owner_id if self.owner_id else "NN"}>'
