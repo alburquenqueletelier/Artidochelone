@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import { Navigate } from "react-router-dom";
 import "../../styles/main.css";
 import { number } from "prop-types";
 
@@ -10,6 +11,7 @@ export const Register = () => {
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [redirect, setRedirect] = useState(null);
 
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -18,6 +20,14 @@ export const Register = () => {
   const handleFailure = (result) => {
     console.log(result);
   };
+
+  useEffect(()=>{
+    if (!!store.user){
+      setRedirect(<Navigate to="/" />);
+    } else {
+      setRedirect("");
+    }
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,6 +76,7 @@ export const Register = () => {
   };
   return (
     <div className="my-4 mx-auto p-4 rounded col-4 glass2">
+      {redirect}
       <div className="border border-light border-bottom-0 text-light rounded-top">
         <h3 className="m-3">Sign Up</h3>
       </div>

@@ -181,6 +181,33 @@ def comment():
             'message': 'Error, no se creo comentario porque falta informacion (texto, emisor o receptor)'
         }), 400
 
+@api.route('/profile/setting/<int:id>', methods=['PUT'])
+@jwt_required()
+def set_profile(id):
+
+    current_username = get_jwt_identity()
+    current_user = User.query.filter_by(username=current_username).first()
+    if id != current_user.id:
+        return jsonify({
+            "Error": "You do not have permission to edit anos profile"
+        }), 401
+    body = request.get_json()
+    profile = Profile.query.filter_by(user_id=id).first()
+    anterior = {
+        "image": profile.photo,
+        "description": profile.description
+    }
+    if "image" in body:
+        profile.photo = body["image"]
+    if "description" in body:
+        profile.description = body["description"]
+    db.session.commit()
+    return jsonify({
+        "profile": "Update Success"
+    })
+
+   
+
 ########  Admin Controls API ######
 @api.route('/admin/load/<string:model>', methods=['GET'])
 @jwt_required()

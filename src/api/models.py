@@ -45,7 +45,7 @@ class User(db.Model):
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=False, nullable=False)
-    photo = db.Column(db.String(50), unique=False, nullable=True)
+    photo = db.Column(db.String(500), unique=False, nullable=True)
     description = db.Column(db.String(50), unique=False, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable = True)
 
