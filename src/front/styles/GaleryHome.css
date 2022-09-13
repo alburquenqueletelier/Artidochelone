@@ -84,6 +84,18 @@ a.link-primary:hover {
   background-color: #1c2237;
 }
 
+.div-galeriaimg {
+  position: relative;
+}
+.username-galeriaimg {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 30px;
+  background-color: aquamarine;
+
+}
+
 @media screen and (max-width: 991px) {
   .container {
     padding-right: 30px;

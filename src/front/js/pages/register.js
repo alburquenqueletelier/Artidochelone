@@ -75,7 +75,7 @@ export const Register = () => {
     password2: password2,
   };
   return (
-    <div className="my-4 mx-auto p-4 rounded col-4 glass2">
+    <div className="my-4 mx-auto p-4 rounded col-4 glass2 container-wrapper">
       {redirect}
       <div className="border border-light border-bottom-0 text-light rounded-top">
         <h3 className="m-3">Sign Up</h3>
