@@ -4,7 +4,6 @@ import { BsSearch, BsHeart, BsChatLeftDots, BsXLg } from "react-icons/bs";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 import { Context } from "../store/appContext";
-// import { Postmodal } from "./postModal";
 
 import "../../styles/main.css";
 
