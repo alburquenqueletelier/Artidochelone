@@ -9,19 +9,23 @@ body {
    https://i.pinimg.com/564x/df/eb/59/dfeb59b54648cb3c170bc540304f7163.jpg
    https://i.pinimg.com/564x/35/6a/5f/356a5fe387d4469e0e833b0bdc4dbfb4.jpg
    https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947__480.jpg*/
-/* esta repitiendo el gradient arreglarr ver en w3school */
+  /* esta repitiendo el gradient arreglarr ver en w3school */
   background-size: fill;
   background: #0d48e7; /* fallback for old browsers */
-   background: -webkit-linear-gradient(
+  background: -webkit-linear-gradient(
     to top,
     #d7dde8,
     #757f9a
   ); /*Chrome 10-25, Safari 5.1-6 */
-   background: linear-gradient(
+  background: linear-gradient(
     to top,
     #d7dde8,
     #757f9a
-  );/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.hover-effect {
+  text-decoration: "none";
 }
 
 .hover-effect:hover {
@@ -38,9 +42,8 @@ body {
   backdrop-filter: blur(10px);
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.295);
 }
-.glass2::after{
-  content: '';
-
+.glass2::after {
+  content: "";
 }
 
 .glassnav {
@@ -54,11 +57,13 @@ body {
   text-decoration: none;
   color: pink !important;
 }
-.nav-item, .footer div {
+.nav-item,
+.footer div {
   color: rgb(169, 170, 168) !important;
   font-size: large;
 }
-.navbar, .footer {
+.navbar,
+.footer {
   background: url(https://cdn.vectorstock.com/i/1000x1000/59/33/gradient-colors-background-vector-22375933.webp);
   background-size: cover;
 }
@@ -87,17 +92,15 @@ Link {
   height: 30em;
   object-fit: cover;
 }
-.jumbotron img{
+.jumbotron img {
   height: 15em;
   width: 100%;
   object-fit: cover;
-
 }
 .btn {
   font-size: large;
 }
-.titulo-jumbotron{
+.titulo-jumbotron {
   top: 100px;
   left: 50px;
-  
 }

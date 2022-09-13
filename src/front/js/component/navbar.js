@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { BsSearch, BsHeart, BsChatLeftDots, BsXLg } from "react-icons/bs";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
@@ -9,11 +9,91 @@ import "../../styles/main.css";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const [search, setSearch] = useState("");
+  const [resultados, setResultados] = useState("");
+  const [inputHidden, setInputHidden] = useState("invisible")
   const usernameInput = React.useRef();
   const passwordInput = React.useRef();
+
+  const inputControl = ()=>{
+    if (inputHidden == "invisible") return setInputHidden("");
+    else return setInputHidden("invisible");
+  }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    fetch(process.env.BACKEND_URL + '/api/searchAll/'+search)
+    .then(resp=>resp.json())
+    .then(data=>{
+      setResultados(data);
+    })
+    .catch(error=>console.log(error))
+    const modal = new bootstrap.Modal(document.querySelector('#searchBackdrop'));
+    modal.show();
+  }
+
+  const closeModal = () => {
+    var myModal = document.getElementById('#searchBackdrop');
+    var modal = bootstrap.Modal.getInstance(myModal);
+    modal.hide();
+  }
  
   return (
     <>
+      {/* <!-- Modal --> */}
+      <div className="modal fade" id="searchBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="searchBackdropLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="searchBackdropLabel">Search for {search}</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+            {!!resultados && !("response" in resultados) ?
+              Object.keys(resultados).map((item, index)=>{
+                return (
+                  !!item &&
+                  <div className="container-fluid" key={index}>
+                    {resultados[item].map((entry, indexEntry)=>{
+                      return (
+                        !!entry &&
+                        <div className="row border border-secondary mb-2" key={indexEntry}>
+                          <h5 className="modal-title">{item} Matches</h5>
+                          {item == 'users' &&
+                          <Link to={"/profile/"+ entry.username} className="bg-secondary text-light text-decoration-none hover-effect" onClick={()=>closeModal()}>
+                            <p>Username: {entry.username}</p>
+                            <p>Name: {entry.name}</p>
+                            <p>Lastname: {entry.lastname}</p>
+                            <p>Email: {entry.email}</p>
+                          </Link>
+                          }
+                          {item == 'comments' &&
+                          <div className="border border-primary bg-secondary text-light">
+                            <p>{entry.text}</p>
+                          </div>
+                          }
+                          {item == 'posts' &&
+                          <div className="border border-primary bg-secondary text-light">
+                            <p>{entry.title}</p>
+                            <p>{entry.description}</p>
+                          </div>
+                          }
+                        </div>
+                      )
+                    })}
+                  </div>
+                )
+              })  
+              : <p>{resultados["response"]}</p>
+            }
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <nav className=" navbar navbar-dark p-0 navbar-expand-md bg-light  ">
         <div className="container-fluid glassnav p-4 ">
           <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/">ARTIDOCHELONE</Link>
@@ -50,16 +130,18 @@ export const Navbar = () => {
                 </div>
              }
               <li className="nav-item mx-3">
-                <form className="d-flex m-auto p-0" role="search">
-                  <button className="btn  " type="submit">
+                <form className="d-flex m-auto p-0" role="search" onSubmit={handleSubmit}>
+                  <button className="btn" type="button" onClick={()=>inputControl()}>
                     <BsSearch className="text-light" />
                   </button>{" "}
                   {/*añadir tooltips a los iconos al clickearlo se abre el input click input .visible sino .invisible*/}
                   <input
-                    className="form-control me-2 invisible"
+                    className={"form-control me-2 " + inputHidden}
                     type="search"
-                    placeholder="Search"
+                    placeholder="Search by a word"
                     aria-label="Search"
+                    value={search}
+                    onChange={(e)=>setSearch(e.target.value)}
                   />
                 </form>
               </li>
