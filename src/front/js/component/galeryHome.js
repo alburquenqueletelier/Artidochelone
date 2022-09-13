@@ -55,11 +55,16 @@ export const GaleryHome = () => {
                               data-bs-target={"#idModal" + post.id}
                             >
                               <div className="div-galeriaimg">
-                              <img
-                                className="galeriaimg"
-                                src={post.image}
-                                alt="post"
-                              />
+                                {post.image.includes("image") ? 
+                                <img
+                                  className="galeriaimg"
+                                  src={post.image}
+                                  alt="post"
+                                />
+                                :
+                                <video src={post.image} style={{width:"320px", height:"240px"}} autoPlay loop muted>
+                                </video>
+                                  }
                               </div>
                               <div
                                 className="username-galeriaimg px-3 d-flex justify-content-between glassTitle"
