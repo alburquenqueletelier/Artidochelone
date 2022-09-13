@@ -8,6 +8,7 @@ export const JumbotronTop10 = () => {
   const { store } = useContext(Context);
   const posts = store.top10?.top10;
   return (
+
     <div
       id="carouselExampleCaptions"
       className="carousel slide"

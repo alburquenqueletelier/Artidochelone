@@ -42,8 +42,10 @@ export const GaleryHome = () => {
                         </h3>
                       </div> */}
                     </div>
+
                     {item.posts.length > 0 && (
                       item.posts.map((post, indexPost) => {
+
                         return (
                           <div key={indexPost} className='glass2 mb-2'>
                             <button
@@ -125,6 +127,15 @@ export const GaleryHome = () => {
                           </div>
                         );
                       })
+                    ) : (
+                      <img
+                        className="galeriaimg"
+                        src={
+                          "https://dummyimage.com/600x400/000/fff&text=" +
+                          item.username
+                        }
+                        alt="No Post"
+                      />
                     )}
                   </div>
                 );
