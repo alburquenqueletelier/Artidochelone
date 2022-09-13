@@ -15,6 +15,12 @@ export const Navbar = () => {
   const usernameInput = React.useRef();
   const passwordInput = React.useRef();
 
+  const seeDropdown = () => {
+    const dropdownNav = document.querySelector('a.nav-link');
+    const dropdown = new bootstrap.Dropdown(dropdownNav);
+    dropdown.toggle();
+  }
+
   const inputControl = () => {
     if (inputHidden == "invisible") return setInputHidden("");
     else return setInputHidden("invisible");
@@ -202,155 +208,145 @@ export const Navbar = () => {
               </Link>
             )}
 
-            <div className="nav-item dropdown ">
-              {!!store.user ? (
-                <Link
-                  to="/asfd"
+            {!!store.user ? (
+              <div className="dropdown">
+                <a
+                  href="#"
+                  onClick={seeDropdown}
                   className="nav-link dropdown-toggle text-secondary"
                   role="button"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  aria-expanded="true"
                 >
                   {store.user.username}
-                </Link>
-              ) : (
-                <ul className="navbar-nav mx-auto">
-                  {/* con modal para login y dar opción para derivar a registrarse 
-                      por mientras se dejara una función onclick que al apretar cambia el
-                      estado de la variable login a true para visaulizar como se ve la pagina
-                      desde un usuario indentificado
-                  */}
-
-                  {/* este es el boton del modal */}
-                  <button
-                    type="button"
-                    className="btn"
-                    data-bs-toggle="modal"
-                    data-bs-target="#loginModal"
-                  >
-                    <li className="nav-item mx-3">Login</li>
-                  </button>
-                  {/* Este es el modal event.preventDefault(); */}
-                  <form
-                    className="mb-1"
-                    onSubmit={(event) =>
-                      actions.login(
-                        event,
-                        usernameInput.current.value,
-                        passwordInput.current.value
-                      )
-                    }
-                  >
-                    <div
-                      className="modal fade"
-                      id="loginModal"
-                      tabIndex="-1"
-                      aria-labelledby="loginModalLabel"
-                      aria-hidden="true"
+                </a>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      to={"/profile/" + store.user?.username}
                     >
-                      <div className="modal-dialog">
-                        <div className="modal-content glass2">
-                          <div className="modal-header">
-                            <h5
-                              className="modal-title text-light"
-                              id="loginModalLabel"
-                            >
-                              Enter your credentials
-                            </h5>
-                            <button
-                              type="button"
-                              className="btn"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"
-                            >
-                              <BsXLg />
-                            </button>
-                          </div>
-                          <div className="modal-body">
-                            {/* se usa componente no controlados */}
-                            <input
-                              className="form-control my-4"
-                              placeholder="Username"
-                              type="text"
-                              ref={usernameInput}
-                            ></input>
-                            <input
-                              className="form-control mb-1 my-4"
-                              placeholder="Password"
-                              type="password"
-                              ref={passwordInput}
-                            ></input>
-                            <a>
-                              <small>Forgot your password?</small>
-                            </a>
-                          </div>
-                          <div className="modal-footer">
-                            <button
-                              type="submit"
-                              className="btn btn-outline-light"
-                              data-bs-dismiss="modal"
-                            >
-                              Login
-                            </button>
-                          </div>
+                      Mi perfil
+                    </Link>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Seguidos{" "}
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Guardados
+                    </a>
+                  </li>
+                  <li>
+                    <Link
+                      to={"/profile/setting/" + store.user?.username}
+                      className="dropdown-item"
+                      href="#"
+                    >
+                      Settings
+                    </Link>
+                  </li>
+
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  {/* Funcion demo para deslogear. Cuando este listo el back end agregar la función correcta */}
+                  <button className="btn" onClick={() => actions.logout()}>
+                    <li className="dropdown-item">Log Out</li>
+                  </button>
+                </ul>
+              </div>
+            ) : (
+              <ul className="navbar-nav mx-auto">
+                {/* este es el boton del modal */}
+                <button
+                  type="button"
+                  className="btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                >
+                  <li className="nav-item mx-3">Login</li>
+                </button>
+                {/* Este es el modal event.preventDefault(); */}
+                <form
+                  className="mb-1"
+                  onSubmit={(event) =>
+                    actions.login(
+                      event,
+                      usernameInput.current.value,
+                      passwordInput.current.value
+                    )
+                  }
+                >
+                  <div
+                    className="modal fade"
+                    id="loginModal"
+                    tabIndex="-1"
+                    aria-labelledby="loginModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog">
+                      <div className="modal-content glass2">
+                        <div className="modal-header">
+                          <h5
+                            className="modal-title text-light"
+                            id="loginModalLabel"
+                          >
+                            Enter your credentials
+                          </h5>
+                          <button
+                            type="button"
+                            className="btn"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <BsXLg />
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          {/* se usa componente no controlados */}
+                          <input
+                            className="form-control my-4"
+                            placeholder="Username"
+                            type="text"
+                            ref={usernameInput}
+                          ></input>
+                          <input
+                            className="form-control mb-1 my-4"
+                            placeholder="Password"
+                            type="password"
+                            ref={passwordInput}
+                          ></input>
+                          <a>
+                            <small>Forgot your password?</small>
+                          </a>
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="submit"
+                            className="btn btn-outline-light"
+                            data-bs-dismiss="modal"
+                          >
+                            Login
+                          </button>
                         </div>
                       </div>
                     </div>
-                  </form>
-                  <Link to="/register">
-                    <button
-                      type="button"
-                      className="btn"
-                      data-bs-toggle="modal"
-                      data-bs-target="#registerModal"
-                    >
-                      <li className="nav-item mx-3">Register</li>
-                    </button>
-                  </Link>
-                </ul>
-              )}
-
-              <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <Link
-                    className="dropdown-item"
-                    to={"/profile/" + store.user?.username}
-                  >
-                    Mi perfil
-                  </Link>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Seguidos{" "}
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Guardados
-                  </a>
-                </li>
-                <li>
-                  <Link
-                    to={"/profile/setting/" + store.user?.username}
-                    className="dropdown-item"
-                    href="#"
-                  >
-                    Settings
-                  </Link>
-                </li>
-
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                {/* Funcion demo para deslogear. Cuando este listo el back end agregar la función correcta */}
-                <button className="btn" onClick={() => actions.logout()}>
-                  <li className="dropdown-item">Log Out</li>
-                </button>
+                  </div>
+                </form>
+                <Link to="/register">
+                  <button type="button" className="btn">
+                    <li className="nav-item mx-3">Register</li>
+                  </button>
+                </Link>
               </ul>
-            </div>
+            )}
           </div>
         </div>
       </nav>
+
       {!!store.user && (
         <div className="d-flex bg-warning">
           <li className="nav-item mx-3">

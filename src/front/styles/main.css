@@ -13,6 +13,10 @@ body {
   border: 1px solid rgba(241, 237, 237, 0.418);
 }
 
+.show > .dropdown-menu {
+  display: block;
+  position: absolute;
+}
 /*general styles*/
 
 /* .gradient {} */
