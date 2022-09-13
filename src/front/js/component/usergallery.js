@@ -10,7 +10,10 @@ export const Usergallery = () => {
         store.profile.posts.map((item, index) => {
           return (
             <div className="card glass2" key={index}>
-              <img src={item.image} className="card-img-top" alt="..." />
+              {item.image.includes("image") 
+              ?  <img src={item.image} className="card-img-top" alt="..." />
+              : <video src={item.image} className="card-img-top" alt="..." controls/>
+            }
               <div className="card-body">
                 <h5 className="card-title">{item.title}</h5>
                 <p className="card-text">{item.description}</p>

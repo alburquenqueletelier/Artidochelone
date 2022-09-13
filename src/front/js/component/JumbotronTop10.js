@@ -125,7 +125,10 @@ export const JumbotronTop10 = () => {
                     }
                     key={indexPost}
                   >
+                    {post.image.includes("image") ? 
                     <img src={post.image} className="d-block w-100" alt="..." />
+                    : <video src={post.image} className="d-block w-100" autoPlay muted loop ></video>  
+                  }
                   </Link>
                 );
               })
