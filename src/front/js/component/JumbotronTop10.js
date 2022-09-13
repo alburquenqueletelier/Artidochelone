@@ -97,12 +97,12 @@ export const JumbotronTop10 = () => {
               return (
                 item.posts.length == 0
                 ? <Link to={"/profile/"+item.username} key={index} className={index<1 ? "carousel-item active" : "carousel-item"}>
-                  <img src={"https://dummyimage.com/600x400/000/fff&text="+item.username+" has no post"} className="d-block w-100" alt="..."/>
+                  <img  src={"https://dummyimage.com/600x400/000/fff&text="+item.username+" has no post"} className="d-block w-100" alt="..."/>
                 </Link>
                 : item.posts.map((post, indexPost)=>{
                   return (
                     <Link to={"/profile/"+item.username} className={index<1 ? "carousel-item active" : "carousel-item"} key={indexPost}>
-                      <img src={post.image} className="d-block w-100" alt="..."/>
+                      <img src={post.image} className="d-block w-100" style={{background: "white"}} alt="..."/>
                     </Link>
                   )
                 })
