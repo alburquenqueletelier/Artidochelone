@@ -13,9 +13,6 @@ body {
   ); 
 }
 
-
-
-
 .hover-effect:hover {
   cursor: pointer;
   border: 1px solid rgba(241, 237, 237, 0.418);
@@ -70,11 +67,13 @@ body {
   border-bottom: rgb(65, 63, 63) solid 1px;
   box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.35);
 }
+/* end - glassmorphism options */
 /*navbar*/
 .navbar-brand {
-  letter-spacing: 10px;
+  letter-spacing: 1rem;
   text-decoration: none;
   color: pink !important;
+  text-shadow: 0 2px 3px #340649;
 }
 .nav-item,
 .footer div {

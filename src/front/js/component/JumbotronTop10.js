@@ -99,13 +99,13 @@ export const JumbotronTop10 = () => {
                 />
                 <div className="carousel-caption ">
                   <span className="span-caption">
-                  <h1 className="fw-bolder">
-                    CREA TU PROPIO PORTAFOLIO WEB
-                  </h1>
-                  <p className="py-3">MUESTRA Y EXPLORA TU CREATIVIDAD</p>
-                  <a href="#galery-home">
-                    <button className="btn blue">ir a galeria!</button>
-                  </a>
+                    <h1 className="fw-bold my-5">
+                      CREA TU PROPIO PORTAFOLIO WEB
+                    </h1>
+                    <p className="py-3">MUESTRA Y EXPLORA TU CREATIVIDAD</p>
+                    <a href="#galery-home">
+                      <button className="btn blue">ir a galeria!</button>
+                    </a>
                   </span>
                 </div>
               </Link>
@@ -124,14 +124,16 @@ export const JumbotronTop10 = () => {
                       className="d-block w-100"
                       alt="..."
                     />
-                    <div className="carousel-caption d-none d-md-block">
-                      <h5 className="fw-bold">
-                        CREA TU PROPIO PORTAFOLIO WEB
-                      </h5>
-                      <p className="py-3">MUESTRA Y EXPLORA TU CREATIVIDAD</p>
-                      <a href="#galery-home">
-                        <button className="btn blue">ir a galeria!</button>
-                      </a>
+                    <div className="carousel-caption ">
+                      <span className="span-caption">
+                        <h1 className="fw-bold py-3">
+                          CREA TU PROPIO PORTAFOLIO WEB
+                        </h1>
+                        <p className="py-3">MUESTRA Y EXPLORA TU CREATIVIDAD</p>
+                        <a href="#galery-home">
+                          <button className="btn blue">ir a galeria!</button>
+                        </a>
+                      </span>
                     </div>
                   </Link>
                 );

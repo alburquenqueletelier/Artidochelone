@@ -12,7 +12,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const usernameInput = React.useRef();
   const passwordInput = React.useRef();
- 
+
   return (
     <>
       <nav className=" navbar navbar-dark p-0 navbar-expand-md bg-light  ">
@@ -29,16 +29,16 @@ export const Navbar = () => {
           >
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
 
-             
 
-              {!!store.user &&
+
+              {/* {!!store.user &&
 
                 <div className="d-flex">
                   <li className="nav-item mx-3">
                     <a className="nav-link btn " aria-current="page" href="#">
                       <BsChatLeftDots />
                     </a>{" "}
-                    {/*onclick agregar clase =  active*/}
+                    {/*onclick agregar clase =  active///
                   </li>
                   <li className="nav-item mx-3 ">
                     <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
@@ -49,7 +49,7 @@ export const Navbar = () => {
                     </a>
                   </li>
                 </div>
-             }
+             } */}
               <li className="nav-item mx-3">
                 <form className="d-flex m-auto p-0" role="search">
                   <button className="btn  " type="submit">
@@ -68,7 +68,7 @@ export const Navbar = () => {
             </ul>
             {!!store.user?.admin &&
               <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/admin">Admin</Link>
-            
+
             }
 
             <div className="nav-item dropdown ">
@@ -167,24 +167,24 @@ export const Navbar = () => {
                     </div>
                   </form>
                   <Link to="/register">
-                      <button 
-                        type="button"
-                        className="btn"
-                        data-bs-toggle="modal"
-                        data-bs-target="#registerModal"
-                      >
+                    <button
+                      type="button"
+                      className="btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#registerModal"
+                    >
                       <li className="nav-item mx-3">Register</li>
                     </button>
                   </Link>
                 </ul>
 
-             
 
-              )} 
+
+              )}
 
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
-                  <Link className="dropdown-item" to={"/profile/"+store.user?.username}>
+                  <Link className="dropdown-item" to={"/profile/" + store.user?.username}>
                     Mi perfil
                   </Link>
                 </li>
@@ -199,7 +199,7 @@ export const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <Link to={"/profile/setting/"+store.user?.username} className="dropdown-item" href="#">
+                  <Link to={"/profile/setting/" + store.user?.username} className="dropdown-item" href="#">
                     Settings
                   </Link>
                 </li>
@@ -216,6 +216,25 @@ export const Navbar = () => {
           </div>
         </div>
       </nav>
+      {!!store.user &&
+
+        <div className="d-flex bg-warning">
+          <li className="nav-item mx-3">
+            <a className="nav-link btn " aria-current="page" href="#">
+              <BsChatLeftDots />
+            </a>{" "}
+            {/*onclick agregar clase =  active*/}
+          </li>
+          <li className="nav-item mx-3 ">
+            <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
+          </li>
+          <li className="nav-item mx-3">
+            <a className="nav-link ">
+              <BsHeart className="icons" />
+            </a>
+          </li>
+        </div>
+      }
     </>
   );
 };
