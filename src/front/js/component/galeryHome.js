@@ -43,7 +43,7 @@ export const GaleryHome = () => {
                       </div> */}
                     </div>
 
-                    {item.posts.length > 0 && (
+                    {item.posts.length > 0 ? (
                       item.posts.map((post, indexPost) => {
 
                         return (
