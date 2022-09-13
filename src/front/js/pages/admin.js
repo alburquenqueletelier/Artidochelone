@@ -100,7 +100,7 @@ export const Admin = () => {
   }, [store.user]);
 
   return (
-    <div className="row justify-content-center m-5">
+    <div className="row justify-content-center m-5 ">
       {/* <!-- Modal --> */}
       <div
         className="modal fade"

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FaRegComment } from "react-icons/fa";
 import { Context } from "../store/appContext";
 import "../../styles/GaleryHome.css";
+import "../../styles/main.css";
+
 import { none } from "@cloudinary/url-gen/qualifiers/progressive";
 
 export const GaleryHome = () => {
@@ -31,30 +33,38 @@ export const GaleryHome = () => {
                 return (
                   <div key={index}>
                     <div className="row justify-content-center my-2 ">
-                      <div className="col-auto">
+                      {/* <div className="col-auto">
                         <h3>{item.username} </h3>
-                      </div>
-                      <div className="col-auto">
+                      </div> */}
+                      {/* <div className="col-auto">
                         <h3>
                           <FaRegComment /> {item.received_comments.length}
                         </h3>
-                      </div>
+                      </div> */}
                     </div>
                     {item.posts.length > 0 && (
-                      item.posts.slice(0, 3).map((post, indexPost) => {
+                      item.posts.map((post, indexPost) => {
                         return (
-                          <div key={indexPost}>
+                          <div key={indexPost} className='glass2 mb-2'>
                             <button
                               type="button"
                               className="btn"
                               data-bs-toggle="modal"
                               data-bs-target={"#idModal" + post.id}
                             >
+                              <div className="div-galeriaimg">
                               <img
                                 className="galeriaimg"
                                 src={post.image}
                                 alt="post"
                               />
+                              </div>
+                              <div
+                                className="username-galeriaimg px-3 d-flex justify-content-between glassTitle"
+                                >                                
+                                <span> subido por {/* {foto usuario} */} <strong>{item.username}</strong></span>
+                                <span><FaRegComment /> {item.received_comments.length}</span>
+                              </div>
                             </button>
 
                             <div
@@ -64,8 +74,8 @@ export const GaleryHome = () => {
                               aria-labelledby={"postModalLabel" + post.id}
                               aria-hidden="true"
                               style={{ position: "sticky", top: 0 }}
-                              ref={ref =>{
-                                refArray.current[''+index+indexPost] = ref;
+                              ref={ref => {
+                                refArray.current['' + index + indexPost] = ref;
                               }}
                             >
                               <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -73,8 +83,8 @@ export const GaleryHome = () => {
                                   <div className="modal-header">
                                     <Link
                                       className="btn"
-                                      to={"/profile/"+item.username}
-                                      onClick={()=>hideModal(refArray[''+index+indexPost])}
+                                      to={"/profile/" + item.username}
+                                      onClick={() => hideModal(refArray['' + index + indexPost])}
                                     >
                                       <h5
                                         className="modal-title text-success"

@@ -22,7 +22,8 @@ export const Profile = () => {
   }, [username]);
 
   return (
-    <div className="container-fluid mb-0">
+    // cada usuario puede elegir el color de fondo de su perfil (colorpicker o predefinidos) y letras?? https://img.freepik.com/vector-premium/publicacion-instagram-facebook-completamente-editable-plantilla-feed-rompecabezas-redes-sociales-venta-moda-beige_151293-101.jpg
+    <div className="container-fluid mb-0 container-wrapper"> 
       {!username && redirect}
       {!!store?.profile ? (
         <div className="container-fluid p-5 glass2 text-start my-5">
@@ -34,7 +35,7 @@ export const Profile = () => {
                     ? store.profile.profile?.photo
                     : "https://public.slidesharecdn.com/v2/images/profile-picture.png"
                 }
-                className="img-circle rounded-circle float-start"
+                className="img-circle w-100 rounded-circle float-start"
               />
             </div>
             <div className="col-auto">
