@@ -121,3 +121,38 @@ Link {
   top: 100px;
   left: 50px;
 }
+.form-control {
+  height: fit-content!important;
+  margin: auto!important;
+  color: #000000c2;
+  background-color: #ffffff29!important;
+  border: 1px solid #f7f4d8!important;
+
+}
+
+.form-control:focus {
+  color: #f5d9fb!important;
+  background-color: #ffffff5e!important;
+  box-shadow: 0 0 0 .25rem rgba(180, 202, 234, 0.25) !important;
+}
+
+.form-commentSection:focus{
+  color: #572263!important;
+  background-color: #ffffff5e!important;
+  box-shadow: 0 0 0 .25rem rgba(180, 202, 234, 0.25) !important;
+}
+a {
+  color: #d8d0d0;
+  text-decoration: none;
+}
+.dropdown-toggle {
+  white-space: nowrap;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.perfil-btn{
+  letter-spacing: 1rem;
+  text-decoration: none;
+  color: pink !important;
+  text-shadow: 0 2px 3px #340649;
+}

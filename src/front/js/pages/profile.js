@@ -4,6 +4,8 @@ import "../../styles/main.css";
 import { Usergallery } from "../component/usergallery";
 import { Context } from "../store/appContext";
 import { CommentSection } from "../component/commentsection";
+import "../../styles/profile.css";
+
 
 export const Profile = () => {
   const { store, actions } = useContext(Context);
@@ -27,22 +29,22 @@ export const Profile = () => {
       {!username && redirect}
       {!!store?.profile ? (
         <>
-          <div className="perfil-section1 row bg-warning">
+          <div className="perfil-section1 row glass2">
 
 
-            <div className="col img-wrapper bg-dark">
+            <div className="col img-wrapper ">
               <img
                 src={
                   !!store.profile.profile.photo
                     ? store.profile.profile?.photo
                     : "https://public.slidesharecdn.com/v2/images/profile-picture.png"
                 }
-                className="img-fluid w-100 float-end"
+                className="img-fluid w-100 float-end profilePhoto"
               />
             </div>
 
-            <div className="col text-wrapper bg-danger">
-              <h2>{username}</h2>
+            <div className="col text-wrapper ">
+              <h2>Hola soy {username}</h2>
               <div className="bg-light">
                 <p>{store.profile.profile.description}descripcion</p>
               </div>
