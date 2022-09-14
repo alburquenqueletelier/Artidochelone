@@ -155,25 +155,24 @@ export const Navbar = () => {
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
-              {/* {!!store.user &&
+               {!!store.user &&
 
                 <div className="d-flex">
                   <li className="nav-item mx-3">
                     <a className="nav-link btn " aria-current="page" href="#">
                       <BsChatLeftDots />
                     </a>{" "}
-                    {/*onclick agregar clase =  active///
                   </li>
                   <li className="nav-item mx-3 ">
                     <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
                   </li>
-                  <li className="nav-item mx-3">
-                    <a className="nav-link ">
+                  <li className="  ">
+                    <a className="nav-item mx-3 nav-link">
                       <BsHeart className="icons" />
                     </a>
                   </li>
                 </div>
-             } */}
+             } 
               <li className="nav-item mx-3">
                 <form
                   className="d-flex m-auto p-0"
@@ -187,7 +186,6 @@ export const Navbar = () => {
                   >
                     <BsSearch className="text-light" />
                   </button>{" "}
-                  {/*añadir tooltips a los iconos al clickearlo se abre el input click input .visible sino .invisible*/}
                   <input
                     className={"form-control me-2 " + inputHidden}
                     type="search"
@@ -347,29 +345,6 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      {!!store.user && (
-        <div className="d-flex bg-warning">
-          <li className="nav-item mx-3">
-            <a className="nav-link btn " aria-current="page" href="#">
-              <BsChatLeftDots />
-            </a>{" "}
-            {/*onclick agregar clase =  active*/}
-          </li>
-          <li className="nav-item mx-3 ">
-            <Link
-              className="navbar-brand fw-normal fs-4 text-secondary"
-              to="/post"
-            >
-              <MdOutlineAddPhotoAlternate />
-            </Link>
-          </li>
-          <li className="nav-item mx-3">
-            <a className="nav-link ">
-              <BsHeart className="icons" />
-            </a>
-          </li>
-        </div>
-      )}
     </>
   );
 };

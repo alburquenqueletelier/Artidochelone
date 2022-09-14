@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 export const Usergallery = () => {
   const { store, actions } = useContext(Context);
   return (
-    <div className="card-group mb-5">
+    <div className="p-5 glass2">
       {store.profile?.posts.length > 0 ? (
         store.profile.posts.map((item, index) => {
           return (
@@ -30,7 +30,7 @@ export const Usergallery = () => {
             No hay publicaciones.{" "}
             {store.profile.username == store.user?.username ? (
               <p>
-                Haz el primero <Link to="../post">aqui</Link>
+                Sube tu primer post <Link to="../post">aqui</Link>
               </p>
             ) : (
               ""
