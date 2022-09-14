@@ -16,10 +16,10 @@ export const Navbar = () => {
   const passwordInput = React.useRef();
 
   const seeDropdown = () => {
-    const dropdownNav = document.querySelector('a.nav-link');
+    const dropdownNav = document.querySelector("#dropdownUser");
     const dropdown = new bootstrap.Dropdown(dropdownNav);
     dropdown.toggle();
-  }
+  };
 
   const inputControl = () => {
     if (inputHidden == "invisible") return setInputHidden("");
@@ -155,17 +155,18 @@ export const Navbar = () => {
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
-              {/* {!!store.user &&
-
-                <div className="d-flex">
+              {!!store.user && (
+                <div className="d-flex align-items-center">
                   <li className="nav-item mx-3">
                     <a className="nav-link btn " aria-current="page" href="#">
                       <BsChatLeftDots />
                     </a>{" "}
-                    {/*onclick agregar clase =  active///
+                    {/* {/*onclick agregar clase =  active/// */}
                   </li>
                   <li className="nav-item mx-3 ">
-                    <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
+                    <Link className="navbar-brand text-secondary" to="/post">
+                      <MdOutlineAddPhotoAlternate />
+                    </Link>
                   </li>
                   <li className="nav-item mx-3">
                     <a className="nav-link ">
@@ -173,7 +174,7 @@ export const Navbar = () => {
                     </a>
                   </li>
                 </div>
-             } */}
+              )}
               <li className="nav-item mx-3">
                 <form
                   className="d-flex m-auto p-0"
@@ -217,6 +218,7 @@ export const Navbar = () => {
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="true"
+                  id="dropdownUser"
                 >
                   {store.user.username}
                 </a>
@@ -346,30 +348,6 @@ export const Navbar = () => {
           </div>
         </div>
       </nav>
-
-      {!!store.user && (
-        <div className="d-flex bg-warning">
-          <li className="nav-item mx-3">
-            <a className="nav-link btn " aria-current="page" href="#">
-              <BsChatLeftDots />
-            </a>{" "}
-            {/*onclick agregar clase =  active*/}
-          </li>
-          <li className="nav-item mx-3 ">
-            <Link
-              className="navbar-brand fw-normal fs-4 text-secondary"
-              to="/post"
-            >
-              <MdOutlineAddPhotoAlternate />
-            </Link>
-          </li>
-          <li className="nav-item mx-3">
-            <a className="nav-link ">
-              <BsHeart className="icons" />
-            </a>
-          </li>
-        </div>
-      )}
     </>
   );
 };
