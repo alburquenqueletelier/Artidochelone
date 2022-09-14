@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { BsSearch, BsHeart, BsChatLeftDots, BsXLg } from "react-icons/bs";
-import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+import { BsXLg } from "react-icons/bs";
+import { MdOutlineAddPhotoAlternate, MdOutlineMessage, MdOutlineFavoriteBorder, MdSearch } from "react-icons/md";
 
 import { Context } from "../store/appContext";
 
@@ -156,22 +156,22 @@ export const Navbar = () => {
           >
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
                {!!store.user &&
-
+// div iconos mensajes post etc navbar
                 <div className="d-flex">
+
                   <li className="nav-item mx-3">
-                    <a className="nav-link btn " aria-current="page" href="#">
-                      <BsChatLeftDots />
-                    </a>{" "}
+                    <Link className="fs-4 nav-link btn " to="/profile"><MdOutlineMessage /></Link>
+                  </li>
+                  <li className="nav-item mx-3">
+                    <Link className="fs-4 nav-link btn " to="/post"><MdOutlineAddPhotoAlternate /></Link>
                   </li>
                   <li className="nav-item mx-3 ">
-                    <Link className="navbar-brand fw-normal fs-4 text-secondary" to="/post"><MdOutlineAddPhotoAlternate /></Link>
+                    <Link className="fs-4 nav-link btn " to="/post"><MdOutlineFavoriteBorder /></Link>
                   </li>
-                  <li className="  ">
-                    <a className="nav-item mx-3 nav-link">
-                      <BsHeart className="icons" />
-                    </a>
-                  </li>
+
                 </div>
+// div iconos mensajes post etc navbar
+
              } 
               <li className="nav-item mx-3">
                 <form
@@ -180,11 +180,11 @@ export const Navbar = () => {
                   onSubmit={handleSubmit}
                 >
                   <button
-                    className="btn"
+                    className="fs-4 nav-link btn"
                     type="button"
                     onClick={() => inputControl()}
                   >
-                    <BsSearch className="text-light" />
+                    <MdSearch />
                   </button>{" "}
                   <input
                     className={"form-control me-2 " + inputHidden}
@@ -199,7 +199,7 @@ export const Navbar = () => {
             </ul>
             {!!store.user?.admin && (
               <Link
-                className="navbar-brand fw-normal fs-4 text-secondary"
+                className="perfil-btn btn nav-link"
                 to="/admin"
               >
                 Admin
@@ -211,7 +211,7 @@ export const Navbar = () => {
                 <a
                   href="#"
                   onClick={seeDropdown}
-                  className="nav-link dropdown-toggle text-secondary"
+                  className="nav-link btn dropdown-toggle perfil-btn"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="true"

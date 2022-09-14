@@ -1,36 +1,37 @@
 import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-
+import '../../styles/commentSection.css'
 
 export const CommentSection = (props) => {
     const { store, actions } = useContext(Context);
     const [commentInput, setCommentInput] = useState('');
     return (
-        <div className="row glass2">
+        <div className="row glass2 commentSection">
 
-            <div className="col px-5 input-text">
-                <h2> ¿Te gusta mi trabajo? Hablemos!
-                </h2>
+            <div className="row p-5 input-text">
+                <h2 className="px-5"> ¿Te gusta mi trabajo?</h2>
+                
                 {!!store.user &&
-                    <div className="" id="addcomment">
-                        <form onSubmit={(e) => actions.comment(e, commentInput)}>
-                            <textarea value={commentInput} className="form-control" placeholder="Tu mensaje aquí.." onChange={(e) => setCommentInput(e.target.value)}></textarea><br />
-                            <button type="submit" className="btn btn-primary" >Enviar</button>
+                    <div className="d-flex row pt-5 align-items-center" id="addcomment">
+                        <form onSubmit={(e) => actions.comment(e, commentInput)} className=' form-comment'>
+                            <textarea value={commentInput} className="form-control form-commentSection" placeholder="Tu mensaje aquí.." onChange={(e) => setCommentInput(e.target.value)}></textarea><br />
+                            <button type="submit" className="btn blue btn-comment" >Enviar</button>
                         </form>
                     </div>
-                } 
+                }
             </div>
 
 
-            <div className="col p-5 align-items-center comment">
-                {store.profile.received_comments.length > 0 ?
+            <div className="row p-5 align-items-center comment">
+                <h2 className="p-5"> Comentarios recibidos</h2>
+                 {store.profile.received_comments.length > 0 ?
                     store.profile.received_comments.map((item, index) => {
                         return (
-                            <div className="head bg-light" key={index}>
+                            <div className="head pb-5 bg-light form-control" key={index}>
                                 <p>{item.text}</p>
                                 <strong className='user'>Enviado por {store.received_com.find(sender => sender.id == item.emisor).username}</strong> at {item.created}<br></br>
-                                
+
                             </div>
                         )
                     })
