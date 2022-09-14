@@ -28,7 +28,7 @@ export const GaleryHome = () => {
       <div className="container">
         <div className="row ">
           <div className="gallery">
-            {!!store?.top10 ?
+            {!!store?.top10 ? (
               store?.top10.top10.map((item, index) => {
                 return (
                   <div key={index}>
@@ -37,23 +37,21 @@ export const GaleryHome = () => {
 
                         return (
                           <div key={indexPost} className='glass2 mb-2'>
+
                             <button
                               type="button"
                               className="btn"
                               data-bs-toggle="modal"
                               data-bs-target={"#idModal" + post.id}
                             >
+                              {/* esta es la imagen con su username dentro del boton para modal */}
+
                               <div className="div-galeriaimg">
-                                {post.image.includes("image") ?
-                                  <img
-                                    className="galeriaimg"
-                                    src={post.image}
-                                    alt="post"
-                                  />
-                                  :
-                                  <video src={post.image} style={{ width: "320px", height: "240px" }} autoPlay loop muted>
-                                  </video>
-                                }
+                                <img
+                                  className="galeriaimg"
+                                  src={post.image}
+                                  alt="post"
+                                />
                               </div>
                               <div
                                 className="username-galeriaimg px-3 d-flex justify-content-between glassTitle"
@@ -61,8 +59,10 @@ export const GaleryHome = () => {
                                 <span> subido por {/* {foto usuario} */} <strong>{item.username}</strong></span>
                                 <span><FaRegComment /> {item.received_comments.length}</span>
                               </div>
-                            </button>
 
+                              {/* esta es la imagen con su username dentro del boton para modal */}
+                            </button>
+                            {/* este es el comienzo del modal */}
                             <div
                               className="modal fade"
                               id={"idModal" + post.id}
@@ -74,6 +74,7 @@ export const GaleryHome = () => {
                                 refArray.current['' + index + indexPost] = ref;
                               }}
                             >
+                              {/* aqui comienza lo que se ve del modal */}
                               <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                 <div className="modal-content">
                                   <div className="modal-header">
@@ -87,9 +88,7 @@ export const GaleryHome = () => {
                                         id={"postModalLabel" + post.id}
                                       >
                                         {post.title} &nbsp;&nbsp;
-                                        <small>
-                                          <b>by {item.username}</b>
-                                        </small>
+                                        <small><b>by {item.username}</b></small>
                                       </h5>
                                     </Link>
 
@@ -100,52 +99,86 @@ export const GaleryHome = () => {
                                       aria-label="Close"
                                     ></button>
                                   </div>
+
+
                                   <div className="modal-body">
                                     <p>{post.description}</p>
                                   </div>
+
                                   <div className="modal-footer">
                                     <p className="me-5">
-                                      At: <small>{post.created}</small>
+                                      Subido: <small>{post.created}</small>
                                     </p>
-                                    <button
-                                      type="button"
-                                      className="btn btn-secondary ms-5 text-center"
-                                      data-bs-dismiss="modal"
-                                    >
-                                      Close
-                                    </button>
                                   </div>
                                 </div>
+
                               </div>
                             </div>
                           </div>
+                          // CIERRE DE LA PRIMERA SENTENCIA
                         );
                       })
+                    ) : ('')
+
+                    })
                     ) : (
-                      <img
-                        className="galeriaimg"
-                        src={
-                          "https://dummyimage.com/600x400/000/fff&text=" + item.username}
-                        alt="No Post"
-                      />
-                    )}
+                    <img
+                      className="galeriaimg"
+                      src={
+                        "https://dummyimage.com/600x400/000/fff&text=" +
+                        item.username
+                      }
+                      alt="No Post"
+                    />
+                    )
                   </div>
                 );
-              }) : (
-                <div className="text-center">
-                  <div
-                    className="spinner-border"
-                    style={{ width: "3rem", height: "3rem" }}
-                    role="status"
-                  >
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
+              })
+
+
+            ) : (
+              <div className="text-center">
+                <div
+                  className="spinner-border"
+                  style={{ width: "3rem", height: "3rem" }}
+                  role="status"
+                >
+                  <span className="visually-hidden">Loading...</span>
                 </div>
-              )
-            }
+              </div>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+
+
+/*
+
+ 
+
+              return (
+          
+          
+             <div className="card glass2" key={index}>
+                       {item.image.includes("image") 
+                       ?  <img src={item.image} className="card-img-top" alt="..." />
+                       : <video src={item.image} className="card-img-top" alt="..." controls/>
+                       }
+                       <div className="card-body">
+                         <h5 className="card-title">{item.title}</h5>
+                         <p className="card-text">{item.description}</p>
+                       </div>
+                       <div className="card-footer">
+                         <small className="text-muted">Posted: {item.created}</small>
+                       </div>
+            </div>
+          );
+        })
+      ) : (
+
+
+*/ 

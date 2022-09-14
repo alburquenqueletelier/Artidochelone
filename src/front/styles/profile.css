@@ -1,0 +1,33 @@
+.perfil-section1{
+    height: 500px;
+    margin: 60px;
+    padding: 60px;
+
+}
+
+/* div foto perfil  */
+
+.img-wrapper{
+    /* background-color: aquamarine; */
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.profilePhoto {
+height: 400px;
+border: 2px solid rgb(189, 123, 206);
+padding: 4rem;
+}
+
+
+
+
+/* div desc perfil */
+
+.text-wrapper{
+    /* background-color: aquamarine; */
+    justify-content: center;
+    align-items: center;
+    padding: 5rem;
+}

@@ -1,0 +1,16 @@
+
+.commentSection{
+    margin: 60px;
+    padding-top: 60px;
+}
+.comment{
+    margin: auto;
+    margin-bottom: 160px;
+}
+.btn-comment, .form-comment{
+    min-height: calc(1.5em + 0.75rem + 2px);
+}
+
+.input-text{
+    margin-left: auto;
+}
