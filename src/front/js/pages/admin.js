@@ -115,7 +115,7 @@ export const Admin = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Are you sure you want delete {model} ID={modelDataID}
+                Are you sure you want delete {model} ID={modelDataID} ?
               </h5>
               <button
                 type="button"
