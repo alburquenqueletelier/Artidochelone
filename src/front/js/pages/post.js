@@ -32,7 +32,7 @@ export const Post = () => {
     <div>
       {!!store?.user ? (
         <div className="modal-dialog modal-lg ">
-          <div className="modal-content glass2 text-light">
+          <div className="modal-content glass2 text-light post-section">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
                 Create New Post
@@ -94,7 +94,7 @@ export const Post = () => {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn blue">
                   Submit
                 </button>
               </div>

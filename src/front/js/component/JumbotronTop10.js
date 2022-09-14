@@ -101,7 +101,7 @@ export const JumbotronTop10 = () => {
                     alt="..."
                   />
                 </Link>
-                <div className={"carousel-caption " + status}>
+                <div className={"carousel-caption-Jumbotron" + status}>
                   <span className="span-caption">
                     <h1 className="fw-bold my-5">
                       CREA TU PROPIO PORTAFOLIO WEB

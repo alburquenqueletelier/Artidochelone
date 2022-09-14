@@ -4,6 +4,8 @@ import "../../styles/main.css";
 import { Usergallery } from "../component/usergallery";
 import { Context } from "../store/appContext";
 import { CommentSection } from "../component/commentsection";
+import "../../styles/profile.css";
+
 
 export const Profile = () => {
   const { store, actions } = useContext(Context);
@@ -23,38 +25,53 @@ export const Profile = () => {
 
   return (
     // cada usuario puede elegir el color de fondo de su perfil (colorpicker o predefinidos) y letras?? https://img.freepik.com/vector-premium/publicacion-instagram-facebook-completamente-editable-plantilla-feed-rompecabezas-redes-sociales-venta-moda-beige_151293-101.jpg
-    <div className="container-fluid mb-0 container-wrapper"> 
+    <>
       {!username && redirect}
       {!!store?.profile ? (
-        <div className="container-fluid p-5 glass2 text-start my-5">
-          <div className="row">
-            <div className="col-auto">
-              <img
-                src={
-                  !!store.profile.profile.photo
-                    ? store.profile.profile?.photo
-                    : "https://public.slidesharecdn.com/v2/images/profile-picture.png"
-                }
-                className="img-circle w-100 rounded-circle float-start"
-              />
+        <>
+          <div className="perfil-section1 row glass2">
+
+            <div className="container">
+              <div className="section-row">
+                
+                <div className="col img-wrapper ">
+                  <img
+                    src={
+                      !!store.profile.profile.photo
+                        ? store.profile.profile?.photo
+                        : "https://public.slidesharecdn.com/v2/images/profile-picture.png"
+                    }
+                    className="img-fluid w-100 float-end profilePhoto"
+                  />
+                </div>
+
+                <div className="col text-wrapper ">
+                  <h2>Hola soy {username}</h2>
+                  <div className="bg-light">
+                    <p>{store.profile.profile.description}descripcion</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="col-auto">
-              <h2>{username}</h2>
-            </div>
-            <div className="col-auto">
-              <p>{store.profile.profile.description}</p>
-            </div>
+
           </div>
-          <div className="row">
+
+
+          {/* seccion galeria */}
+          <div className=" ">
             <div className="portafolio">
               <Usergallery />
+            </div>
+            <div className="about"></div>
+            <div className="contact-me">
               <CommentSection />
             </div>
+
           </div>
-        </div>
+        </>
       ) : (
         <h1>No existe el usuario {username}</h1>
       )}
-    </div>
+    </>
   );
 };
