@@ -31,22 +31,26 @@ export const Profile = () => {
         <>
           <div className="perfil-section1 row glass2">
 
+            <div className="container">
+              <div className="section-row">
+                
+                <div className="col img-wrapper ">
+                  <img
+                    src={
+                      !!store.profile.profile.photo
+                        ? store.profile.profile?.photo
+                        : "https://public.slidesharecdn.com/v2/images/profile-picture.png"
+                    }
+                    className="img-fluid w-100 float-end profilePhoto"
+                  />
+                </div>
 
-            <div className="col img-wrapper ">
-              <img
-                src={
-                  !!store.profile.profile.photo
-                    ? store.profile.profile?.photo
-                    : "https://public.slidesharecdn.com/v2/images/profile-picture.png"
-                }
-                className="img-fluid w-100 float-end profilePhoto"
-              />
-            </div>
-
-            <div className="col text-wrapper ">
-              <h2>Hola soy {username}</h2>
-              <div className="bg-light">
-                <p>{store.profile.profile.description}descripcion</p>
+                <div className="col text-wrapper ">
+                  <h2>Hola soy {username}</h2>
+                  <div className="bg-light">
+                    <p>{store.profile.profile.description}descripcion</p>
+                  </div>
+                </div>
               </div>
             </div>
 

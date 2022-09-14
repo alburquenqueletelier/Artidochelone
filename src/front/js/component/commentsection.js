@@ -15,7 +15,7 @@ export const CommentSection = (props) => {
                 {!!store.user &&
                     <div className="d-flex row pt-5 align-items-center" id="addcomment">
                         <form onSubmit={(e) => actions.comment(e, commentInput)} className=' form-comment'>
-                            <textarea value={commentInput} className="form-control form-commentSection" placeholder="Tu mensaje aquí.." onChange={(e) => setCommentInput(e.target.value)}></textarea><br />
+                            <textarea value={commentInput} className="form-control form-commentSection" placeholder="Deja tu mensaje aquí!" onChange={(e) => setCommentInput(e.target.value)}></textarea><br />
                             <button type="submit" className="btn blue btn-comment" >Enviar</button>
                         </form>
                     </div>
@@ -24,7 +24,7 @@ export const CommentSection = (props) => {
 
 
             <div className="row p-5 align-items-center comment">
-                <h2 className="p-5"> Comentarios recibidos</h2>
+                <h2 className="px-5 pb-5"> Comentarios recibidos</h2>
                  {store.profile.received_comments.length > 0 ?
                     store.profile.received_comments.map((item, index) => {
                         return (
