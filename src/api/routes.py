@@ -241,6 +241,25 @@ def search(search):
             "response":f"\"{search}\" Not Found in this page"
         }), 404
 
+@api.route('/delete/post/<int:id>', methods=['DELETE'])
+@jwt_required()
+def delete_post_user_by_id(id):
+
+    username = get_jwt_identity()
+    user = db.session.query(User).filter_by(username=username).first()
+    post = db.session.query(Post).get(id)
+
+    if user.id == post.owner_id:
+        db.session.delete(post)
+        db.session.commit()
+        return jsonify({
+            "message": f"Post: \"{post.title}\" deteled"
+        })
+    else:
+        return jsonify({
+            "message": "Error, you can't deleted anon Post"
+        })
+
 ########  Admin Controls API ######
 @api.route('/admin/load/<string:model>', methods=['GET'])
 @jwt_required()
