@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { BsXLg } from "react-icons/bs";
+import { BsXLg, BsChatLeftDots, BsHeart } from "react-icons/bs";
 import { MdOutlineAddPhotoAlternate, MdOutlineMessage, MdOutlineFavoriteBorder, MdSearch } from "react-icons/md";
 
 import { Context } from "../store/appContext";
