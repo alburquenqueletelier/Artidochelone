@@ -5,3 +5,10 @@
 .btn-comment, .form-comment{
     min-height: calc(1.5em + 0.75rem + 2px);
 }
+.commentSection{
+    margin: 60px;
+    padding-top: 60px;
+}
+.input-text{
+    margin-left: auto;
+}

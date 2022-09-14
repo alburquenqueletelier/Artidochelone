@@ -7,13 +7,13 @@ export const CommentSection = (props) => {
     const { store, actions } = useContext(Context);
     const [commentInput, setCommentInput] = useState('');
     return (
-        <div className="row glass2">
+        <div className="row glass2 commentSection">
 
             <div className="row p-5 input-text">
-                <h2> ¿Te gusta mi trabajo?
-                </h2>
+                <h2 className="px-5"> ¿Te gusta mi trabajo?</h2>
+                
                 {!!store.user &&
-                    <div className="d-flex row p-5 align-items-center" id="addcomment">
+                    <div className="d-flex row pt-5 align-items-center" id="addcomment">
                         <form onSubmit={(e) => actions.comment(e, commentInput)} className=' form-comment'>
                             <textarea value={commentInput} className="form-control form-commentSection" placeholder="Tu mensaje aquí.." onChange={(e) => setCommentInput(e.target.value)}></textarea><br />
                             <button type="submit" className="btn blue btn-comment" >Enviar</button>
@@ -23,11 +23,9 @@ export const CommentSection = (props) => {
             </div>
 
 
-            <div className="row pb-5 px-5 align-items-center comment">
-                <h2> Comentarios recibidos
-                </h2>
-
-                {store.profile.received_comments.length > 0 ?
+            <div className="row p-5 align-items-center comment">
+                <h2 className="p-5"> Comentarios recibidos</h2>
+                 {store.profile.received_comments.length > 0 ?
                     store.profile.received_comments.map((item, index) => {
                         return (
                             <div className="head pb-5 bg-light form-control" key={index}>
