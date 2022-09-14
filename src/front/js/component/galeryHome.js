@@ -28,22 +28,11 @@ export const GaleryHome = () => {
       <div className="container">
         <div className="row ">
           <div className="gallery">
-            {!!store?.top10 ? (
+            {!!store?.top10 ?
               store?.top10.top10.map((item, index) => {
                 return (
                   <div key={index}>
-                    <div className="row justify-content-center my-2 ">
-                      {/* <div className="col-auto">
-                        <h3>{item.username} </h3>
-                      </div> */}
-                      {/* <div className="col-auto">
-                        <h3>
-                          <FaRegComment /> {item.received_comments.length}
-                        </h3>
-                      </div> */}
-                    </div>
-
-                    {item.posts.length > 0 && (
+                    {item.posts.length > 0 ? (
                       item.posts.map((post, indexPost) => {
 
                         return (
@@ -55,15 +44,20 @@ export const GaleryHome = () => {
                               data-bs-target={"#idModal" + post.id}
                             >
                               <div className="div-galeriaimg">
-                              <img
-                                className="galeriaimg"
-                                src={post.image}
-                                alt="post"
-                              />
+                                {post.image.includes("image") ?
+                                  <img
+                                    className="galeriaimg"
+                                    src={post.image}
+                                    alt="post"
+                                  />
+                                  :
+                                  <video src={post.image} style={{ width: "320px", height: "240px" }} autoPlay loop muted>
+                                  </video>
+                                }
                               </div>
                               <div
                                 className="username-galeriaimg px-3 d-flex justify-content-between glassTitle"
-                                >                                
+                              >
                                 <span> subido por {/* {foto usuario} */} <strong>{item.username}</strong></span>
                                 <span><FaRegComment /> {item.received_comments.length}</span>
                               </div>
@@ -131,26 +125,24 @@ export const GaleryHome = () => {
                       <img
                         className="galeriaimg"
                         src={
-                          "https://dummyimage.com/600x400/000/fff&text=" +
-                          item.username
-                        }
+                          "https://dummyimage.com/600x400/000/fff&text=" + item.username}
                         alt="No Post"
                       />
-                    )
+                    )}
                   </div>
                 );
-              })
-            ) : (
-              <div className="text-center">
-                <div
-                  className="spinner-border"
-                  style={{ width: "3rem", height: "3rem" }}
-                  role="status"
-                >
-                  <span className="visually-hidden">Loading...</span>
+              }) : (
+                <div className="text-center">
+                  <div
+                    className="spinner-border"
+                    style={{ width: "3rem", height: "3rem" }}
+                    role="status"
+                  >
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )
+            }
           </div>
         </div>
       </div>

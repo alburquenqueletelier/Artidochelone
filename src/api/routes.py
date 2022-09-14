@@ -206,7 +206,40 @@ def set_profile(id):
         "profile": "Update Success"
     })
 
-   
+@api.route('/searchAll/<string:search>', methods=['GET'])
+def search(search):
+
+    allUsers = db.session.query(User).all()
+    allPosts = db.session.query(Post).all()
+    allComment = db.session.query(Comment).all()
+
+    search = search.upper()
+    
+    response = {
+        "users": [],
+        "posts": [],
+        "comments": []
+    }
+
+    for user in allUsers:
+        if search in user.username.upper() or search in user.name.upper() or search in user.lastname.upper() or search in user.email.upper():
+            response["users"].append(user)
+    for post in allPosts:
+        if post.title.upper().count(search) > 0 or post.description.upper().count(search) > 0:
+            response["posts"].append(post)
+    for comment in allComment:
+        if comment.text.upper().count(search) > 0:
+            response["comments"].append(comment)
+    if response["users"] or response["posts"] or response["comments"]:
+        return jsonify({
+            "users": [model.serialize() for model in response["users"]],
+            "posts": [model.serialize() for model in response["posts"]],
+            "comments": [model.serialize() for model in response["comments"]]
+        })
+    else:
+        return jsonify({
+            "response":f"\"{search}\" Not Found in this page"
+        }), 404
 
 ########  Admin Controls API ######
 @api.route('/admin/load/<string:model>', methods=['GET'])
