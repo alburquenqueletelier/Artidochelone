@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { BsXLg } from "react-icons/bs";
+import { BsXLg, BsChatLeftDots, BsHeart } from "react-icons/bs";
 import { MdOutlineAddPhotoAlternate, MdOutlineMessage, MdOutlineFavoriteBorder, MdSearch } from "react-icons/md";
 
 import { Context } from "../store/appContext";
@@ -16,10 +16,10 @@ export const Navbar = () => {
   const passwordInput = React.useRef();
 
   const seeDropdown = () => {
-    const dropdownNav = document.querySelector('a.nav-link');
+    const dropdownNav = document.querySelector("#dropdownUser");
     const dropdown = new bootstrap.Dropdown(dropdownNav);
     dropdown.toggle();
-  }
+  };
 
   const inputControl = () => {
     if (inputHidden == "invisible") return setInputHidden("");
@@ -155,24 +155,29 @@ export const Navbar = () => {
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav mx-auto  mb-2 mb-lg-0 ">
-               {!!store.user &&
-// div iconos mensajes post etc navbar
-                <div className="d-flex">
-
+              {!!store.user && (
+                <div className="d-flex align-items-center">
                   <li className="nav-item mx-3">
-                    <Link className="fs-4 nav-link btn " to="/profile"><MdOutlineMessage /></Link>
-                  </li>
-                  <li className="nav-item mx-3">
-                    <Link className="fs-4 nav-link btn " to="/post"><MdOutlineAddPhotoAlternate /></Link>
+                    <a className="nav-link btn " aria-current="page" href="#">
+                      <BsChatLeftDots />
+                    </a>{" "}
+                    {/* {/*onclick agregar clase =  active/// */}
                   </li>
                   <li className="nav-item mx-3 ">
-                    <Link className="fs-4 nav-link btn " to="/post"><MdOutlineFavoriteBorder /></Link>
+                    <Link className="navbar-brand text-secondary" to="/post">
+                      <MdOutlineAddPhotoAlternate />
+                    </Link>
+                  </li>
+                  <li className="nav-item mx-3">
+                    <a className="nav-link ">
+                      <BsHeart className="icons" />
+                    </a>
+
                   </li>
 
                 </div>
-// div iconos mensajes post etc navbar
+              )}
 
-             } 
               <li className="nav-item mx-3">
                 <form
                   className="d-flex m-auto p-0"
@@ -215,6 +220,7 @@ export const Navbar = () => {
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="true"
+                  id="dropdownUser"
                 >
                   {store.user.username}
                 </a>
@@ -344,7 +350,6 @@ export const Navbar = () => {
           </div>
         </div>
       </nav>
-
     </>
   );
 };
