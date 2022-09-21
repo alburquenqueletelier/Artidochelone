@@ -2,6 +2,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from datetime import datetime
 from sqlalchemy.sql import expression
+from werkzeug.security import generate_password_hash as genph
+from werkzeug.security import check_password_hash as checkph
 
 db = SQLAlchemy()
 
@@ -11,7 +13,7 @@ class User(db.Model):
     lastname = db.Column(db.String(50), unique=False, nullable=False)
     username = db.Column(db.String(60), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
+    password = db.Column(db.String(300), unique=False, nullable=False)
     profile = db.relationship('Profile', cascade='all,delete-orphan', lazy='select', uselist=False,
         backref=db.backref('user', lazy='joined'))
     posts = db.relationship('Post', lazy='select', cascade='all,delete-orphan',
@@ -26,6 +28,12 @@ class User(db.Model):
     #created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     def __repr__(self):
         return f'<User {self.username} ID={self.id}>' 
+    
+    def def_password(self, clave):
+        self.password = genph(clave)
+    
+    def verif_clave(self, clave):
+        return checkph(self.password, clave)
 
     def serialize(self):
         return {
